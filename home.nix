@@ -19,7 +19,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixos = "cp ~/.config/kwinrulesrc ~/dotfiles/.config/ && cp ~/.config/kglobalshortcutsrc ~/dotfiles/.config/ && cp ~/.config/plasmashellrc ~/dotfiles/.config/ && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixos = "cd ~/dotfiles && git add -f -N nixos/hardware-configuration.nix && git add . && (git commit -m \"Update $(date)\" || true) && sudo nixos-rebuild switch --flake .#naxce";
     };
   };
 
