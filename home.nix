@@ -17,9 +17,9 @@
     shellAliases = {
       nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force && sudo nixos-rebuild switch --flake .#naxce";
 
-      onlygit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force";
+      nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force";
 
-      onlybuild = "cd ~/dotfiles && git add . && sudo nixos-rebuild switch --flake .#naxce";
+      nixbuild = "cd ~/dotfiles && git add . && sudo nixos-rebuild switch --flake .#naxce";
 
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
     };
