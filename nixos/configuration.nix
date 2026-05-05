@@ -6,7 +6,6 @@
     ./hardware-configuration.nix
     ./network.nix
     ./core.nix
-    ./packages.nix
     ./desktop.nix
     ./gaming.nix
     ./users.nix
