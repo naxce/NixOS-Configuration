@@ -1,0 +1,9 @@
+audio.sources=pulse
+
+visualizer.fps=60
+visualizer.type=spectrum
+visualizer.spectrum.bar.width=2
+visualizer.spectrum.bar.spacing=1
+
+colors.override.terminal=false
+colors.scheme=rainbow
