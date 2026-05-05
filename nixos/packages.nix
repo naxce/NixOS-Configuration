@@ -34,7 +34,6 @@
     gamemode
     gamescope
     protonup-qt
-    protontricks
     antimicrox
     evtest
     libinput
