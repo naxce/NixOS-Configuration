@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "naxce nixos config";
 
