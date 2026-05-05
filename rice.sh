@@ -46,7 +46,7 @@ kitty --title "naxce" $FLAGS \
         while true; do
             tput cup 8 0;
             echo -e '\033[1;34m';
-            nix-shell -p toilet --run 'toilet -f mono9 \"naxce\"' | sed 's/^/                /'
+            toilet -f mono9 \"naxce\" | sed 's/^/                /'
             tput el;
             sleep 60;
         done
