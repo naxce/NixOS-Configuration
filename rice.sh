@@ -56,19 +56,16 @@ kitty --title "naxce" $FLAGS \
 kitty --title "visualizer" $FLAGS \
       sh -c "cava || tail -f /dev/null" &
 
-# 10. Cavalier
-kitty --title "cavalier" $FLAGS \
+# 10. CLI-VIZ
+kitty --title "visualizer2" $FLAGS \
       --override window_padding_width=0 \
       --override window_margin_width=0 \
-      sh -c "sleep 1; nix run nixpkgs#cavalier || tail -f /dev/null" &
+      sh -c "python ~/dotfiles/cli-viz/main.py' || tail -f /dev/null" &
 
 # 12. Julka
 kitty --title "julka" $FLAGS \
   --override window_padding_width=0 \
-  --override background_image=~/NixOS/julcia.png \
-  --override background_image_layout=scaled \
-  --override background_image_linear=yes \
-  sh -c "tput civis; clear; tail -f /dev/null" &
+  sh -c "lavat -c blue -r 1; tail -f /dev/null" &
 
 # 13. Asciiquarium
 kitty --title "asciiquarium" $FLAGS \
