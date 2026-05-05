@@ -10,7 +10,7 @@ pkgs.stdenv.mkDerivation {
     owner = "PosixAlchemist";
     repo = "cli-visualizer";
     rev = "v1.6";
-    sha256 = "0m4p5qpxxxxxxxx";
+    sha256 = pkgs.lib.fakeSha256;
   };
 
   nativeBuildInputs = with pkgs; [
