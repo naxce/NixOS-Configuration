@@ -13,7 +13,12 @@ pkgs.stdenv.mkDerivation {
     sha256 = "sha256-DurKc9g9SQT7AJSYoJsM5eWphPZLvkJ7Gg4KsXIdQl4=";
   };
 
-  nativeBuildInputs = with pkgs; [ pkg-config ];
+  nativeBuildInputs = with pkgs; [
+    pkg-config
+    which
+    gcc
+  ];
+
   buildInputs = with pkgs; [
     ncurses
     fftw
@@ -21,11 +26,14 @@ pkgs.stdenv.mkDerivation {
   ];
 
   buildPhase = ''
-    make
+    mkdir -p build
+    g++ -O3 -lpthread -lncurses -lfftw3 -lpulse -lrt \
+        src/*.cpp src/Visualizers/*.cpp src/PostProcessors/*.cpp src/Transformers/*.cpp \
+        -I./include -o build/vis-visualizer
   '';
 
   installPhase = ''
     mkdir -p $out/bin
-    cp build/vis $out/bin/vis-visualizer
+    cp build/vis-visualizer $out/bin/vis-visualizer
   '';
 }
