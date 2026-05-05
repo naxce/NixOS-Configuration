@@ -14,6 +14,7 @@
     p7zip
     unrar
     brave
+    anydesk
     libreoffice
     lsof
     haveged
