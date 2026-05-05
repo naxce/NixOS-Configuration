@@ -19,7 +19,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && git add -f -N nixos/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#naxce";
+      nixos = "cd ~/dotfiles && git fetch origin main && git reset --soft origin/main && git add . && git rm --cached nixos/hardware-configuration.nix --ignore-unmatch && git add -f -N nixos/hardware-configuration.nix && (git commit -m \"Update $(date)\" || true) && git push origin main --force && sudo nixos-rebuild switch --flake .#naxce";
     };
   };
 
