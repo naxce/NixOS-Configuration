@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  cli-visualizer = pkgs.callPackage ./pkgs/cli-visualizer.nix { };
+in
 {
   home.packages = with pkgs; [
     # System
@@ -100,5 +103,6 @@
     tty-clock
     cava
     lavat
+    cli-visualizer
   ];
 }
