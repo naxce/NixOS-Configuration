@@ -100,5 +100,6 @@
     tty-clock
     cava
     lavat
+    toilet
   ];
 }
