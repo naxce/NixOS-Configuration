@@ -27,7 +27,7 @@
     gnome-calculator
     maliit-keyboard
     maliit-framework
-    expidus.calculator
+    haskellPackages.calculator
 
     # Gaming
     heroic
