@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  cli-visualizer = pkgs.callPackage ./pkgs/cli-visualizer.nix { };
+  cli-visualizer = pkgs.callPackage ~/dotfiles/pkgs/cli-visualizer.nix { };
 in
 {
   home.packages = with pkgs; [
