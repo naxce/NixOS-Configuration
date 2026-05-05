@@ -63,6 +63,16 @@
     filezilla
     github-desktop
 
+    (python311.withPackages (
+      ps: with ps; [
+        numpy
+        pyaudio
+        scipy
+        colorama
+      ]
+    ))
+    portaudio
+
     # Audio i Bluetooth
     cider-2
     pavucontrol

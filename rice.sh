@@ -60,7 +60,7 @@ kitty --title "visualizer" $FLAGS \
 kitty --title "visualizer2" $FLAGS \
       --override window_padding_width=0 \
       --override window_margin_width=0 \
-      sh -c "python ~/dotfiles/cli-viz/main.py' || tail -f /dev/null" &
+      sh -c "nix-shell -p python311 python311Packages.numpy python311Packages.pyaudio python311Packages.scipy python311Packages.colorama portaudio --run 'python3 ~/dotfiles/cli-viz/main.py' || tail -f /dev/null" &
 
 # 12. Julka
 kitty --title "julka" $FLAGS \
