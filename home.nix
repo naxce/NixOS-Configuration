@@ -19,7 +19,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git pull --rebase origin main && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixos = "cp ~/.config/kwinrulesrc ~/dotfiles/.config/ && cp ~/.config/kglobalshortcutsrc ~/dotfiles/.config/ && cp ~/.config/plasmashellrc ~/dotfiles/.config/ && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
     };
   };
 
@@ -27,6 +27,6 @@
   programs.git = {
     enable = true;
     settings.user.name = "naxce";
-    settings.user.email = "naxcehelltea@email.com";
+    settings.user.email = "naxcehelltea@gmail.com";
   };
 }
