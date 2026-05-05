@@ -29,7 +29,7 @@ pkgs.stdenv.mkDerivation {
     mkdir -p build
     g++ -O3 -lpthread -lncurses -lfftw3 -lpulse -lrt \
         src/*.cpp src/Visualizers/*.cpp src/PostProcessors/*.cpp src/Transformers/*.cpp \
-        -I./include -o build/vis-visualizer
+        -I./include -I./src -o build/vis-visualizer
   '';
 
   installPhase = ''
