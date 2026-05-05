@@ -55,12 +55,27 @@ kitty --title "naxce" $FLAGS \
 # 9. Cava
 kitty --title "visualizer" $FLAGS \
       sh -c "cava || tail -f /dev/null" &
-
-# 10. CLI-VIZ
-kitty --title "visualizer2" $FLAGS \
-      --override window_padding_width=0 \
-      --override window_margin_width=0 \
-      sh -c "python3 ~/dotfiles/cli-viz/main.py || tail -f /dev/null" &
+      
+# 10. CBonsai
+kitty --title "cbonsai" $FLAGS \
+  --override color1=#89b4fa \
+  --override color2=#74c7ec \
+  --override color3=#94e2d5 \
+  --override color4=#89b4fa \
+  --override color5=#74c7ec \
+  --override color6=#94e2d5 \
+  --override color7=#bac2de \
+  \
+  --override color8=#585b70 \
+  --override color9=#89b4fa \
+  --override color10=#74c7ec \
+  --override color11=#94e2d5 \
+  --override color12=#89b4fa \
+  --override color13=#74c7ec \
+  --override color14=#94e2d5 \
+  --override color15=#a6adc8 \
+  \
+  sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
 
 # 12. Julka
 kitty --title "julka" $FLAGS \
