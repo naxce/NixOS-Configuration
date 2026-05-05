@@ -28,7 +28,7 @@ pkgs.stdenv.mkDerivation {
   buildPhase = ''
     mkdir -p build
     g++ -O3 -lpthread -lncurses -lfftw3 -lpulse -lrt \
-        src/*.cpp src/Visualizers/*.cpp src/PostProcessors/*.cpp src/Transformers/*.cpp \
+        $(find src -name "*.cpp") \
         -I./include -I./src -o build/vis-visualizer
   '';
 
