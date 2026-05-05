@@ -31,7 +31,6 @@ kitty --title "calendar" $FLAGS \
 # 6. Weather
 kitty --title "weather" $FLAGS \
       sh -c "tput civis; ~/.config/kitty/weather.sh; tail -f /dev/null" &
-      #sh -c "tput civis; curl wttr.in/Warsaw; tail -f /dev/null" &
 
 # 7. Stats
 kitty --title "stats" $FLAGS \
@@ -57,7 +56,11 @@ kitty --title "naxce" $FLAGS \
 kitty --title "visualizer" $FLAGS \
       sh -c "cava || tail -f /dev/null" &
 
-kitty --title "placeholder" $FLAGS --override window_padding_width=0 --override window_margin_width=0 sh -c "cavalier --mode 4 || cavalier || tail -f /dev/null" &
+# 10. Cavalier
+kitty --title "cavalier" $FLAGS \
+      --override window_padding_width=0 \
+      --override window_margin_width=0 \
+      sh -c "sleep 1; nix run nixpkgs#cavalier || tail -f /dev/null" &
 
 # 12. Julka
 kitty --title "julka" $FLAGS \

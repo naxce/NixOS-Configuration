@@ -89,6 +89,6 @@
     toilet
     tty-clock
     cava
-    cavalier
+    lavat
   ];
 }
