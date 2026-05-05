@@ -55,7 +55,7 @@ kitty --title "naxce" $FLAGS \
 # 9. Cava
 kitty --title "visualizer" $FLAGS \
       sh -c "cava || tail -f /dev/null" &
-      
+
 # 10. CBonsai
 kitty --title "cbonsai" $FLAGS \
   --override color1=#89b4fa \
@@ -77,8 +77,8 @@ kitty --title "cbonsai" $FLAGS \
   \
   sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
 
-# 12. Julka
-kitty --title "julka" $FLAGS \
+# 12. Lavat
+kitty --title "lavat" $FLAGS \
   --override window_padding_width=0 \
   sh -c "lavat -c blue -r 1; tail -f /dev/null" &
 
