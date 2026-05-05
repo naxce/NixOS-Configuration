@@ -28,7 +28,7 @@
 
   programs.git = {
     enable = true;
-    userName = "naxce";
-    userEmail = "naxcehelltea@gmail.com";
+    settings.user.name = "naxce";
+    settings.user.email = "naxcehelltea@gmail.com";
   };
 }
