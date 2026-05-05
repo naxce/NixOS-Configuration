@@ -11,7 +11,6 @@
   home.file.".config/fastfetch".source = ./.config/fastfetch;
   home.file.".config/kitty".source = ./.config/kitty;
   home.file.".config/sptlrx".source = ./.config/sptlrx;
-  home.file.".config/vis".source = ./.config/vis;
 
   programs.bash = {
     enable = true;
