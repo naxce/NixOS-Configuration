@@ -29,6 +29,7 @@ pkgs.stdenv.mkDerivation {
     mkdir -p build
     g++ -O3 -lpthread -lncurses -lfftw3 -lpulse -lrt \
         $(find src -name "*.cpp") \
+        -include cmath \
         -I./include -I./src -o build/vis-visualizer
   '';
 
