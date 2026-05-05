@@ -15,7 +15,6 @@
     unrar
     brave
     libreoffice
-    anydesk
     lsof
     haveged
     libnotify
@@ -27,7 +26,6 @@
     gnome-calculator
     maliit-keyboard
     maliit-framework
-    haskellPackages.calculator
 
     # Gaming
     heroic
