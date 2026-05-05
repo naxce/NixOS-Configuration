@@ -33,7 +33,7 @@
               home-manager.users.naxce = {
                 imports = [
                   ./home.nix
-                  plasma-manager.homeManagerModules.plasma-manager
+                  plasma-manager.homeModules.plasma-manager
                 ];
               };
             }

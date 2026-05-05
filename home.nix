@@ -20,6 +20,7 @@
     enable = true;
     shellAliases = {
       nixos = "cd ~/dotfiles && git add -f -N nixos/hardware-configuration.nix && git add . && (git commit -m \"Update $(date)\" || true) && sudo nixos-rebuild switch --flake .#naxce";
+      onlybuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
     };
   };
 
