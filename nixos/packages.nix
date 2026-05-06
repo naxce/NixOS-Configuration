@@ -39,6 +39,7 @@
     maliit-framework
     haruna
     audacity
+    kdePackages.kdenlive
 
     # Gaming
     heroic
