@@ -108,7 +108,6 @@
     playerctl
     pipes-rs
     cbonsai
-    toilet
     tty-clock
     cava
     lavat

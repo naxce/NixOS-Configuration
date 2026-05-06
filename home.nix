@@ -4,6 +4,7 @@
   home.username = "naxce";
   home.homeDirectory = "/home/naxce";
   home.stateVersion = "26.05";
+  home.preferXdgDirectories = true;
 
   programs.home-manager.enable = true;
 
@@ -31,5 +32,11 @@
     enable = true;
     settings.user.name = "naxce";
     settings.user.email = "naxcehelltea@gmail.com";
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
   };
 }
