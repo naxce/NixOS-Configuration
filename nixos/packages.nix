@@ -25,6 +25,7 @@
     unrar
     brave
     anydesk
+    rustdesk
     libreoffice
     lsof
     haveged
