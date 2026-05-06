@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     # System
+    home-manager
     os-prober
     tesseract
     kdiskmark

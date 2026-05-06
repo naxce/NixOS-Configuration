@@ -1,92 +1,70 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "display": {
-    "separator": " 󰁔 ",
+    "separator": " {#34}󰁔 ",
     "color": {
         "keys": "blue",
-        "output": "white"
+        "output": "blue"
+    },
+    "key": {
+        "width": 10
     }
   },
   "logo": {
     "source": "nixos_small",
     "color": {
       "1": "blue",
-      "2": "light_blue"
+      "2": "blue"
     },
     "padding": {
-      "top": 2,
-      "left": 3,
-      "right": 3
+      "top": 1,
+      "left": 2
     }
   },
   "modules": [
     {
       "type": "title",
-      "format": "{#34}󰭟 {#34}{user-name}{#default}@{#36}{host-name}"
-    },
-    {
-        "type": "custom",
-        "format": "{#30}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      "format": "{#34}󰭟 {user-name}{#default}@{#34}{host-name}"
     },
     {
       "type": "os",
-      "key": "{#34} OS",
+      "key": "󰣭  OS",
       "format": "{3}"
     },
     {
       "type": "kernel",
-      "key": "{#34}󰒋 Ker",
-      "format": "{2}"
+      "key": "󰒋  Ker"
     },
     {
       "type": "uptime",
-      "key": "{#34}󰅐 Upt",
-      "format": "{1}h {2}m"
+      "key": "󰅐  Upt"
     },
     {
       "type": "packages",
-      "key": "{#34}󰏖 Pkg"
-    },
-    {
-        "type": "custom",
-        "format": ""
+      "key": "󰏖  Pkg"
     },
     {
       "type": "de",
-      "key": "{#36}󰖲 DE ",
-      "format": "{2} ({3})"
-    },
-    {
-      "type": "shell",
-      "key": "{#36} Sh ",
-      "format": "{1}"
+      "key": "󰖲  DE"
     },
     {
       "type": "terminal",
-      "key": "{#36} Term",
-      "format": "{3}"
-    },
-    {
-        "type": "custom",
-        "format": ""
+      "key": "  Term"
     },
     {
       "type": "cpu",
-      "key": "{#34}󰻠 CPU",
+      "key": "󰻠  CPU",
       "format": "{1}"
     },
     {
       "type": "gpu",
-      "key": "{#34}󰍛 GPU",
-      "format": "{2}"
+      "key": "󰍛  GPU",
+      "format": "{2}",
+      "hideType": "integrated"
     },
     {
-        "type": "custom",
-        "format": ""
-    },
-    {
-        "type": "colors",
-        "symbol": "circle"
+      "type": "colors",
+      "symbol": "circle"
     }
   ]
 }
