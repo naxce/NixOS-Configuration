@@ -16,15 +16,17 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force && sudo nixos-rebuild switch --flake .#naxce && plasmashell --replace & disown";
+      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force && sudo nixos-rebuild switch --flake .#naxce";
 
       nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force";
 
-      nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce && plasmashell --replace & disown";
+      nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
 
       nixhome = "cd ~/dotfiles && home-manager switch -f ~/dotfiles/home.nix";
 
-      nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d && plasmashell --replace & disown";
+      nixplasma = "plasmashell --replace & disown";
+
+      nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
     };
   };
 
