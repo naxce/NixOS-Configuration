@@ -58,6 +58,7 @@
 
     # Multimedia
     obs-studio
+    davinci-resolve
     gimp
 
     # Nix Language
