@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  targets.genericLinux.enable = true;
+
+  xdg.enable = true;
+  xdg.mime.enable = true;
+  xdg.systemDirs.data = [
+    "${config.home.homeDirectory}/.nix-profile/share"
+    "/var/lib/flatpak/exports/share"
+  ];
+
   home.packages = with pkgs; [
     # System
     home-manager
