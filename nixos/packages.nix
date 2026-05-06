@@ -23,9 +23,8 @@
     peazip
     p7zip
     unrar
-    brave
-    anydesk
     rustdesk
+    btop
     libreoffice
     lsof
     haveged
