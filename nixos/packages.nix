@@ -29,6 +29,7 @@
     maliit-keyboard
     maliit-framework
     haruna
+    audacity
 
     # Gaming
     heroic
