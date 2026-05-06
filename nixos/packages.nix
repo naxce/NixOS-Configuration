@@ -28,6 +28,7 @@
     gnome-calculator
     maliit-keyboard
     maliit-framework
+    haruna
 
     # Gaming
     heroic
