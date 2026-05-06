@@ -74,6 +74,7 @@
     qbittorrent
     filezilla
     github-desktop
+    ollama
 
     (python311.withPackages (
       ps: with ps; [
