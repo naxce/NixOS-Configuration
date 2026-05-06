@@ -19,7 +19,9 @@
 
       nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main --force";
 
-      nixbuild = "cd ~/dotfiles && git add . && sudo nixos-rebuild switch --flake .#naxce";
+      nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+
+      nixhome = "cd ~/dotfiles && home-manager switch -f ~/dotfiles/home.nix";
 
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
     };
