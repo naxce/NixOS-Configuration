@@ -46,14 +46,23 @@ kitty --title "love" $FLAGS \
         
         echo -e '\033[1;34m';
 
+        center_text() {
+            local text=\$1
+            local width=\$(tput cols)
+            local text_width=\$(toilet -f mono9 \"\$text\" | wc -L)
+            local pad=\$(( (width - text_width) / 2 ))
+            [ \$pad -lt 0 ] && pad=0
+            toilet -f mono9 \"\$text\" | sed \"s/^/\$(printf '%*s' \$pad '')/\"
+        }
+
         tput cup 4 0;
-        toilet -f mono9 \"  I\" | sed 's/^/              /'
+        center_text \"I\"
         
         tput cup 12 0;
-        toilet -f mono9 \" <3\" | sed 's/^/              /'
+        center_text \"<3\"
         
         tput cup 20 0;
-        toilet -f mono9 \"JULKA\" | sed 's/^/              /'
+        center_text \"JULKA\"
 
         tail -f /dev/null
       " &
