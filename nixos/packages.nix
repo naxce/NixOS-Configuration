@@ -74,7 +74,6 @@
     qbittorrent
     filezilla
     github-desktop
-    claude-code
 
     (python311.withPackages (
       ps: with ps; [
