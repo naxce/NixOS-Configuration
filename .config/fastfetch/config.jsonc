@@ -2,13 +2,16 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "display": {
     "separator": " 󰁔 ",
-    "color": "cyan"
+    "color": {
+        "keys": "blue",
+        "output": "white"
+    }
   },
   "logo": {
     "source": "nixos_small",
     "color": {
-      "1": "cyan",
-      "2": "blue"
+      "1": "blue",
+      "2": "light_blue"
     },
     "padding": {
       "top": 2,
@@ -19,51 +22,71 @@
   "modules": [
     {
       "type": "title",
-      "format": "{#1}{#36}{user-name}{#default}@{#34}{host-name}"
+      "format": "{#34}󰭟 {#34}{user-name}{#default}@{#36}{host-name}"
     },
-    "separator",
+    {
+        "type": "custom",
+        "format": "{#30}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
     {
       "type": "os",
-      "key": " OS",
+      "key": "{#34} OS",
       "format": "{3}"
     },
     {
-      "type": "host",
-      "key": "󰌢 Host",
+      "type": "kernel",
+      "key": "{#34}󰒋 Ker",
       "format": "{2}"
     },
     {
-      "type": "kernel",
-      "key": "󰒋 Kernel"
-    },
-    {
       "type": "uptime",
-      "key": "󰅐 Uptime"
-    },
-    "separator",
-    {
-      "type": "DE",
-      "key": "󰖲 DE"
+      "key": "{#34}󰅐 Upt",
+      "format": "{1}h {2}m"
     },
     {
-      "type": "terminal",
-      "key": " Terminal"
+      "type": "packages",
+      "key": "{#34}󰏖 Pkg"
+    },
+    {
+        "type": "custom",
+        "format": ""
+    },
+    {
+      "type": "de",
+      "key": "{#36}󰖲 DE ",
+      "format": "{2} ({3})"
     },
     {
       "type": "shell",
-      "key": " Shell"
+      "key": "{#36} Sh ",
+      "format": "{1}"
     },
-    "separator",
+    {
+      "type": "terminal",
+      "key": "{#36} Term",
+      "format": "{3}"
+    },
+    {
+        "type": "custom",
+        "format": ""
+    },
     {
       "type": "cpu",
-      "key": "󰻠 CPU",
-      "format": "{1} ({4} cores)"
+      "key": "{#34}󰻠 CPU",
+      "format": "{1}"
     },
     {
       "type": "gpu",
-      "key": "󰍛 GPU",
-      "format": "{2}",
-      "hideType": "integrated"
+      "key": "{#34}󰍛 GPU",
+      "format": "{2}"
+    },
+    {
+        "type": "custom",
+        "format": ""
+    },
+    {
+        "type": "colors",
+        "symbol": "circle"
     }
   ]
 }

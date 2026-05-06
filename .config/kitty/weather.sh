@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 BLUE='\033[1;34m'
-CYAN='\033[1;36m'
 WHITE='\033[1;37m'
 GREY='\033[0;90m'
 NC='\033[0m'
@@ -10,7 +9,7 @@ while true; do
     tput civis
     clear
     
-    weather_data=$(curl -s "wttr.in/Grojec?format=%c;%t;%C;%w;%h;%P")
+    weather_data=$(curl -s "wttr.in/Warsaw?format=%c;%t;%C;%w;%h;%P")
     
     IFS=';' read -r icon temp desc wind humi pres <<< "$weather_data"
     
@@ -25,7 +24,7 @@ while true; do
         local icon=$1
         local label=$2
         local value=$3
-        echo -e "${PAD}${CYAN}${icon} ${label}${NC} ${BLUE}➜${NC} ${WHITE}${value}${NC}"
+        echo -e "${PAD}${BLUE}${icon} ${label}${NC} ${BLUE}➜${NC} ${WHITE}${value}${NC}"
     }
 
     print_line "󰔄" "Location   " "PL"

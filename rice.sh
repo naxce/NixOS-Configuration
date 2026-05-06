@@ -30,26 +30,32 @@ kitty --title "calendar" $FLAGS \
 
 # 6. Weather
 kitty --title "weather" $FLAGS \
-      sh -c "tput civis; ~/.config/kitty/weather.sh; tail -f /dev/null" &
+      sh -c "tput civis; ~/dotfiles/.config/kitty/weather.sh; tail -f /dev/null" &
 
 # 7. Stats
 kitty --title "stats" $FLAGS \
   sh -c "~/.config/kitty/sys_info.sh" &
 
-# 8. naxce
-kitty --title "naxce" $FLAGS \
+# 8. I <3 JULKA
+kitty --title "love" $FLAGS \
       --override window_padding_width=0 \
       --override window_margin_width=0 \
       sh -c "
         tput civis; 
         clear;
-        while true; do
-            tput cup 8 0;
-            echo -e '\033[1;34m';
-            toilet -f mono9 \"naxce\" | sed 's/^/                /'
-            tput el;
-            sleep 60;
-        done
+        
+        echo -e '\033[1;34m';
+
+        tput cup 4 0;
+        toilet -f mono9 \"  I\" | sed 's/^/              /'
+        
+        tput cup 12 0;
+        toilet -f mono9 \" <3\" | sed 's/^/              /'
+        
+        tput cup 20 0;
+        toilet -f mono9 \"JULKA\" | sed 's/^/              /'
+
+        tail -f /dev/null
       " &
 
 # 9. Cava
@@ -77,23 +83,23 @@ kitty --title "cbonsai" $FLAGS \
   \
   sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
 
-# 12. Lavat
+# 11. Lavat
 kitty --title "lavat" $FLAGS \
   --override window_padding_width=0 \
   sh -c "lavat -c blue -r 1; tail -f /dev/null" &
 
-# 13. Asciiquarium
+# 12. Asciiquarium
 kitty --title "asciiquarium" $FLAGS \
   --override font_size=6 \
   --override window_padding_width=0 \
   --override placement_strategy=center \
   sh -c "asciiquarium -t || tail -f /dev/null" &
 
-# 14. Lyrics
+# 13. Lyrics
 kitty --title "lyrics" $FLAGS \
   sptlrx &
 
-# 15. Pipes
+# 14. Pipes
 kitty --title "pipes" $FLAGS \
   --override color1=#89b4fa \
   --override color2=#74c7ec \
