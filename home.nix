@@ -24,7 +24,7 @@
 
       nixhome = "cd ~/dotfiles && home-manager switch -f ~/dotfiles/home.nix";
 
-      nixplasma = "plasmashell --replace & disown";
+      nixplasma = "sudo plasmashell --replace & disown";
 
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
     };
