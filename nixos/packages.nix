@@ -93,6 +93,7 @@
     pavucontrol
     bluez
     bluez-tools
+    icloudpd
 
     # Sieć
     wireless-regdb
