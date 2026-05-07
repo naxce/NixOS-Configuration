@@ -93,6 +93,7 @@
     pavucontrol
     bluez
     bluez-tools
+    bt-dualboot
 
     # Sieć
     wireless-regdb
