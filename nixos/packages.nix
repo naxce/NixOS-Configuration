@@ -17,7 +17,7 @@
         owner = "Darkkal44";
         repo = "qylock";
         rev = "main";
-        sha256 = "sha256-4O8U8Wq+RInuG9mZq9X5Fp9GzG2ZJz8B1V3S8J8z7kU=";
+        sha256 = "sha256-u1+0dkL4gYyIQP/Ap2cGyf6WhQbUNHxDQDkxT/gbZ1Q=";
       };
       installPhase = ''
         mkdir -p $out/share/sddm/themes
