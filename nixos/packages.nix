@@ -11,6 +11,20 @@
   ];
 
   home.packages = with pkgs; [
+    (stdenv.mkDerivation {
+      name = "sddm-theme-forest";
+      src = fetchFromGitHub {
+        owner = "Darkkal44";
+        repo = "qylock";
+        rev = "main";
+        sha256 = "sha256-4O8U8Wq+RInuG9mZq9X5Fp9GzG2ZJz8B1V3S8J8z7kU=";
+      };
+      installPhase = ''
+        mkdir -p $out/share/sddm/themes
+        cp -r themes/forest $out/share/sddm/themes/forest
+      '';
+    })
+
     # System
     home-manager
     os-prober

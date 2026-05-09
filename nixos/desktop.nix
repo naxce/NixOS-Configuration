@@ -5,8 +5,11 @@
 {
   services.xserver.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "forest";
+  };
   services.desktopManager.plasma6.enable = true;
   programs.dconf.enable = true;
   environment.plasma6.excludePackages = [ ];
