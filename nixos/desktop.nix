@@ -10,26 +10,30 @@
     wayland.enable = true;
     theme = "forest";
   };
+
   environment.systemPackages = with pkgs; [
-    kdePackages.qtgraphicaleffects
+    kdePackages.qt5compat
     kdePackages.qtsvg
     kdePackages.qtmultimedia
+
+    (stdenv.mkDerivation {
+      name = "sddm-theme-forest";
+      src = fetchFromGitHub {
+        owner = "Darkkal44";
+        repo = "qylock";
+        rev = "main";
+        sha256 = "sha256-4O8U8Wq+RInuG9mZq9X5Fp9GzG2ZJz8B1V3S8J8z7kU=";
+      };
+      installPhase = ''
+        mkdir -p $out/share/sddm/themes
+        cp -r themes/forest $out/share/sddm/themes/forest
+      '';
+    })
   ];
+
   services.desktopManager.plasma6.enable = true;
   programs.dconf.enable = true;
   environment.plasma6.excludePackages = [ ];
-
-  /*
-    environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      LIBVA_DRIVER_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      WLR_DRM_NO_ATOMIC = "1";
-      KWIN_DRM_NO_AMS = "1";
-    };
-  */
 
   programs.firefox = {
     enable = true;
