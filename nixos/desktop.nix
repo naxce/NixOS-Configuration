@@ -10,6 +10,11 @@
     wayland.enable = true;
     theme = "forest";
   };
+  environment.systemPackages = with pkgs; [
+    kdePackages.qtgraphicaleffects
+    kdePackages.qtsvg
+    kdePackages.qtmultimedia
+  ];
   services.desktopManager.plasma6.enable = true;
   programs.dconf.enable = true;
   environment.plasma6.excludePackages = [ ];
