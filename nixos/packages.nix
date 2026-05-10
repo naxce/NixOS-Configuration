@@ -5,44 +5,54 @@
 
   xdg.enable = true;
   xdg.mime.enable = true;
+
   xdg.systemDirs.data = [
     "${config.home.homeDirectory}/.nix-profile/share"
     "/var/lib/flatpak/exports/share"
   ];
 
   home.packages = with pkgs; [
-    # System
+
+    # SYSTEM
     home-manager
     os-prober
-    tesseract
     kdiskmark
     refind
     killall
-    kdePackages.kate
-    kdePackages.ktextaddons
-    peazip
-    p7zip
-    unrar
-    rustdesk
-    btop
-    libreoffice
     lsof
     haveged
     libnotify
     iw
     linux-wifi-hotspot
-    #lutris
-    wineWow64Packages.stable
-    winetricks
+
+    # Archives
+    peazip
+    p7zip
+    unrar
+
+    # Terminal
+    btop
+    fastfetch
+    lm_sensors
+
+    # KDE
+    kdePackages.kate
+    kdePackages.ktextaddons
+
+    # Audio / multimedia tools
+    haruna
+    audacity
     gnome-calculator
     maliit-keyboard
     maliit-framework
-    haruna
-    audacity
-    kdePackages.kdenlive
 
-    # Gaming
+    # Office
+    libreoffice
+
+    # GAMING
     heroic
+    modrinth-app
+    lutris
     mangohud
     gamemode
     gamescope
@@ -52,62 +62,67 @@
     libinput
     dualsensectl
 
-    # Komunikacja
+    wineWow64Packages.stable
+    winetricks
+
+    # COMMUNICATION
     vesktop
-    #ferdium
+    # ferdium
 
-    # Multimedia
+    # MEDIA
     obs-studio
-    davinci-resolve
     gimp
+    davinci-resolve
+    kdePackages.kdenlive
 
-    # Nix Language
+    # DEV
     vscodium
     nixfmt
     git
 
-    # Kodowanie
-    elmPackages.nodejs
-    rustc
-    cargo
     gcc
     pkg-config
     openssl
+
+    rustc
+    cargo
+
+    elmPackages.nodejs
+
+    (python311.withPackages (
+      ps: with ps; [
+        numpy
+        scipy
+        pyaudio
+        colorama
+      ]
+    ))
+
+    portaudio
+
+    # TOOLS
     qbittorrent
     filezilla
     github-desktop
     ollama
 
-    (python311.withPackages (
-      ps: with ps; [
-        numpy
-        pyaudio
-        scipy
-        colorama
-      ]
-    ))
-    portaudio
-
-    # Audio i Bluetooth
-    cider-2
+    # AUDIO / BLUETOOTH
     pavucontrol
     bluez
     bluez-tools
+    cider-2
     icloudpd
 
-    # Sieć
+    # NETWORK
     wireless-regdb
 
-    # Ricing
+    # RICING
     kitty
-    fastfetch
     imagemagick
     cmatrix
     ascii-image-converter
     display3d
     asciiquarium-transparent
-    btop
-    lm_sensors
     sptlrx
     playerctl
     pipes-rs
