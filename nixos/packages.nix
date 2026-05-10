@@ -104,6 +104,8 @@
     filezilla
     github-desktop
     ollama
+    rustdesk
+    anydesk
 
     # AUDIO / BLUETOOTH
     pavucontrol
@@ -111,8 +113,6 @@
     bluez-tools
     cider-2
     icloudpd
-    rustdesk
-    anydesk
 
     # NETWORK
     wireless-regdb
