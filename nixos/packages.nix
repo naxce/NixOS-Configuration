@@ -11,17 +11,7 @@
     "/var/lib/flatpak/exports/share"
   ];
 
-  fonts.packages = with pkgs; [
-    inter
-    jetbrains-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
-    noto-fonts
-    noto-fonts-emoji
-  ];
-
   home.packages = with pkgs; [
-
     # SYSTEM
     home-manager
     os-prober
@@ -33,6 +23,14 @@
     libnotify
     iw
     linux-wifi-hotspot
+
+    # Fonts
+    inter
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
+    noto-fonts
+    noto-fonts-emoji
 
     # Archives
     peazip
