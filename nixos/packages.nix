@@ -127,7 +127,7 @@
     # RICING
     zenity
     kitty
-    imagemagick
+    caca-utils
     cmatrix
     ascii-image-converter
     display3d

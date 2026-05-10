@@ -27,6 +27,8 @@
       nixplasma = "sudo plasmashell --replace & disown";
 
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+
+      rice = "~/dotfiles/rice.sh";
     };
   };
 
