@@ -51,6 +51,7 @@
 
     # GAMING
     heroic
+    modrinth-app
     mangohud
     gamemode
     gamescope
