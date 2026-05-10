@@ -112,6 +112,7 @@
     cider-2
     icloudpd
     rustdesk
+    anydesk
 
     # NETWORK
     wireless-regdb
