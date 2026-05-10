@@ -111,6 +111,7 @@
     bluez-tools
     cider-2
     icloudpd
+    rustdesk
 
     # NETWORK
     wireless-regdb
