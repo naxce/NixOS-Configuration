@@ -11,6 +11,10 @@
     "/var/lib/flatpak/exports/share"
   ];
 
+  nixpkgs.config = {
+    allowBroken = false;
+  };
+
   home.packages = with pkgs; [
 
     # SYSTEM
@@ -52,7 +56,6 @@
     # GAMING
     heroic
     modrinth-app
-    lutris
     mangohud
     gamemode
     gamescope
