@@ -160,6 +160,9 @@
     };
   };
 
+  # Java
+  programs.java.enable = true;
+
   # OCR (nie działa xd)
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [
