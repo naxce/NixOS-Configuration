@@ -14,7 +14,8 @@
   fonts.packages = with pkgs; [
     inter
     jetbrains-mono
-    nerdfonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
     noto-fonts
     noto-fonts-emoji
   ];
