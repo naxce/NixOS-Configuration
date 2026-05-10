@@ -11,6 +11,14 @@
     "/var/lib/flatpak/exports/share"
   ];
 
+  fonts.packages = with pkgs; [
+    inter
+    jetbrains-mono
+    nerdfonts
+    noto-fonts
+    noto-fonts-emoji
+  ];
+
   home.packages = with pkgs; [
 
     # SYSTEM
@@ -118,6 +126,7 @@
     wireless-regdb
 
     # RICING
+    zenity
     kitty
     imagemagick
     cmatrix
