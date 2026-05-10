@@ -100,7 +100,6 @@
       '';
     };
   };
-  hardware.opengl.enable = true;
 
   # Parametry kernela
   boot.kernelParams = [
