@@ -153,11 +153,11 @@
   ];
 
   systemd.services.reset-refind-config = {
-    description = "Default rEFInd";
+    description = "rEFInd (NixOS)";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"timeout 5\ndefault_selection \\\"NixOS\\\"\" > /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/printf \"timeout 5\\ndefault_selection \\\"NixOS\\\"\\n\" > /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf'";
     };
   };
 
