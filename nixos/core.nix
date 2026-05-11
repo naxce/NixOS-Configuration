@@ -144,21 +144,19 @@
           command = "/run/current-system/sw/bin/pkill";
           options = [ "NOPASSWD" ];
         }
-        {
-          command = "/run/current-system/sw/bin/efibootmgr -n 0005";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl reboot";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/home/naxce/dotfiles/boot-windows";
-          options = [ "NOPASSWD" ];
-        }
       ];
     }
   ];
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.policykit.exec" &&
+          action.lookup("program") == "/usr/local/bin/boot-windows" &&
+          subject.isInGroup("users")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   # Bluetooth
   hardware.bluetooth = {
