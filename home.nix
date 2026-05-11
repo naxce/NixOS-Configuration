@@ -30,7 +30,7 @@
 
       rice = "~/dotfiles/rice.sh";
 
-      bootwindows = "sudo bootctl set-oneshot auto-windows && systemctl reboot";
+      boot-windows = "sudo bootctl set-oneshot auto-windows && systemctl reboot";
     };
   };
 
