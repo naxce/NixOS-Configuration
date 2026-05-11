@@ -125,8 +125,11 @@
 
   # Rebuild bez hasła
   security.sudo.extraRules = [
+
     {
+
       users = [ "naxce" ];
+
       commands = [
         {
           command = "/run/current-system/sw/bin/nixos-rebuild";
@@ -134,6 +137,7 @@
         }
         {
           command = "/run/current-system/sw/bin/nix-collect-garbage";
+
           options = [ "NOPASSWD" ];
         }
         {
@@ -144,19 +148,22 @@
           command = "/run/current-system/sw/bin/efibootmgr";
           options = [ "NOPASSWD" ];
         }
+        {
+          command = "/run/current-system/sw/bin/systemctl";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
 
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (action.id == "org.freedesktop.policykit.exec" &&
-          action.lookup("program") == "/usr/local/bin/boot-windows" &&
-          subject.isInGroup("users")) {
-        return polkit.Result.YES;
-      }
-    });
-  '';
+  systemd.services.restore-refind-order = {
+    description = "Przywrócenie rEFInd jako domyślnego bootloadera";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.efibootmgr}/bin/efibootmgr -o 0003,0000,0001";
+    };
+  };
 
   # Bluetooth
   hardware.bluetooth = {
