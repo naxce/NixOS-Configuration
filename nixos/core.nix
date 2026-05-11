@@ -141,7 +141,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/pkill";
+          command = "/run/current-system/sw/bin/bootctl";
           options = [ "NOPASSWD" ];
         }
       ];
