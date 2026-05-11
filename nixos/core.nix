@@ -152,15 +152,6 @@
     }
   ];
 
-  systemd.services.restore-refind-order = {
-    description = "Przywrócenie rEFInd jako domyślnego bootloadera";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.efibootmgr}/bin/efibootmgr -o 0003,0000,0001";
-    };
-  };
-
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
