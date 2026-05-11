@@ -16,15 +16,15 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixhelp = "echo
-      nixos: Rebuild with Flakes + Commit to GitHub\n
-      nixgit: Commit to GitHub\n
-      nixbuild: Rebuild with Flakes\n
-      nixhome: Rebuild Home Manager Config\n
-      nixplasma: Restart KDE Plasma\n
-      nixclean: Collect and delete garbage\n
-      rice: Show ricing style choice\n
-      boot-windows: Immediately boot to Windows 11
+      nixhelp = "printf '%s\n' \
+      'nixos: Rebuild with Flakes + Commit to GitHub' \
+      'nixgit: Commit to GitHub' \
+      'nixbuild: Rebuild with Flakes' \
+      'nixhome: Rebuild Home Manager Config' \
+      'nixplasma: Restart KDE Plasma' \
+      'nixclean: Collect and delete garbage' \
+      'rice: Show ricing style choice' \
+      'boot-windows: Immediately boot to Windows 11'
       ";
       nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
       nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
