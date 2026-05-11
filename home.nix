@@ -29,6 +29,8 @@
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
 
       rice = "~/dotfiles/rice.sh";
+
+      bootwindows = "~/dotfiles/rice.sh";
     };
   };
 
