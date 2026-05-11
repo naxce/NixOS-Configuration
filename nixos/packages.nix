@@ -46,6 +46,7 @@
     # KDE
     kdePackages.kate
     kdePackages.ktextaddons
+    kdePackages.kfind
 
     # Audio / multimedia tools
     haruna
