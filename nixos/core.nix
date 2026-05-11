@@ -125,11 +125,8 @@
 
   # Rebuild bez hasła
   security.sudo.extraRules = [
-
     {
-
       users = [ "naxce" ];
-
       commands = [
         {
           command = "/run/current-system/sw/bin/nixos-rebuild";
@@ -145,7 +142,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/tee /boot/EFI/refind/manual_boot.conf";
+          command = "/home/naxce/dotfiles/scripts/winboot.sh";
           options = [ "NOPASSWD" ];
         }
       ];
