@@ -145,7 +145,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/tee /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf";
+          command = "/run/current-system/sw/bin/tee /boot/EFI/refind/manual_boot.conf";
           options = [ "NOPASSWD" ];
         }
       ];
