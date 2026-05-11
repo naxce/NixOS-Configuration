@@ -152,6 +152,15 @@
     }
   ];
 
+  systemd.services.reset-refind-config = {
+    description = "Reset rEFInd manual boot config";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.coreutils}/bin/sh -c 'echo \"\" > /boot/EFI/refind/manual_boot.conf'";
+    };
+  };
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
