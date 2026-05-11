@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-pkill -f kitty
-
 CHOICE=$(zenity --list \
     --title="Ricing Selector" \
     --column="Theme" \
@@ -11,6 +9,8 @@ CHOICE=$(zenity --list \
     "Purple" \
     " " \
     "Change Wallpaper" \
+    " " \
+    "Kill Rice" \
     --width=300 --height=450)
 
 case "$CHOICE" in
@@ -25,5 +25,8 @@ case "$CHOICE" in
         ;;
     "Change Wallpaper")
         ~/dotfiles/wallpaper.sh
+        ;;
+    "Kill Rice")
+        pkill -f kitty
         ;;
 esac

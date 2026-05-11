@@ -291,34 +291,36 @@ EOF
 
 cat << 'EOF' > /tmp/bluerice/fastfetch.jsonc
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-  "display": {
-    "separator": " 󰁔 ",
-    "color": { "keys": "blue", "title": "cyan" }
-  },
-  "logo": {
-    "source": "~/dotfiles/Pictures/NixOSBlue.png",
-    "color": { "1": "cyan", "2": "blue" },
-    "padding": { "top": 2, "left": 3, "right": 4 }
-  },
-  "modules": [
-    { "type": "title", "format": "{#36}{user-name}{#default}@{#34}{host-name}" },
-    { "type": "separator", "string": "—" },
-    { "type": "os", "key": "󰣭  OS", "format": "{3} {1}" },
-    { "type": "kernel", "key": "󰒋  Kern", "format": "{2}" },
-    { "type": "uptime", "key": "󰅐  Up", "format": "{2}d {3}h {4}m" },
-    { "type": "packages", "key": "󰮯  Pkgs" },
-    { "type": "disk", "key": "󰋊  Disk" },
-    { "type": "shell", "key": "󰅂  Shell" },
-    { "type": "separator", "string": "—" },
-    { "type": "de", "key": "󰖲  DE" },
-    { "type": "wm", "key": "󱂬  WM" },
-    { "type": "terminal", "key": "  Term" },
-    { "type": "separator", "string": "—" },
-    { "type": "cpu", "key": "󰻠  CPU", "format": "{1} @ {6}GHz" },
-    { "type": "gpu", "key": "󰍛  GPU", "format": "{2}", "hideType": "integrated" },
-    { "type": "memory", "key": "󰍛  Mem" }
-  ]
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/dotfiles/Pictures/LogoBlue.png",
+        "type": "kitty",
+        "width": 22,
+        "height": 10,
+        "padding": { "top": 2, "left": 2 }
+    },
+    "display": {
+        "separator": " ➜ ",
+        "color": { "keys": "blue" }
+    },
+    "modules": [
+        "title",
+        "separator",
+        { "type": "os", "key": "󱄅", "format": "{2} {8}" },
+        { "type": "kernel", "key": "󰌽", "format": "{2}" },
+        { "type": "uptime", "key": "󱎫" },
+        { "type": "shell", "key": "󱆃" },
+        { "type": "cpu", "key": "󰻠", "format": "{1}" },
+        { "type": "gpu", "key": "󰢮", "hideType": "integrated", "format": "{2}" },
+        { 
+            "type": "display", 
+            "key": "󰍹", 
+            "compactType": "original-with-refresh",
+            "format": "{1}x{2} @ {3}Hz" 
+        },
+        { "type": "memory", "key": "󰑭" },
+        { "type": "localip", "key": "󰩟", "showIpv6": false }
+    ]
 }
 EOF
 

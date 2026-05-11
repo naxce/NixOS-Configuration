@@ -38,9 +38,10 @@
     unrar
 
     # Terminal
-    btop
+    htop
     fastfetch
     lm_sensors
+    efibootmgr
 
     # KDE
     kdePackages.kate
@@ -127,7 +128,7 @@
     # RICING
     zenity
     kitty
-    caca-utils
+    inetutils
     cmatrix
     ascii-image-converter
     display3d

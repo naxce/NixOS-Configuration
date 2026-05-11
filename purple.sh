@@ -1,70 +1,19 @@
 #!/usr/bin/env bash
+
 pkill -f kitty
+
 plasma-apply-wallpaperimage ~/dotfiles/Pictures/Purple.jpg
+
 mkdir -p /tmp/purplerice
 mkdir -p /tmp/purplerice/.config
+
 rm -f ~/.config/kwinrulesrc
+
 cat << 'EOF' > ~/.config/kwinrulesrc
-[0ea3dfbd-6d9e-45fd-af9a-a6e1e640b044]
-position=3560,760
-positionrule=3
-size=480,400
-sizerule=3
-[27d4431a-8f34-4518-8b25-1f6e404a675d]
-Description=Cava
-position=2560,1160
-positionrule=3
-size=1280,260
-sizerule=3
-title=visualizer
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[2982c3d7-5cd6-42f9-ab5e-def10a474c73]
-Description=Pipes
-position=3860,1160
-positionrule=3
-size=600,260
-sizerule=3
-title=pipes
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[409d8155-6d47-4643-9cd9-47cefd42888b]
-Description=Fastfetch
-position=1940,20
-positionrule=3
-size=600,350
-sizerule=3
-title=fetch
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[65fd0069-5fee-4500-85a2-b4396a0e2f5e]
-Description=Lyrics
-position=4060,215
-positionrule=3
-size=400,925
-sizerule=3
-title=lyrics
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[6c7e549b-c22c-455c-a7de-20b75bfb124b]
-Description=Lavat
-position=3560,390
-positionrule=3
-size=480,750
-sizerule=3
-title=lavat
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
+[General]
+count=16
+rules=994a0f1d-2ade-4e2b-9d93-c49010f0d845,fetch,clock,bonsai,aqua,cal,weather,stats,love,lavat,lyrics,matrix,visualizer,pipes
+
 [994a0f1d-2ade-4e2b-9d93-c49010f0d845]
 Description=No Taskbar
 noborder=true
@@ -77,234 +26,193 @@ skiptaskbar=true
 skiptaskbarrule=3
 wmclass=kitty
 wmclassmatch=1
-[General]
-count=16
-rules=6c7e549b-c22c-455c-a7de-20b75bfb124b,ed5c2b8f-2782-4b54-8aca-d01ac4022fa2,994a0f1d-2ade-4e2b-9d93-c49010f0d845,409d8155-6d47-4643-9cd9-47cefd42888b,b96c50d8-9f86-4343-a9cb-4e08744afa01,ccc43692-cd2c-4ff8-8c53-d92c34050f61,a1566e1d-8ab4-41e5-b58b-4c1e59ba5298,e7bf94cf-a49b-4b9b-ad1b-688142d172da,e088a8f9-bdf2-48b6-acd9-ab80d6f9870f,b7f4a35c-5cac-4568-bbd9-e5ffc19e2495,27d4431a-8f34-4518-8b25-1f6e404a675d,d25fa3b2-4b3d-4ead-9ad0-225d36afb87d,65fd0069-5fee-4500-85a2-b4396a0e2f5e,b98ba038-f78b-4cdf-9a5d-ea3f32c4f19b,2982c3d7-5cd6-42f9-ab5e-def10a474c73,4d8f7b2a-1c3e-4a5b-9f6d-7e2a8b4c0d1e
-[a1566e1d-8ab4-41e5-b58b-4c1e59ba5298]
-Description=Calendar
-position=2560,390
+
+[fetch]
+position=1940,20
+size=640,410
 positionrule=3
-size=330,300
 sizerule=3
-title=calendar
+title=fetch
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b7f4a35c-5cac-4568-bbd9-e5ffc19e2495]
-Description=Love
-position=2910,660
+
+[clock]
+position=2600,20
+size=910,410
 positionrule=3
-size=630,480
-sizerule=3
-title=love
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b96c50d8-9f86-4343-a9cb-4e08744afa01]
-Description=Matrix
-position=1940,1160
-positionrule=3
-size=600,260
-sizerule=3
-title=matrix
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b98ba038-f78b-4cdf-9a5d-ea3f32c4f19b]
-Description=CBonsai
-position=3560,390
-positionrule=3
-size=480,350
-sizerule=3
-title=bonsai
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[ccc43692-cd2c-4ff8-8c53-d92c34050f61]
-Description=Clock
-position=2560,20
-positionrule=3
-size=900,300
 sizerule=3
 title=clock
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[d25fa3b2-4b3d-4ead-9ad0-225d36afb87d]
-Description=Asciiquarium
-position=4060,20
+
+[bonsai]
+position=3530,20
+size=450,410
 positionrule=3
-size=400,175
+sizerule=3
+title=bonsai
+titlematch=1
+
+[aqua]
+position=4000,20
+size=460,200
+positionrule=3
 sizerule=3
 title=asciiquarium
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[e088a8f9-bdf2-48b6-acd9-ab80d6f9870f]
-Description=Stats
-position=2560,710
+
+[stats]
+position=4000,240
+size=460,400
 positionrule=3
-size=330,430
 sizerule=3
 title=stats
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[e7bf94cf-a49b-4b9b-ad1b-688142d172da]
-Description=Weather
-position=2910,390
+
+[weather]
+position=4000,660
+size=460,280
 positionrule=3
-size=630,300
 sizerule=3
 title=weather
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[ed5c2b8f-2782-4b54-8aca-d01ac4022fa2]
-Description=CBonsai
-position=3690,20
+
+[love]
+position=1940,450
+size=640,490
 positionrule=3
-size=350,350
 sizerule=3
-title=cbonsai
+title=love
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[4d8f7b2a-1c3e-4a5b-9f6d-7e2a8b4c0d1e]
-Description=Nyancat
-position=1940,390
+
+[lavat]
+position=2600,450
+size=655,490
 positionrule=3
-size=600,400
 sizerule=3
-title=nyancat
+title=lavat
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
+
+[lyrics]
+position=3275,450
+size=705,490
+positionrule=3
+sizerule=3
+title=lyrics
+titlematch=1
+
+[matrix]
+position=1940,960
+size=350,460
+positionrule=3
+sizerule=3
+title=matrix
+titlematch=1
+
+[visualizer]
+position=2310,960
+size=950,460
+positionrule=3
+sizerule=3
+title=visualizer
+titlematch=1
+
+[pipes]
+position=3280,960
+size=580,460
+positionrule=3
+sizerule=3
+title=pipes
+titlematch=1
+
+[cal]
+position=3880,960
+size=580,460
+positionrule=3
+sizerule=3
+title=calendar
+titlematch=1
 EOF
+
 qdbus org.kde.KWin /KWin reconfigure
 sleep 1
+
+cat << 'EOF' > /tmp/purplerice/fastfetch.jsonc
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/dotfiles/Pictures/LogoPurple.png",
+        "type": "kitty",
+        "width": 24,
+        "height": 10,
+        "padding": { "top": 2, "left": 2 }
+    },
+    "display": {
+        "separator": " ➜ ",
+        "color": { "keys": "magenta" }
+    },
+    "modules": [
+        "title",
+        "separator",
+        { "type": "os", "key": "󱄅", "format": "{2} {8}" },
+        { "type": "kernel", "key": "󰌽", "format": "{2}" },
+        { "type": "uptime", "key": "󱎫" },
+        { "type": "shell", "key": "󱆃" },
+        { "type": "cpu", "key": "󰻠", "format": "{1}" },
+        { "type": "gpu", "key": "󰢮", "hideType": "integrated", "format": "{2}" },
+        { 
+            "type": "display", 
+            "key": "󰍹", 
+            "compactType": "original-with-refresh",
+            "format": "{1}x{2} @ {3}Hz" 
+        },
+        { "type": "memory", "key": "󰑭" },
+        { "type": "localip", "key": "󰩟", "showIpv6": false }
+    ]
+}
+EOF
+
 cat << 'EOF' > /tmp/purplerice/kitty.conf
 background         #0f0d1a
 foreground         #f5e0dc
 background_opacity 0.2
 background_blur    40
-window_padding_width 15
+window_padding_width 12
+window_margin_width 15
 confirm_os_window_close 0
-window_margin_width 12
 window_border_width 1pt
 active_border_color #cba6f7
 inactive_border_color #313244
-draw_minimal_borders yes
 hide_window_decorations yes
-cursor             #cba6f7
-cursor_text_color  #0f0d1a
-cursor_shape       beam
 font_family        JetBrains Mono
 font_size          11
-color0 #1e1e2e
-color8 #585b70
-color1 #f38ba8
-color9 #f38ba8
-color2 #a6e3a1
-color10 #a6e3a1
-color3 #f9e2af
-color11 #f9e2af
+cursor             #0f0d1a
+cursor_text_color  #0f0d1a
 color4 #cba6f7
 color12 #cba6f7
 color5 #f5c2e7
 color13 #f5c2e7
-color6 #94e2d5
-color14 #94e2d5
-color7 #bac2de
-color15 #a6adc8
+color2 #f5c2e7
+color10 #cba6f7
 linux_display_server wayland
 shell_integration no-rc
 repaint_delay 10
 input_delay 3
 sync_to_monitor yes
 EOF
+
 cat << 'EOF' > /tmp/purplerice/cava.conf
 [general]
-framerate = 90
-bars = 44
+framerate = 60
+bars = 0
+[input]
+method = pulse
+source = auto
 [color]
 gradient = 1
-gradient_count = 6
-gradient_color_1 = '#313244'
-gradient_color_2 = '#45475a'
-gradient_color_3 = '#585b70'
-gradient_color_4 = '#cba6f7'
-gradient_color_5 = '#f5c2e7'
-gradient_color_6 = '#ffffff'
-[smoothing]
-integral = 50
-monstercat = 0
-waves = 1
+gradient_count = 2
+gradient_color_1 = '#cba6f7'
+gradient_color_2 = '#f5c2e7'
 EOF
-cat << 'EOF' > /tmp/purplerice/fastfetch.jsonc
-{
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-  "display": {
-    "separator": " 󰁔 ",
-    "color": { "keys": "magenta", "title": "blue" }
-  },
-  "logo": {
-    "source": "~/dotfiles/Pictures/NixOSPurple.png",
-    "color": { "1": "blue", "2": "magenta" },
-    "padding": { "top": 2, "left": 3, "right": 4 }
-  },
-  "modules": [
-    { "type": "title", "format": "{#35}{user-name}{#default}@{#34}{host-name}" },
-    { "type": "separator", "string": "—" },
-    { "type": "os", "key": "󰣭  OS", "format": "{3} {1}" },
-    { "type": "kernel", "key": "󰒋  Kern", "format": "{2}" },
-    { "type": "uptime", "key": "󰅐  Up", "format": "{2}d {3}h {4}m" },
-    { "type": "packages", "key": "󰮯  Pkgs" },
-    { "type": "disk", "key": "󰋊  Disk" },
-    { "type": "shell", "key": "󰅂  Shell" },
-    { "type": "separator", "string": "—" },
-    { "type": "de", "key": "󰖲  DE" },
-    { "type": "wm", "key": "󱂬  WM" },
-    { "type": "terminal", "key": "  Term" },
-    { "type": "separator", "string": "—" },
-    { "type": "cpu", "key": "󰻠  CPU", "format": "{1} @ {6}GHz" },
-    { "type": "gpu", "key": "󰍛  GPU", "format": "{2}", "hideType": "integrated" },
-    { "type": "memory", "key": "󰍛  Mem" }
-  ]
-}
-EOF
-cat << 'EOF' > /tmp/purplerice/sptlrx.yaml
-player: "mpris"
-ignoreErrors: true
-timerInterval: 200
-updateInterval: 500
-omitTitle: false
-centerLyrics: true
-style:
-  hAlignment: center
-  lineHeight: 2
-  before:
-    foreground: "#444444"
-    faint: true
-  current:
-    foreground: "#f5c2e7"
-    bold: true
-  after:
-    foreground: "#444444"
-    faint: true
-mpris:
-  players: ["chromium", "cider", "spotify"]
-EOF
+
 cat << 'EOF' > /tmp/purplerice/sys_info.sh
 #!/usr/bin/env bash
 PURPLE='\033[38;2;203;166;247m'
@@ -313,28 +221,28 @@ BOLD='\033[1m'
 NC='\033[0m'
 tput civis
 while true; do
+  UPTIME=$(awk '{printf "%dh %dm", $1/3600, ($1%3600)/60}' /proc/uptime)
   CPU_USAGE=$(awk '/^cpu / {u=($2+$4)*100/($2+$4+$5)} END {printf "%.0f", u}' /proc/stat)
   CPU_TEMP=$(sensors 2>/dev/null | awk '/Tctl|Package id 0/ {print int($2); exit}')
   [ -z "$CPU_TEMP" ] && CPU_TEMP="--"
-  GPU_USAGE=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d ' ')
-  GPU_TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d ' ')
-  [ -z "$GPU_USAGE" ] && GPU_USAGE="--"
-  [ -z "$GPU_TEMP" ] && GPU_TEMP="--"
   RAM_USED=$(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} END {printf "%.1f", (t-a)/1024/1024}' /proc/meminfo)
   RAM_PERCENT=$(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} END {printf "%.0f", (t-a)/t*100}' /proc/meminfo)
-  MB_TEMP=$(sensors 2>/dev/null | awk '/Composite/ {print int($2); exit}')
-  [ -z "$MB_TEMP" ] && MB_TEMP="--"
+  DISK_USAGE=$(df -h / | awk 'NR==2 {print $5}')
+  KERNEL_VER=$(uname -r | cut -d'-' -f1)
+  
   tput cup 0 0
-  echo -e "${PURPLE}${BOLD}SYSTEM${NC}"
+  echo -e "${PURPLE}${BOLD}SYSTEM STATS${NC}"
   echo "----------------------"
   printf "${BOLD}${PINK}CPU${NC}  %-3s%%   %3s°C\n" "$CPU_USAGE" "$CPU_TEMP"
-  printf "${BOLD}${PINK}GPU${NC}  %-3s%%   %3s°C\n" "$GPU_USAGE" "$GPU_TEMP"
   printf "${BOLD}${PINK}RAM${NC}  %-5s  %3s%%\n" "$RAM_USED" "$RAM_PERCENT"
-  printf "${BOLD}${PINK}MBD${NC} %3s°C\n" "$MB_TEMP"
+  printf "${BOLD}${PINK}DSK${NC}  %-13s\n" "$DISK_USAGE"
+  printf "${BOLD}${PINK}KER${NC}  %-13s\n" "$KERNEL_VER"
+  printf "${BOLD}${PINK}UPT${NC}  %s\n" "$UPTIME"
   echo "----------------------"
   sleep 2
 done
 EOF
+
 cat << 'EOF' > /tmp/purplerice/weather.sh
 #!/usr/bin/env bash
 PURPLE='\033[1;35m'
@@ -349,33 +257,37 @@ while true; do
     PAD="  "
     echo -e "${PAD}${PURPLE}󰖐  WEATHER${NC}"
     echo -e "${PAD}${WHITE}-----------${NC}"
-    print_line() { echo -e "${PAD}${PURPLE}$1 $2${NC} ${PURPLE}➜${NC} ${WHITE}$3${NC}"; }
+    print_line() {
+        echo -e "${PAD}${PURPLE}$1 $2${NC} ${PURPLE}➜${NC} ${WHITE}$3${NC}"
+    }
     print_line "󰔄" "Location   " "PL"
     print_line "󰖐" "Conditions " "${icon}${desc}"
     print_line "󱩄" "Temperature" "${temp}"
     print_line "󰖝" "Wind       " "${wind}"
     print_line "󰖚" "Humidity   " "${humi}"
-    print_line "󰓅" "Pressure   " "${pres}"
     sleep 600
 done
 EOF
+
 chmod +x /tmp/purplerice/sys_info.sh
 chmod +x /tmp/purplerice/weather.sh
-sleep 1
+
 FLAGS="--config /tmp/purplerice/kitty.conf --override remember_window_size=no --override shell_integration=disabled"
+PURPLE_COLORS="--override color1=#cba6f7 --override color2=#f5c2e7 --override color3=#eba0ac --override color4=#cba6f7 --override color5=#f5c2e7 --override color6=#eba0ac --override color7=#cdd6f4 --override color8=#585b70 --override color9=#cba6f7 --override color10=#f5c2e7 --override color11=#eba0ac --override color12=#cba6f7 --override color13=#f5c2e7 --override color14=#eba0ac --override color15=#f5e0dc"
+
 kitty --title "fetch" $FLAGS sh -c "tput civis; fastfetch -c /tmp/purplerice/fastfetch.jsonc; tail -f /dev/null" &
-kitty --title "nyancat" $FLAGS sh -c "nyancat" &
-kitty --title "matrix" $FLAGS sh -c "tput civis; cmatrix -C magenta -s" &
-kitty --title "clock" $FLAGS sh -c "tty-clock -S -c -C 5 -b -B || tail -f /dev/null" &
-kitty --title "calendar" $FLAGS sh -c "tput civis; echo -e '\n\n\033[1;35m'; cal; tail -f /dev/null" &
+kitty --title "clock" $FLAGS sh -c "tty-clock -S -c -C 5 -b -B" &
+kitty --title "calendar" $FLAGS --override font_size=13 --override window_padding_width=60 sh -c "tput civis; echo -e '\033[1;35m'; cal; tail -f /dev/null" &
 kitty --title "weather" $FLAGS sh -c "tput civis; /tmp/purplerice/weather.sh; tail -f /dev/null" &
 kitty --title "stats" $FLAGS sh -c "/tmp/purplerice/sys_info.sh" &
-kitty --title "love" $FLAGS --override window_padding_width=0 --override window_margin_width=0 sh -c "tput civis; clear; echo -e '\033[1;35m'; center_text() { local text=\$1; local width=\$(tput cols); local text_width=\$(toilet -f mono9 \"\$text\" | wc -L); local pad=\$(( (width - text_width) / 2 )); [ \$pad -lt 0 ] && pad=0; toilet -f mono9 \"\$text\" | sed \"s/^/\$(printf '%*s' \$pad '')/\"; }; tput cup 4 0; center_text \"I\"; tput cup 12 0; center_text \"<3\"; tput cup 20 0; center_text \"JULKA\"; tail -f /dev/null" &
-kitty --title "visualizer" $FLAGS sh -c "cava -p /tmp/purplerice/cava.conf || tail -f /dev/null" &
-kitty --title "cbonsai" $FLAGS --override color1=#cba6f7 --override color2=#f5c2e7 sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
-kitty --title "lavat" $FLAGS --override window_padding_width=0 sh -c "lavat -c magenta -r 1; tail -f /dev/null" &
-kitty --title "asciiquarium" $FLAGS --override font_size=6 --override window_padding_width=0 sh -c "asciiquarium -t || tail -f /dev/null" &
-kitty --title "pipes" $FLAGS --override color1=#cba6f7 --override color2=#f5c2e7 sh -c "pipes-rs -c ansi --palette default -k curved -b true || tail -f /dev/null" &
-kitty --title "lyrics" $FLAGS sh -c "sptlrx --config /tmp/purplerice/sptlrx.yaml --player mpris || tail -f /dev/null" &
+kitty --title "love" $FLAGS sh -c "tput civis; clear; echo -e '\033[1;35m'; center_text() { local text=\$1; local width=\$(tput cols); local text_width=\$(toilet -f mono9 \"\$text\" | wc -L); local pad=\$(( (width - text_width) / 2 )); [ \$pad -lt 0 ] && pad=0; toilet -f mono9 \"\$text\" | sed \"s/^/\$(printf '%*s' \$pad '')/\"; }; tput cup 6 0; center_text \"naxce\"; tail -f /dev/null" &
+kitty --title "visualizer" $FLAGS sh -c "cava -p /tmp/purplerice/cava.conf" &
+kitty --title "matrix" $FLAGS sh -c "tput civis; cmatrix -b -C magenta" &
+kitty --title "bonsai" $FLAGS $PURPLE_COLORS sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
+kitty --title "lavat" $FLAGS sh -c "lavat -c magenta -r 1; tail -f /dev/null" &
+kitty --title "asciiquarium" $FLAGS $PURPLE_COLORS --override font_size=6 --override window_padding_width=0 sh -c "asciiquarium -t" &
+kitty --title "pipes" $FLAGS $PURPLE_COLORS sh -c "pipes-rs -c ansi --palette default -k curved -b true || tail -f /dev/null" &
+kitty --title "lyrics" $FLAGS sh -c "sptlrx --config /tmp/purplerice/sptlrx.yaml" &
+
 disown
 exit 0

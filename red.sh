@@ -1,71 +1,20 @@
 #!/usr/bin/env bash
+
 pkill -f kitty
+
 plasma-apply-wallpaperimage ~/dotfiles/Pictures/Red.jpg
+
 mkdir -p /tmp/redrice
 mkdir -p /tmp/redrice/.config
+
 rm -f ~/.config/kwinrulesrc
+
 cat << 'EOF' > ~/.config/kwinrulesrc
-[0ea3dfbd-6d9e-45fd-af9a-a6e1e640b044]
-position=3560,760
-positionrule=3
-size=480,400
-sizerule=3
-[27d4431a-8f34-4518-8b25-1f6e404a675d]
-Description=Cava
-position=2560,1160
-positionrule=3
-size=1280,260
-sizerule=3
-title=visualizer
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[2982c3d7-5cd6-42f9-ab5e-def10a474c73]
-Description=Pipes
-position=3860,1160
-positionrule=3
-size=600,260
-sizerule=3
-title=pipes
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[409d8155-6d47-4643-9cd9-47cefd42888b]
-Description=Fastfetch
-position=1940,20
-positionrule=3
-size=600,350
-sizerule=3
-title=fetch
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[65fd0069-5fee-4500-85a2-b4396a0e2f5e]
-Description=Lyrics
-position=4060,215
-positionrule=3
-size=400,925
-sizerule=3
-title=lyrics
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[6c7e549b-c22c-455c-a7de-20b75bfb124b]
-Description=Lavat
-position=3560,390
-positionrule=3
-size=480,750
-sizerule=3
-title=lavat
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[994a0f1d-2ade-4e2b-9d93-c49010f0d845]
+[General]
+count=15
+rules=d4f5e6a7-b8c9-4d0e-9f1a-2b3c4d5e6f7a,fetch,clock,bonsai,aqua,cal,weather,stats,lavat,lyrics,matrix,visualizer,pipes
+
+[d4f5e6a7-b8c9-4d0e-9f1a-2b3c4d5e6f7a]
 Description=No Taskbar
 noborder=true
 noborderrule=3
@@ -77,262 +26,195 @@ skiptaskbar=true
 skiptaskbarrule=3
 wmclass=kitty
 wmclassmatch=1
-[General]
-count=16
-rules=6c7e549b-c22c-455c-a7de-20b75bfb124b,ed5c2b8f-2782-4b54-8aca-d01ac4022fa2,994a0f1d-2ade-4e2b-9d93-c49010f0d845,409d8155-6d47-4643-9cd9-47cefd42888b,b96c50d8-9f86-4343-a9cb-4e08744afa01,ccc43692-cd2c-4ff8-8c53-d92c34050f61,a1566e1d-8ab4-41e5-b58b-4c1e59ba5298,e7bf94cf-a49b-4b9b-ad1b-688142d172da,e088a8f9-bdf2-48b6-acd9-ab80d6f9870f,b7f4a35c-5cac-4568-bbd9-e5ffc19e2495,27d4431a-8f34-4518-8b25-1f6e404a675d,d25fa3b2-4b3d-4ead-9ad0-225d36afb87d,65fd0069-5fee-4500-85a2-b4396a0e2f5e,b98ba038-f78b-4cdf-9a5d-ea3f32c4f19b,2982c3d7-5cd6-42f9-ab5e-def10a474c73,1d2e4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b
-[a1566e1d-8ab4-41e5-b58b-4c1e59ba5298]
-Description=Calendar
-position=2560,390
+
+[lyrics]
+position=1940,20
+size=500,1400
 positionrule=3
-size=330,300
 sizerule=3
-title=calendar
+title=lyrics
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b7f4a35c-5cac-4568-bbd9-e5ffc19e2495]
-Description=Love
-position=2910,660
+
+[stats]
+position=2460,20
+size=1000,430
 positionrule=3
-size=600,450
-sizerule=3
-title=love
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b96c50d8-9f86-4343-a9cb-4e08744afa01]
-Description=Matrix
-position=1940,1160
-positionrule=3
-size=600,260
-sizerule=3
-title=matrix
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[b98ba038-f78b-4cdf-9a5d-ea3f32c4f19b]
-Description=CBonsai
-position=3560,390
-positionrule=3
-size=480,350
-sizerule=3
-title=bonsai
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[ccc43692-cd2c-4ff8-8c53-d92c34050f61]
-Description=Clock
-position=2560,20
-positionrule=3
-size=1110,350
-sizerule=3
-title=clock
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[d25fa3b2-4b3d-4ead-9ad0-225d36afb87d]
-Description=Asciiquarium
-position=4060,20
-positionrule=3
-size=500,200
-sizerule=3
-title=asciiquarium
-titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[e088a8f9-bdf2-48b6-acd9-ab80d6f9870f]
-Description=Stats
-position=2560,710
-positionrule=3
-size=330,430
 sizerule=3
 title=stats
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[e7bf94cf-a49b-4b9b-ad1b-688142d172da]
-Description=Weather
-position=2910,390
+
+[fetch]
+position=3480,20
+size=980,430
 positionrule=3
-size=630,250
+sizerule=3
+title=fetch
+titlematch=1
+
+[weather]
+position=2460,470
+size=480,330
+positionrule=3
 sizerule=3
 title=weather
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[ed5c2b8f-2782-4b54-8aca-d01ac4022fa2]
-Description=CBonsai
-position=3690,20
+
+[cal]
+position=2960,470
+size=500,330
 positionrule=3
-size=350,350
 sizerule=3
-title=cbonsai
+title=calendar
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
-[1d2e4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b]
-Description=Nyancat
-position=1940,390
+
+[clock]
+position=3480,470
+size=980,330
 positionrule=3
-size=600,400
 sizerule=3
-title=nyancat
+title=clock
 titlematch=1
-types=1
-wmclass=kitty
-wmclassmatch=1
+
+[matrix]
+position=2460,820
+size=2000,120
+positionrule=3
+sizerule=3
+title=matrix
+titlematch=1
+
+[bonsai]
+position=2460,960
+size=700,300
+positionrule=3
+sizerule=3
+title=bonsai
+titlematch=1
+
+[pipes]
+position=3180,960
+size=700,300
+positionrule=3
+sizerule=3
+title=pipes
+titlematch=1
+
+[lavat]
+position=3900,960
+size=560,220
+positionrule=3
+sizerule=3
+title=lavat
+titlematch=1
+
+[aqua]
+position=3900,1200
+size=560,220
+positionrule=3
+sizerule=3
+title=asciiquarium
+titlematch=1
+
+[visualizer]
+position=2460,1280
+size=1420,140
+positionrule=3
+sizerule=3
+title=visualizer
+titlematch=1
 EOF
+
 qdbus org.kde.KWin /KWin reconfigure
 sleep 1
-cat << 'EOF' > /tmp/redrice/kitty.conf
-background         #050000
-foreground         #f38ba8
-background_opacity 0.3
-background_blur    60
-window_padding_width 15
-confirm_os_window_close 0
-window_margin_width 12
-window_border_width 1pt
-active_border_color #f38ba8
-inactive_border_color #310000
-draw_minimal_borders yes
-hide_window_decorations yes
-cursor             #f38ba8
-cursor_text_color  #050000
-cursor_shape       beam
-font_family        Cascadia Code
-font_size          11
-color0 #1e1e2e
-color8 #585b70
-color1 #f38ba8
-color9 #f38ba8
-color2 #fab387
-color10 #fab387
-color3 #f9e2af
-color11 #f9e2af
-color4 #f38ba8
-color12 #f38ba8
-color5 #fab387
-color13 #fab387
-color6 #eba0ac
-color14 #eba0ac
-color7 #bac2de
-color15 #a6adc8
-linux_display_server wayland
-shell_integration no-rc
-repaint_delay 10
-input_delay 3
-sync_to_monitor yes
-EOF
-cat << 'EOF' > /tmp/redrice/cava.conf
-[general]
-framerate = 90
-bars = 44
-[color]
-gradient = 1
-gradient_count = 6
-gradient_color_1 = '#110000'
-gradient_color_2 = '#310000'
-gradient_color_3 = '#550000'
-gradient_color_4 = '#990000'
-gradient_color_5 = '#f38ba8'
-gradient_color_6 = '#ffffff'
-[smoothing]
-integral = 50
-monstercat = 0
-waves = 1
-EOF
+
 cat << 'EOF' > /tmp/redrice/fastfetch.jsonc
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-  "display": {
-    "separator": " 󰁔 ",
-    "color": { "keys": "red", "title": "yellow" }
-  },
-  "logo": {
-    "source": "~/dotfiles/Pictures/NixOSRed.png",
-    "color": { "1": "red", "2": "yellow" },
-    "padding": { "top": 2, "left": 3, "right": 4 }
-  },
-  "modules": [
-    { "type": "title", "format": "{#31}{user-name}{#default}@{#33}{host-name}" },
-    { "type": "separator", "string": "—" },
-    { "type": "os", "key": "󰣭  OS", "format": "{3} {1}" },
-    { "type": "kernel", "key": "󰒋  Kern", "format": "{2}" },
-    { "type": "uptime", "key": "󰅐  Up", "format": "{2}d {3}h {4}m" },
-    { "type": "packages", "key": "󰮯  Pkgs" },
-    { "type": "disk", "key": "󰋊  Disk" },
-    { "type": "shell", "key": "󰅂  Shell" },
-    { "type": "separator", "string": "—" },
-    { "type": "de", "key": "󰖲  DE" },
-    { "type": "wm", "key": "󱂬  WM" },
-    { "type": "terminal", "key": "  Term" },
-    { "type": "separator", "string": "—" },
-    { "type": "cpu", "key": "󰻠  CPU", "format": "{1} @ {6}GHz" },
-    { "type": "gpu", "key": "󰍛  GPU", "format": "{2}", "hideType": "integrated" },
-    { "type": "memory", "key": "󰍛  Mem" }
-  ]
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/dotfiles/Pictures/NixRed.png",
+        "type": "kitty",
+        "width": 24,
+        "height": 10,
+        "padding": { "top": 2, "left": 2 }
+    },
+    "display": {
+        "separator": " ➜ ",
+        "color": { "keys": "red" }
+    },
+    "modules": [
+        "title",
+        "separator",
+        { "type": "os", "key": "󱄅", "format": "{2} {8}" },
+        { "type": "kernel", "key": "󰌽", "format": "{2}" },
+        { "type": "uptime", "key": "󱎫" },
+        { "type": "shell", "key": "󱆃" },
+        { "type": "cpu", "key": "󰻠", "format": "{1}" },
+        { "type": "gpu", "key": "󰢮", "hideType": "integrated", "format": "{2}" },
+        { 
+            "type": "display", 
+            "key": "󰍹", 
+            "compactType": "original-with-refresh",
+            "format": "{1}x{2} @ {3}Hz" 
+        },
+        { "type": "memory", "key": "󰑭" },
+        { "type": "localip", "key": "󰩟", "showIpv6": false }
+    ]
 }
 EOF
-cat << 'EOF' > /tmp/redrice/sptlrx.yaml
-player: "mpris"
-ignoreErrors: true
-timerInterval: 200
-updateInterval: 500
-omitTitle: false
-centerLyrics: true
-style:
-  hAlignment: center
-  lineHeight: 2
-  before:
-    foreground: "#440000"
-    faint: true
-  current:
-    foreground: "#f38ba8"
-    bold: true
-  after:
-    foreground: "#440000"
-    faint: true
+
+cat << 'EOF' > /tmp/redrice/kitty.conf
+background         #0a0505
+foreground         #f2c0c0
+background_opacity 0.2
+background_blur    40
+window_padding_width 12
+window_margin_width 5
+confirm_os_window_close 0
+window_border_width 1pt
+active_border_color #ff5555
+inactive_border_color #310000
+hide_window_decorations yes
+font_family        JetBrains Mono
+font_size          10
+cursor             #ff5555
+color4 #ff5555
+color12 #ff5555
+color2 #ff5555
+color10 #ff5555
+linux_display_server wayland
+shell_integration no-rc
 EOF
+
 cat << 'EOF' > /tmp/redrice/sys_info.sh
 #!/usr/bin/env bash
-RED='\033[38;2;243;139;168m'
-ORANGE='\033[38;2;250;179;135m'
+RED='\033[38;2;255;85;85m'
+PINK='\033[38;2;255;182;193m'
 BOLD='\033[1m'
 NC='\033[0m'
 tput civis
 while true; do
+  UPTIME=$(awk '{printf "%dh %dm", $1/3600, ($1%3600)/60}' /proc/uptime)
   CPU_USAGE=$(awk '/^cpu / {u=($2+$4)*100/($2+$4+$5)} END {printf "%.0f", u}' /proc/stat)
   CPU_TEMP=$(sensors 2>/dev/null | awk '/Tctl|Package id 0/ {print int($2); exit}')
   [ -z "$CPU_TEMP" ] && CPU_TEMP="--"
-  GPU_USAGE=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d ' ')
-  GPU_TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | tr -d ' ')
-  [ -z "$GPU_USAGE" ] && GPU_USAGE="--"
-  [ -z "$GPU_TEMP" ] && GPU_TEMP="--"
   RAM_USED=$(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} END {printf "%.1f", (t-a)/1024/1024}' /proc/meminfo)
   RAM_PERCENT=$(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} END {printf "%.0f", (t-a)/t*100}' /proc/meminfo)
-  MB_TEMP=$(sensors 2>/dev/null | awk '/Composite/ {print int($2); exit}')
-  [ -z "$MB_TEMP" ] && MB_TEMP="--"
+  DISK_USAGE=$(df -h / | awk 'NR==2 {print $5}')
+  KERNEL_VER=$(uname -r | cut -d'-' -f1)
+  
   tput cup 0 0
-  echo -e "${RED}${BOLD}SYSTEM${NC}"
+  echo -e "${RED}${BOLD}SYSTEM STATS${NC}"
   echo "----------------------"
-  printf "${BOLD}${RED}CPU${NC}  %-3s%%   %3s°C\n" "$CPU_USAGE" "$CPU_TEMP"
-  printf "${BOLD}${RED}GPU${NC}  %-3s%%   %3s°C\n" "$GPU_USAGE" "$GPU_TEMP"
-  printf "${BOLD}${RED}RAM${NC}  %-5s  %3s%%\n" "$RAM_USED" "$RAM_PERCENT"
-  printf "${BOLD}${RED}MBD${NC} %3s°C\n" "$MB_TEMP"
+  printf "${BOLD}${PINK}CPU${NC}  %-3s%%   %3s°C\n" "$CPU_USAGE" "$CPU_TEMP"
+  printf "${BOLD}${PINK}RAM${NC}  %-5s  %3s%%\n" "$RAM_USED" "$RAM_PERCENT"
+  printf "${BOLD}${PINK}DSK${NC}  %-13s\n" "$DISK_USAGE"
+  printf "${BOLD}${PINK}KER${NC}  %-13s\n" "$KERNEL_VER"
+  printf "${BOLD}${PINK}UPT${NC}  %s\n" "$UPTIME"
   echo "----------------------"
   sleep 2
 done
 EOF
+
 cat << 'EOF' > /tmp/redrice/weather.sh
 #!/usr/bin/env bash
 RED='\033[1;31m'
@@ -347,39 +229,58 @@ while true; do
     PAD="  "
     echo -e "${PAD}${RED}󰖐  WEATHER${NC}"
     echo -e "${PAD}${WHITE}-----------${NC}"
-    print_line() { echo -e "${PAD}${RED}$1 $2${NC} ${RED}➜${NC} ${WHITE}$3${NC}"; }
+    print_line() {
+        echo -e "${PAD}${RED}$1 $2${NC} ${RED}➜${NC} ${WHITE}$3${NC}"
+    }
     print_line "󰔄" "Location   " "PL"
     print_line "󰖐" "Conditions " "${icon}${desc}"
     print_line "󱩄" "Temperature" "${temp}"
     print_line "󰖝" "Wind       " "${wind}"
     print_line "󰖚" "Humidity   " "${humi}"
-    print_line "󰓅" "Pressure   " "${pres}"
     sleep 600
 done
 EOF
+
+cat << 'EOF' > /tmp/redrice/cava.conf
+[general]
+framerate = 60
+autosens = 1
+bars = 0
+bar_width = 1
+bar_spacing = 1
+
+[input]
+method = pulse
+source = auto
+
+[output]
+method = ncurses
+
+[color]
+gradient = 1
+gradient_count = 2
+gradient_color_1 = '#ff5555'
+gradient_color_2 = '#ff0000'
+EOF
+
 chmod +x /tmp/redrice/sys_info.sh
 chmod +x /tmp/redrice/weather.sh
-sleep 1
+
 FLAGS="--config /tmp/redrice/kitty.conf --override remember_window_size=no --override shell_integration=disabled"
+RED_COLORS="--override color1=#ff5555 --override color2=#ff0000 --override color3=#ff7eb3 --override color4=#ff5555 --override color5=#ff0000 --override color6=#ff7eb3 --override color7=#cdd6f4 --override color8=#585b70 --override color9=#ff5555 --override color10=#ff0000 --override color11=#ff7eb3 --override color12=#ff5555 --override color13=#ff0000 --override color14=#ff7eb3 --override color15=#f2c0c0"
+
+kitty --title "lyrics" $FLAGS sh -c "sptlrx --config /tmp/redrice/sptlrx.yaml" &
+kitty --title "stats" $FLAGS --override font_size=13 sh -c "/tmp/redrice/sys_info.sh" &
 kitty --title "fetch" $FLAGS sh -c "tput civis; fastfetch -c /tmp/redrice/fastfetch.jsonc; tail -f /dev/null" &
-kitty --title "nyancat" $FLAGS sh -c "nyancat" &
-kitty --title "matrix" $FLAGS sh -c "tput civis; cmatrix -C red -s" &
-kitty --title "clock" $FLAGS sh -c "tty-clock -S -c -C 1 -b -B || tail -f /dev/null" &
-kitty --title "calendar" $FLAGS sh -c "tput civis; echo -e '\n\n\033[1;31m'; cal; tail -f /dev/null" &
-kitty --title "weather" $FLAGS sh -c "tput civis; /tmp/redrice/weather.sh; tail -f /dev/null" &
-kitty --title "stats" $FLAGS sh -c "/tmp/redrice/sys_info.sh" &
-kitty --title "love" $FLAGS --override window_padding_width=0 --override window_margin_width=0 sh -c "tput civis; clear; echo -e '\033[1;31m'; center_text() { local text=\$1; local width=\$(tput cols); local text_width=\$(toilet -f mono9 \"\$text\" | wc -L); local pad=\$(( (width - text_width) / 2 )); [ \$pad -lt 0 ] && pad=0; toilet -f mono9 \"\$text\" | sed \"s/^/\$(printf '%*s' \$pad '')/\"; }; tput cup 4 0; center_text \"I\"; tput cup 12 0; center_text \"<3\"; tput cup 20 0; center_text \"JULKA\"; tail -f /dev/null" &
-kitty --title "visualizer" $FLAGS sh -c "cava -p /tmp/redrice/cava.conf || tail -f /dev/null" &
-kitty --title "cbonsai" $FLAGS --override color1=#f38ba8 --override color2=#fab387 sh -c "cbonsai -l -b 1 || tail -f /dev/null" &
-kitty --title "lavat" $FLAGS --override window_padding_width=0 sh -c "lavat -c red -r 1; tail -f /dev/null" &
-kitty --title "asciiquarium" $FLAGS --override font_size=6 --override window_padding_width=0 sh -c "asciiquarium -t || tail -f /dev/null" &
-kitty --title "pipes" $FLAGS --override color1=#f38ba8 --override color2=#fab387 sh -c "pipes-rs -c ansi --palette default -k curved -b true || tail -f /dev/null" &
-TARGET_PLAYER=$(playerctl -l | grep -E "chromium\.instance[0-9]{5,}" | head -n 1)
+kitty --title "weather" $FLAGS sh -c "/tmp/redrice/weather.sh" &
+kitty --title "calendar" $FLAGS --override font_size=11 sh -c "tput civis; echo -e '\033[1;31m'; cal; tail -f /dev/null" &
+kitty --title "clock" $FLAGS sh -c "tty-clock -S -c -C 1 -b -B" &
+kitty --title "matrix" $FLAGS sh -c "tput civis; cmatrix -b -C red" &
+kitty --title "bonsai" $FLAGS $RED_COLORS sh -c "cbonsai -l -b 1" &
+kitty --title "pipes" $FLAGS $RED_COLORS sh -c "pipes-rs -k curved" &
+kitty --title "lavat" $FLAGS sh -c "lavat -c red -r 1" &
+kitty --title "asciiquarium" $FLAGS $RED_COLORS --override font_size=6 sh -c "asciiquarium -t" &
+kitty --title "visualizer" $FLAGS sh -c "sleep 3; cava -p /tmp/redrice/cava.conf" &
 
-if [ -z "$TARGET_PLAYER" ]; then
-    TARGET_PLAYER=$(playerctl -l | grep "chromium" | head -n 1)
-fi
-
-kitty --title "lyrics" $FLAGS sh -c "export MPRIS_PLAYER=$TARGET_PLAYER; sptlrx --config /tmp/redrice/sptlrx.yaml --player mpris || tail -f /dev/null" &
 disown
 exit 0
