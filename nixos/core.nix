@@ -152,6 +152,10 @@
           command = "/run/current-system/sw/bin/systemctl reboot";
           options = [ "NOPASSWD" ];
         }
+        {
+          command = "/home/naxce/dotfiles/boot-windows";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
