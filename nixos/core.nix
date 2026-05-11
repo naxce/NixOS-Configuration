@@ -145,11 +145,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/efibootmgr";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl";
+          command = "${pkgs.systemd}/bin/bootctl";
           options = [ "NOPASSWD" ];
         }
       ];

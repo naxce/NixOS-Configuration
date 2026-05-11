@@ -35,7 +35,7 @@
       nixplasma = "plasmashell --replace & disown";
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
       rice = "~/dotfiles/rice.sh";
-      boot-windows = "sudo efibootmgr -o 0000,0003 && systemctl reboot";
+      boot-windows = "sudo bootctl set-oneshot auto-windows && sudo bootctl set-timeout 1 && systemctl reboot";
     };
   };
 
