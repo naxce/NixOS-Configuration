@@ -152,6 +152,16 @@
     }
   ];
 
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if ((action.id == "org.freedesktop.policykit.exec" || 
+           action.id == "org.freedesktop.login1.reboot") &&
+          subject.user == "naxce") {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   systemd.services.reset-refind-config = {
     description = "rEFInd (NixOS)";
     wantedBy = [ "multi-user.target" ];
