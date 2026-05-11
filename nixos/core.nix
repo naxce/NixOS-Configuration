@@ -145,7 +145,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "${pkgs.systemd}/bin/bootctl";
+          command = "/run/current-system/sw/bin/tee /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf";
           options = [ "NOPASSWD" ];
         }
       ];
@@ -153,11 +153,11 @@
   ];
 
   systemd.services.reset-refind-config = {
-    description = "Reset rEFInd manual boot config";
+    description = "Default rEFInd";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/truncate -s 0 /boot/EFI/refind/manual_boot.conf'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"timeout 5\ndefault_selection \\\"NixOS\\\"\" > /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf'";
     };
   };
 

@@ -35,7 +35,7 @@
       nixplasma = "plasmashell --replace & disown";
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
       rice = "~/dotfiles/rice.sh";
-      boot-windows = "echo -e 'default_selection \"Windows 11\"\ntimeout 0' | sudo tee /boot/EFI/refind/manual_boot.conf && systemctl reboot";
+      boot-windows = "echo -e 'timeout 0\ndefault_selection \"Windows 11\"' | sudo tee /boot/EFI/refind/themes/rEFInd-fatum/manual_boot.conf && systemctl reboot";
     };
   };
 
