@@ -24,6 +24,7 @@
         nixhome: Rebuild Home Manager Config
         nixplasma: Restart KDE Plasma
         nixclean: Collect and delete garbage
+        nixsh: nix-shell
         rice: Show ricing style choice
         "
       '';
@@ -33,6 +34,7 @@
       nixhome = "home-manager switch --flake ~/dotfiles#naxce";
       nixplasma = "plasmashell --replace & disown";
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      nixsh = "sudo nix-shell";
       rice = "~/dotfiles/scripts/rice.sh";
     };
   };
