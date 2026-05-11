@@ -144,6 +144,14 @@
           command = "/run/current-system/sw/bin/pkill";
           options = [ "NOPASSWD" ];
         }
+        {
+          command = "/run/current-system/sw/bin/efibootmgr -n 0005";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/systemctl reboot";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
