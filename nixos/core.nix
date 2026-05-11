@@ -138,6 +138,10 @@
           options = [ "NOPASSWD" ];
         }
         {
+          command = "/run/current-system/sw/bin/nix-shell";
+          options = [ "NOPASSWD" ];
+        }
+        {
           command = "/run/current-system/sw/bin/create_ap";
           options = [ "NOPASSWD" ];
         }
