@@ -157,7 +157,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.coreutils}/bin/sh -c 'echo \"\" > /boot/EFI/refind/manual_boot.conf'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/truncate -s 0 /boot/EFI/refind/manual_boot.conf'";
     };
   };
 
