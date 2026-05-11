@@ -33,7 +33,7 @@
       nixhome = "home-manager switch --flake ~/dotfiles#naxce";
       nixplasma = "plasmashell --replace & disown";
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
-      rice = "~/dotfiles/rice.sh";
+      rice = "~/dotfiles/scripts/rice.sh";
     };
   };
 

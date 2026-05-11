@@ -13,6 +13,6 @@ sleep 0.5
 kwin_wayland --replace & disown
 
 sleep 3
-sh -c "~/NixOS/rice.sh"
+sh -c "~/NixOS/scripts/rice.sh"
 
 echo "✅ RICING MODE ENABLED"

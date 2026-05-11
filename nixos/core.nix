@@ -207,18 +207,6 @@
 
   services.xserver.xkb.layout = "pl";
 
-  # Rice i OpenRGB
-  systemd.user.services.rice-autostart = {
-    description = "rice-autostart";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash /home/naxce/NixOS/rice.sh";
-      Type = "oneshot";
-      RemainAfterExit = "yes";
-    };
-  };
-
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";

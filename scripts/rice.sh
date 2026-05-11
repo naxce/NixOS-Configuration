@@ -15,16 +15,16 @@ CHOICE=$(zenity --list \
 
 case "$CHOICE" in
     Blue)
-        ~/dotfiles/blue.sh
+        ~/dotfiles/scripts/blue.sh
         ;;
     Red)
-        ~/dotfiles/red.sh
+        ~/dotfiles/scripts/red.sh
         ;;
     Purple)
-        ~/dotfiles/purple.sh
+        ~/dotfiles/scripts/purple.sh
         ;;
     "Change Wallpaper")
-        ~/dotfiles/wallpaper.sh
+        ~/dotfiles/scripts/wallpaper.sh
         ;;
     "Kill Rice")
         pkill -f kitty

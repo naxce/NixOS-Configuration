@@ -27,7 +27,7 @@ case "$CHOICE" in
         plasma-apply-wallpaperimage ~/dotfiles/Pictures/Purple.jpg
         ;;
     "Choose Ricing Theme")
-        ~/dotfiles/rice.sh
+        ~/dotfiles/scripts/rice.sh
         ;;
     "Kill Rice")
         pkill -f kitty
