@@ -13,25 +13,15 @@
   home.file.".config/kitty".source = ./.config/kitty;
   home.file.".config/sptlrx".source = ./.config/sptlrx;
 
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
-
-      nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
-
-      nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
-
-      nixhome = "home-manager switch --flake ~/dotfiles#naxce";
-
-      nixplasma = "plasmashell --replace & disown";
-
-      nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
-
-      rice = "~/dotfiles/rice.sh";
-
-      boot-windows = "sudo bootctl set-oneshot auto-windows && systemctl reboot";
-    };
+  programs.bash.shellAliases = {
+    nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+    nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
+    nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+    nixhome = "home-manager switch --flake ~/dotfiles#naxce";
+    nixplasma = "plasmashell --replace & disown";
+    nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+    rice = "~/dotfiles/rice.sh";
+    boot-windows = "sudo efibootmgr -n 0000 && systemctl reboot";
   };
 
   programs.git = {

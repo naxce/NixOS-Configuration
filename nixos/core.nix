@@ -141,7 +141,7 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/bootctl";
+          command = "/run/current-system/sw/bin/efibootmgr";
           options = [ "NOPASSWD" ];
         }
       ];
