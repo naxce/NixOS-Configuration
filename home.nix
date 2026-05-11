@@ -25,7 +25,6 @@
         nixplasma: Restart KDE Plasma
         nixclean: Collect and delete garbage
         rice: Show ricing style choice
-        boot-windows: Immediately boot to Windows 11
         "
       '';
       nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
@@ -35,7 +34,6 @@
       nixplasma = "plasmashell --replace & disown";
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
       rice = "~/dotfiles/rice.sh";
-      boot-windows = "printf 'timeout -1\ndefault_selection \"Windows 11\"\n' | sudo tee /boot/EFI/refind/manual_boot.conf && systemctl reboot";
     };
   };
 
