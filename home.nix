@@ -16,7 +16,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      nixhelp = "
+      nixhelp = "echo
       nixos: Rebuild with Flakes + Commit to GitHub\n
       nixgit: Commit to GitHub\n
       nixbuild: Rebuild with Flakes\n
