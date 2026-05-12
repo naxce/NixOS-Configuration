@@ -23,9 +23,6 @@
     libnotify
     iw
     linux-wifi-hotspot
-    usbmuxd
-    libimobiledevice
-    realvnc-vnc-viewer
 
     # Fonts
     inter
@@ -97,6 +94,7 @@
 
     rustc
     cargo
+    rustup
     cpio
     squashfsTools
     gnumake

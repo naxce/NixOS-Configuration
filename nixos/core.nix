@@ -195,9 +195,6 @@
   # Java
   programs.java.enable = true;
 
-  # UBSMUXD
-  services.usbmuxd.enable = true;
-
   #
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [
