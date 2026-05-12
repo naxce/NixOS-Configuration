@@ -18,44 +18,44 @@ void AddNotification(std::string app, std::string msg) {
 }
 
 void DrawUI(int w, int h) {
-    DrawRectangle(0, h - 60, w, 60, Fade(BLACK, 0.95f));
-    DrawLine(0, h - 60, w, h - 60, CYAN);
+    DrawRectangle(0, h - 60, w, 60, Fade((Color){0, 0, 0, 255}, 0.95f));
+    DrawLine(0, h - 60, w, h - 60, (Color){0, 255, 255, 255});
 
-    DrawText("ZENITH", 15, h - 45, 25, CYAN);
+    DrawText("ZENITH", 15, h - 45, 25, (Color){0, 255, 255, 255});
 
-    int dummy; // Zmienna pomocnicza do uciszenia kompilatora
+    int dummy;
 
     Rectangle btnVesktop = { 130, (float)h - 50, 100, 40 };
     if (CheckCollisionPointRec(GetMousePosition(), btnVesktop)) {
-        DrawRectangleRec(btnVesktop, GRAY);
+        DrawRectangleRec(btnVesktop, (Color){130, 130, 130, 255});
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("vesktop &");
     }
-    DrawText("VESKTOP", btnVesktop.x + 10, btnVesktop.y + 12, 15, WHITE);
+    DrawText("VESKTOP", btnVesktop.x + 10, btnVesktop.y + 12, 15, (Color){255, 255, 255, 255});
 
     Rectangle btnCider = { 240, (float)h - 50, 80, 40 };
     if (CheckCollisionPointRec(GetMousePosition(), btnCider)) {
-        DrawRectangleRec(btnCider, GRAY);
+        DrawRectangleRec(btnCider, (Color){130, 130, 130, 255});
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("cider &");
     }
-    DrawText("CIDER", btnCider.x + 15, btnCider.y + 12, 15, WHITE);
+    DrawText("CIDER", btnCider.x + 15, btnCider.y + 12, 15, (Color){255, 255, 255, 255});
 
     Rectangle btnDisplay = { 330, (float)h - 50, 160, 40 };
     bool hoverDisplay = CheckCollisionPointRec(GetMousePosition(), btnDisplay);
-    DrawRectangleRec(btnDisplay, hoverDisplay ? SKYBLUE : DARKBLUE);
-    DrawText("DISPLAY CONFIG", btnDisplay.x + 15, btnDisplay.y + 12, 15, WHITE);
+    DrawRectangleRec(btnDisplay, hoverDisplay ? (Color){102, 191, 255, 255} : (Color){0, 82, 172, 255});
+    DrawText("DISPLAY CONFIG", btnDisplay.x + 15, btnDisplay.y + 12, 15, (Color){255, 255, 255, 255});
     if (hoverDisplay && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("wdisplays &");
 
-    DrawText(TextFormat("%i FPS", GetFPS()), w - 100, h - 38, 16, MAROON);
-    (void)dummy; // Ostateczne uciszenie ostrzeżenia o nieużywanej zmiennej
+    DrawText(TextFormat("%i FPS", GetFPS()), w - 100, h - 38, 16, (Color){190, 33, 55, 255});
+    (void)dummy;
 }
 
 void DrawNotifications() {
     for (size_t i = 0; i < notifications.size(); i++) {
         float yPos = 20 + (i * 80);
-        DrawRectangle(GetScreenWidth() - 270, yPos, 250, 70, Fade(BLACK, 0.8f));
-        DrawRectangleLines(GetScreenWidth() - 270, yPos, 250, 70, CYAN);
-        DrawText(notifications[i].appName.c_str(), GetScreenWidth() - 260, yPos + 10, 15, CYAN);
-        DrawText(notifications[i].message.c_str(), GetScreenWidth() - 260, yPos + 35, 12, WHITE);
+        DrawRectangle(GetScreenWidth() - 270, yPos, 250, 70, Fade((Color){0, 0, 0, 255}, 0.8f));
+        DrawRectangleLines(GetScreenWidth() - 270, yPos, 250, 70, (Color){0, 255, 255, 255});
+        DrawText(notifications[i].appName.c_str(), GetScreenWidth() - 260, yPos + 10, 15, (Color){0, 255, 255, 255});
+        DrawText(notifications[i].message.c_str(), GetScreenWidth() - 260, yPos + 35, 12, (Color){255, 255, 255, 255});
     }
 }
 
@@ -88,7 +88,7 @@ int main() {
         }
 
         BeginDrawing();
-            ClearBackground(BLANK);
+            ClearBackground((Color){0, 0, 0, 0});
             DrawUI(GetScreenWidth(), GetScreenHeight());
             DrawNotifications();
         EndDrawing();

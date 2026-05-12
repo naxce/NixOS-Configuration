@@ -27,8 +27,7 @@
       unpackPhase = "true";
       buildPhase = ''
         g++ -o zenith ${./ZenithWM/zenith.cpp} \
-          $(pkg-config --cflags --libs raylib wlroots wayland-server) \
-          -lrt -lm -ldl -lpthread
+          -lraylib -lwayland-server -lrt -lm -ldl -lpthread
       '';
       installPhase = ''
         mkdir -p $out/bin
