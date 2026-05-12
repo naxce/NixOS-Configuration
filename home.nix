@@ -18,7 +18,8 @@
     shellAliases = {
       nixhelp = ''
         echo "
-        nixos: Rebuild with Flakes + Commit to GitHub
+        nixos: Update + Rebuild + Git Push
+        nixup: Update Flake Inputs
         nixgit: Commit to GitHub
         nixbuild: Rebuild with Flakes
         nixhome: Rebuild Home Manager Config
@@ -28,13 +29,23 @@
         rice: Show ricing style choice
         "
       '';
-      nixos = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+
+      nixos = "cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+
+      nixup = "cd ~/dotfiles && nix flake update";
+
       nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
+
       nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+
       nixhome = "home-manager switch --flake ~/dotfiles#naxce";
+
       nixplasma = "plasmashell --replace & disown";
+
       nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+
       nixsh = "nix-shell";
+
       rice = "~/dotfiles/scripts/rice.sh";
     };
   };
