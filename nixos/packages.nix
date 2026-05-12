@@ -23,6 +23,8 @@
     libnotify
     iw
     linux-wifi-hotspot
+    usbmuxd
+    libimobiledevice
 
     # Fonts
     inter
