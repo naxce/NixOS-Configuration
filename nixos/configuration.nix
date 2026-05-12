@@ -11,11 +11,6 @@
     ./users.nix
   ];
 
-    specialisation = {
-    nixconsole.configuration =
-      import ./nixconsole.nix;
-  };
-
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "26.05";
 }
