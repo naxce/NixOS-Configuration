@@ -94,7 +94,6 @@
 
     rustc
     cargo
-    rustup
     cpio
     squashfsTools
     gnumake
