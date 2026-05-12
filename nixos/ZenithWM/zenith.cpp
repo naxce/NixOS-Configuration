@@ -13,25 +13,21 @@ struct DesktopIcon {
     Color color;
 };
 
-// --- PROTOTYPY (Deklaracje, żeby kompilator wiedział co jest grane) ---
 void AddIcon(std::string name, std::string cmd, float x, float y, Color col);
 void SetupIcons();
 void DrawTaskbar(int w, int h);
 void DrawSettingsGUI(int w, int h);
-bool DrawCustomButton(Rectangle rect, std::string text); // Zmiana nazwy dla bezpieczeństwa
+bool DrawCustomButton(Rectangle rect, std::string text);
 
-// Zmienne globalne
 std::vector<DesktopIcon> icons;
 bool showSettings = false;
-
-// --- IMPLEMENTACJA FUNKCJI ---
 
 bool DrawCustomButton(Rectangle rect, std::string text) {
     bool hover = CheckCollisionPointRec(GetMousePosition(), rect);
     DrawRectangleRec(rect, hover ? (Color){0, 255, 255, 150} : (Color){40, 40, 45, 255});
     DrawRectangleLinesEx(rect, 1, (Color){0, 255, 255, 255});
     DrawText(text.c_str(), rect.x + 15, rect.y + 12, 16, WHITE);
-    return (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON));
+    return (hover && IsMouseButtonReleased(MOUSE_LEFT_BUTTON));
 }
 
 void AddIcon(std::string name, std::string cmd, float x, float y, Color col) {
@@ -40,10 +36,10 @@ void AddIcon(std::string name, std::string cmd, float x, float y, Color col) {
 
 void SetupIcons() {
     icons.clear();
-    AddIcon("VESKTOP", "vesktop &", 50, 50, (Color){88, 101, 242, 255});
-    AddIcon("STEAM", "gamemoderun steam &", 50, 180, (Color){23, 26, 33, 255});
-    AddIcon("BROWSER", "firefox &", 50, 310, (Color){255, 113, 67, 255});
-    AddIcon("KITTY", "kitty &", 50, 440, (Color){40, 40, 40, 255});
+    AddIcon("VESKTOP", "nohup vesktop > /dev/null 2>&1 &", 50, 50, (Color){88, 101, 242, 255});
+    AddIcon("STEAM", "nohup gamemoderun steam > /dev/null 2>&1 &", 50, 180, (Color){23, 26, 33, 255});
+    AddIcon("BROWSER", "nohup firefox > /dev/null 2>&1 &", 50, 310, (Color){255, 113, 67, 255});
+    AddIcon("KITTY", "nohup kitty > /dev/null 2>&1 &", 50, 440, (Color){40, 40, 40, 255});
 }
 
 void DrawTaskbar(int w, int h) {
@@ -56,7 +52,7 @@ void DrawTaskbar(int w, int h) {
     DrawRectangleRec(showDesktopBtn, hoverSD ? (Color){0, 255, 255, 100} : (Color){40, 40, 45, 255});
     DrawText("#", showDesktopBtn.x + 15, showDesktopBtn.y + 8, 20, WHITE);
 
-    if (hoverSD && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    if (hoverSD && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
         dummy = system("swaymsg [app_id=\".*\"] floating enable; swaymsg [app_id=\".*\"] move scratchpad");
     }
 
@@ -69,34 +65,36 @@ void DrawTaskbar(int w, int h) {
     DrawRectangleRec(settingsBtn, hoverSet ? (Color){0, 255, 255, 100} : (Color){40, 40, 45, 255});
     DrawText("SETTINGS", settingsBtn.x + 10, settingsBtn.y + 10, 16, WHITE);
 
-    if (hoverSet && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) showSettings = !showSettings;
+    if (hoverSet && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) showSettings = !showSettings;
     (void)dummy;
 }
 
 void DrawSettingsGUI(int w, int h) {
     if (!showSettings) return;
-
+    static int dummy;
     Rectangle panel = { (float)w - 320, (float)h - 410, 300, 350 };
     DrawRectangleRec(panel, (Color){20, 20, 25, 245});
     DrawRectangleLinesEx(panel, 2, (Color){0, 255, 255, 255});
     DrawText("ZENITH PANEL", panel.x + 20, panel.y + 20, 18, (Color){0, 255, 255, 255});
 
-    if (DrawCustomButton({ panel.x + 20, panel.y + 60, 260, 40 }, "MONITORS")) system("wdisplays &");
-    if (DrawCustomButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART")) system("pkill zenith");
-    if (DrawCustomButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM")) system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 60, 260, 40 }, "MONITORS")) dummy = system("nohup wdisplays > /dev/null 2>&1 &");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART")) dummy = system("pkill zenith");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM")) dummy = system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
 
     DrawText("System: NixOS Unstable", panel.x + 20, panel.y + 290, 14, GRAY);
     DrawText("GPU: NVIDIA RTX Mode", panel.x + 20, panel.y + 310, 14, GREEN);
+    (void)dummy;
 }
 
 int main() {
-    // Środowisko pod Nvidię
     setenv("WLR_NO_HARDWARE_CURSORS", "1", 1);
     setenv("LIBVA_DRIVER_NAME", "nvidia", 1);
     setenv("__GLX_VENDOR_LIBRARY_NAME", "nvidia", 1);
     setenv("GBM_BACKEND", "nvidia-drm", 1);
 
+    SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
     InitWindow(1920, 1080, "Zenith WM");
+
     int m = 0;
     SetWindowSize(GetMonitorWidth(m), GetMonitorHeight(m));
     ToggleFullscreen();
@@ -119,7 +117,9 @@ int main() {
             DrawRectangleRec(icon.rect, hover ? Fade(icon.color, 0.6f) : Fade(icon.color, 0.3f));
             DrawRectangleLinesEx(icon.rect, 2, hover ? (Color){0, 255, 255, 255} : (Color){80, 80, 85, 150});
             DrawText(icon.label.c_str(), icon.rect.x + (100 - MeasureText(icon.label.c_str(), 15)) / 2, icon.rect.y + 110, 15, WHITE);
-            if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system(icon.command.c_str());
+            if (hover && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+                dummy = system(icon.command.c_str());
+            }
         }
 
         DrawTaskbar(GetScreenWidth(), GetScreenHeight());
@@ -127,6 +127,7 @@ int main() {
         EndDrawing();
     }
 
+    (void)dummy;
     CloseWindow();
     return 0;
 }
