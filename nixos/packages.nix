@@ -40,11 +40,11 @@
     wayland-protocols
     libxkbcommon
     libGL
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXi
-    xorg.libXinerama
+    libX11
+    libXcursor
+    libXrandr
+    libXi
+    libXinerama
 
     # SYSTEM
     home-manager
