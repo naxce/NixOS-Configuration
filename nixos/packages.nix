@@ -16,14 +16,17 @@
       pname = "zenithwm";
       version = "1.0";
       src = ./ZenithWM;
-      buildInputs = [ 
-        raylib 
+      buildInputs = [
+        raylib
         wlroots_0_20
-        wayland 
-        libxkbcommon 
-        pixman 
+        wayland
+        libxkbcommon
+        pixman
       ];
-      nativeBuildInputs = [ pkg-config gcc ];
+      nativeBuildInputs = [
+        pkg-config
+        gcc
+      ];
       unpackPhase = "true";
       buildPhase = ''
         g++ -o zenith ${./ZenithWM/zenith.cpp} \
@@ -35,8 +38,8 @@
       '';
     })
     # ZENITH
-    raylib 
-    wayland 
+    raylib
+    wayland
     wayland-protocols
     libxkbcommon
     libGL
@@ -131,6 +134,9 @@
     gcc
     pkg-config
     openssl
+
+    clang-tools
+    cmake
 
     rustc
     cargo
