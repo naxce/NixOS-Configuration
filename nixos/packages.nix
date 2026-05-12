@@ -122,6 +122,7 @@
     ollama
     rustdesk
     anydesk
+    deskreen
 
     # AUDIO / BLUETOOTH
     pavucontrol
