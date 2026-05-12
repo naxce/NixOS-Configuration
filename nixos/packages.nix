@@ -95,7 +95,7 @@
     rustc
     cargo
     cpio
-    squashtools
+    squashfs
     make
     curl
 
