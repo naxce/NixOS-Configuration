@@ -12,31 +12,6 @@
   ];
 
   home.packages = with pkgs; [
-    (stdenv.mkDerivation {
-      pname = "zenithwm";
-      version = "1.0";
-      src = ./ZenithWM;
-      buildInputs = [
-        raylib
-        wlroots_0_20
-        wayland
-        libxkbcommon
-        pixman
-      ];
-      nativeBuildInputs = [
-        pkg-config
-        gcc
-      ];
-      unpackPhase = "true";
-      buildPhase = ''
-        g++ -o zenith ${./ZenithWM/zenith.cpp} \
-          -lraylib -lwayland-server -lrt -lm -ldl -lpthread
-      '';
-      installPhase = ''
-        mkdir -p $out/bin
-        cp zenith $out/bin/
-      '';
-    })
     # ZENITH
     raylib
     wayland
