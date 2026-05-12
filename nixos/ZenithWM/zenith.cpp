@@ -5,6 +5,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+struct DesktopIcon {
+    Rectangle rect;
+    std::string label;
+    std::string command;
+    Color color;
+};
+
 struct Notification {
     std::string appName;
     std::string message;
@@ -12,88 +19,68 @@ struct Notification {
 };
 
 std::vector<Notification> notifications;
+std::vector<DesktopIcon> icons;
 
-void AddNotification(std::string app, std::string msg) {
-    notifications.push_back({app, msg, 5.0f});
+void AddIcon(std::string name, std::string cmd, float x, float y, Color col) {
+    icons.push_back({ {x, y, 100, 100}, name, cmd, col });
+}
+
+void SetupIcons() {
+    icons.clear();
+    AddIcon("VESKTOP", "vesktop &", 50, 50, (Color){88, 101, 242, 255});
+    AddIcon("STEAM", "gamemoderun steam &", 50, 180, (Color){23, 26, 33, 255});
+    AddIcon("BROWSER", "firefox &", 50, 310, (Color){255, 113, 67, 255});
+    AddIcon("KITTY", "kitty &", 50, 440, (Color){40, 40, 40, 255});
+    AddIcon("CONFIG", "wdisplays &", 50, 570, (Color){0, 150, 136, 255});
 }
 
 void DrawUI(int w, int h) {
-    DrawRectangle(0, h - 60, w, 60, Fade((Color){0, 0, 0, 255}, 0.95f));
-    DrawLine(0, h - 60, w, h - 60, (Color){0, 255, 255, 255});
-
-    DrawText("ZENITH", 15, h - 45, 25, (Color){0, 255, 255, 255});
-
     int dummy;
+    
+    for (auto& icon : icons) {
+        bool hover = CheckCollisionPointRec(GetMousePosition(), icon.rect);
+        
+        DrawRectangleRec(icon.rect, hover ? Fade(icon.color, 0.8f) : Fade(icon.color, 0.4f));
+        DrawRectangleLinesEx(icon.rect, 2, hover ? (Color){0, 255, 255, 255} : (Color){200, 200, 200, 100});
+        
+        DrawText(icon.label.c_str(), icon.rect.x + (100 - MeasureText(icon.label.c_str(), 15)) / 2, icon.rect.y + 110, 15, (Color){255, 255, 255, 255});
 
-    Rectangle btnVesktop = { 130, (float)h - 50, 100, 40 };
-    if (CheckCollisionPointRec(GetMousePosition(), btnVesktop)) {
-        DrawRectangleRec(btnVesktop, (Color){130, 130, 130, 255});
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("vesktop &");
+        if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            dummy = system(icon.command.c_str());
+        }
     }
-    DrawText("VESKTOP", btnVesktop.x + 10, btnVesktop.y + 12, 15, (Color){255, 255, 255, 255});
 
-    Rectangle btnCider = { 240, (float)h - 50, 80, 40 };
-    if (CheckCollisionPointRec(GetMousePosition(), btnCider)) {
-        DrawRectangleRec(btnCider, (Color){130, 130, 130, 255});
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("cider &");
-    }
-    DrawText("CIDER", btnCider.x + 15, btnCider.y + 12, 15, (Color){255, 255, 255, 255});
-
-    Rectangle btnDisplay = { 330, (float)h - 50, 160, 40 };
-    bool hoverDisplay = CheckCollisionPointRec(GetMousePosition(), btnDisplay);
-    DrawRectangleRec(btnDisplay, hoverDisplay ? (Color){102, 191, 255, 255} : (Color){0, 82, 172, 255});
-    DrawText("DISPLAY CONFIG", btnDisplay.x + 15, btnDisplay.y + 12, 15, (Color){255, 255, 255, 255});
-    if (hoverDisplay && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("wdisplays &");
-
-    DrawText(TextFormat("%i FPS", GetFPS()), w - 100, h - 38, 16, (Color){190, 33, 55, 255});
+    DrawRectangle(0, h - 40, w, 40, Fade((Color){0, 0, 0, 255}, 0.9f));
+    DrawText("ZENITH CORE | MAX PERFORMANCE MODE", 20, h - 30, 18, (Color){0, 255, 255, 255});
+    DrawText(TextFormat("FPS: %i", GetFPS()), w - 100, h - 30, 18, (Color){0, 255, 0, 255});
     (void)dummy;
 }
 
-void DrawNotifications() {
-    for (size_t i = 0; i < notifications.size(); i++) {
-        float yPos = 20 + (i * 80);
-        DrawRectangle(GetScreenWidth() - 270, yPos, 250, 70, Fade((Color){0, 0, 0, 255}, 0.8f));
-        DrawRectangleLines(GetScreenWidth() - 270, yPos, 250, 70, (Color){0, 255, 255, 255});
-        DrawText(notifications[i].appName.c_str(), GetScreenWidth() - 260, yPos + 10, 15, (Color){0, 255, 255, 255});
-        DrawText(notifications[i].message.c_str(), GetScreenWidth() - 260, yPos + 35, 12, (Color){255, 255, 255, 255});
-    }
-}
-
 int main() {
-    setenv("RAYLIB_LIBPATH", "wayland", 1);
     setenv("WLR_NO_HARDWARE_CURSORS", "1", 1);
-    setenv("SDL_VIDEODRIVER", "wayland", 1);
-    setenv("_JAVA_AWT_WM_NONREPARENTING", "1", 1);
     setenv("LIBVA_DRIVER_NAME", "nvidia", 1);
     setenv("__GLX_VENDOR_LIBRARY_NAME", "nvidia", 1);
     setenv("GBM_BACKEND", "nvidia-drm", 1);
 
-    InitWindow(0, 0, "Zenith WM");
+    InitWindow(2560, 1440, "Zenith WM"); 
+    
+    int monitor = 0; 
+    SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
     ToggleFullscreen();
+    
     SetTargetFPS(200);
+    SetupIcons();
 
     int dummy;
 
     while (!WindowShouldClose()) {
         if (IsKeyDown(KEY_LEFT_SUPER)) {
-            if (IsKeyPressed(KEY_T)) dummy = system("kitty &");
-            if (IsKeyPressed(KEY_F)) dummy = system("firefox &");
-            if (IsKeyPressed(KEY_G)) dummy = system("gamemoderun steam &");
-            if (IsKeyPressed(KEY_B)) dummy = system("blueman-manager &");
-            if (IsKeyPressed(KEY_V)) dummy = system("pavucontrol &");
             if (IsKeyPressed(KEY_X)) dummy = system("pkill zenith");
         }
 
-        for (auto it = notifications.begin(); it != notifications.end();) {
-            it->lifetime -= GetFrameTime();
-            if (it->lifetime <= 0) it = notifications.erase(it);
-            else ++it;
-        }
-
         BeginDrawing();
-            ClearBackground((Color){0, 0, 0, 0});
+            ClearBackground((Color){15, 15, 20, 255});
             DrawUI(GetScreenWidth(), GetScreenHeight());
-            DrawNotifications();
         EndDrawing();
     }
 

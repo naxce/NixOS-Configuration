@@ -90,6 +90,8 @@
   };
   hardware.enableRedistributableFirmware = true;
 
+  programs.sway.enable = true;
+
   systemd.services.gpu-performance = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
