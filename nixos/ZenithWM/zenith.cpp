@@ -23,17 +23,19 @@ void DrawUI(int w, int h) {
 
     DrawText("ZENITH", 15, h - 45, 25, CYAN);
 
+    int dummy; // Zmienna pomocnicza do uciszenia kompilatora
+
     Rectangle btnVesktop = { 130, (float)h - 50, 100, 40 };
     if (CheckCollisionPointRec(GetMousePosition(), btnVesktop)) {
         DrawRectangleRec(btnVesktop, GRAY);
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) (void)system("vesktop &");
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("vesktop &");
     }
     DrawText("VESKTOP", btnVesktop.x + 10, btnVesktop.y + 12, 15, WHITE);
 
     Rectangle btnCider = { 240, (float)h - 50, 80, 40 };
     if (CheckCollisionPointRec(GetMousePosition(), btnCider)) {
         DrawRectangleRec(btnCider, GRAY);
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) (void)system("cider &");
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("cider &");
     }
     DrawText("CIDER", btnCider.x + 15, btnCider.y + 12, 15, WHITE);
 
@@ -41,9 +43,10 @@ void DrawUI(int w, int h) {
     bool hoverDisplay = CheckCollisionPointRec(GetMousePosition(), btnDisplay);
     DrawRectangleRec(btnDisplay, hoverDisplay ? SKYBLUE : DARKBLUE);
     DrawText("DISPLAY CONFIG", btnDisplay.x + 15, btnDisplay.y + 12, 15, WHITE);
-    if (hoverDisplay && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) (void)system("wdisplays &");
+    if (hoverDisplay && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system("wdisplays &");
 
     DrawText(TextFormat("%i FPS", GetFPS()), w - 100, h - 38, 16, MAROON);
+    (void)dummy; // Ostateczne uciszenie ostrzeżenia o nieużywanej zmiennej
 }
 
 void DrawNotifications() {
@@ -66,14 +69,16 @@ int main() {
     ToggleFullscreen();
     SetTargetFPS(200);
 
+    int dummy;
+
     while (!WindowShouldClose()) {
         if (IsKeyDown(KEY_LEFT_SUPER)) {
-            if (IsKeyPressed(KEY_T)) (void)system("kitty &");
-            if (IsKeyPressed(KEY_F)) (void)system("firefox &");
-            if (IsKeyPressed(KEY_G)) (void)system("gamemoderun steam &");
-            if (IsKeyPressed(KEY_B)) (void)system("blueman-manager &");
-            if (IsKeyPressed(KEY_V)) (void)system("pavucontrol &");
-            if (IsKeyPressed(KEY_X)) (void)system("pkill zenith");
+            if (IsKeyPressed(KEY_T)) dummy = system("kitty &");
+            if (IsKeyPressed(KEY_F)) dummy = system("firefox &");
+            if (IsKeyPressed(KEY_G)) dummy = system("gamemoderun steam &");
+            if (IsKeyPressed(KEY_B)) dummy = system("blueman-manager &");
+            if (IsKeyPressed(KEY_V)) dummy = system("pavucontrol &");
+            if (IsKeyPressed(KEY_X)) dummy = system("pkill zenith");
         }
 
         for (auto it = notifications.begin(); it != notifications.end();) {
@@ -89,6 +94,7 @@ int main() {
         EndDrawing();
     }
 
+    (void)dummy;
     CloseWindow();
     return 0;
 }
