@@ -12,6 +12,29 @@
   ];
 
   home.packages = with pkgs; [
+    (stdenv.mkDerivation {
+      pname = "zenith-os";
+      version = "1.0";
+      src = /home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM;
+      buildInputs = [ 
+        raylib 
+        wlroots_0_16 
+        wayland 
+        libxkbcommon 
+        pixman 
+      ];
+      nativeBuildInputs = [ pkg-config gcc ];
+      unpackPhase = "true";
+      buildPhase = ''
+        g++ -o zenith ${/home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM/zenith.cpp} \
+          $(pkg-config --cflags --libs raylib wlroots wayland-server) \
+          -lrt -lm -ldl -lpthread
+      '';
+      installPhase = ''
+        mkdir -p $out/bin
+        cp zenith $out/bin/
+      '';
+    })
     # SYSTEM
     home-manager
     os-prober
