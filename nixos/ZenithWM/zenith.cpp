@@ -65,15 +65,15 @@ void DrawSettingsGUI(int w, int h) {
     DrawRectangleLinesEx(panel, 2, (Color){0, 255, 255, 255});
     DrawText("ZENITH CONTROL PANEL", panel.x + 20, panel.y + 20, 18, (Color){0, 255, 255, 255});
 
-    if (GuiButton({ panel.x + 20, panel.y + 60, 260, 40 }, "REFRESH DISPLAYS")) system("wdisplays &");
-    if (GuiButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART ZENITH")) system("pkill zenith");
-    if (GuiButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM (Drop Caches)")) system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
+    if (MouseButton({ panel.x + 20, panel.y + 60, 260, 40 }, "REFRESH DISPLAYS")) system("wdisplays &");
+    if (MouseButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART ZENITH")) system("pkill zenith");
+    if (MouseButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM (Drop Caches)")) system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
 
     DrawText("NixOS Unstable", panel.x + 20, panel.y + 280, 15, GRAY);
     DrawText("NVIDIA RTX Mode: ON", panel.x + 20, panel.y + 300, 15, GREEN);
 }
 
-bool GuiButton(Rectangle rect, std::string text) {
+bool MouseButton(Rectangle rect, std::string text) {
     bool hover = CheckCollisionPointRec(GetMousePosition(), rect);
     DrawRectangleRec(rect, hover ? (Color){0, 255, 255, 150} : (Color){40, 40, 45, 255});
     DrawRectangleLinesEx(rect, 1, (Color){0, 255, 255, 255});
