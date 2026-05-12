@@ -15,7 +15,7 @@
     (stdenv.mkDerivation {
       pname = "zenith-os";
       version = "1.0";
-      src = /home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM;
+      src = ./ZenithWM;
       buildInputs = [ 
         raylib 
         wlroots_0_20
@@ -26,7 +26,7 @@
       nativeBuildInputs = [ pkg-config gcc ];
       unpackPhase = "true";
       buildPhase = ''
-        g++ -o zenith ${/home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM/zenith.cpp} \
+        g++ -o zenith ${./ZenithWM/zenith.cpp} \
           $(pkg-config --cflags --libs raylib wlroots wayland-server) \
           -lrt -lm -ldl -lpthread
       '';
