@@ -45,7 +45,7 @@
     xorg.libXrandr
     xorg.libXi
     xorg.libXinerama
-    
+
     # SYSTEM
     home-manager
     os-prober
@@ -59,6 +59,7 @@
     linux-wifi-hotspot
     wdisplays
     wlr-randr
+    cage
 
     # Fonts
     inter

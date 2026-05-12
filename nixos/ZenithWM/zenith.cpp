@@ -62,7 +62,8 @@ void DrawNotifications() {
 int main() {
     setenv("RAYLIB_LIBPATH", "wayland", 1);
     setenv("WLR_NO_HARDWARE_CURSORS", "1", 1);
-    setenv("WLR_NO_HARDWARE_CURSORS", "1", 1);
+    setenv("SDL_VIDEODRIVER", "wayland", 1);
+    setenv("_JAVA_AWT_WM_NONREPARENTING", "1", 1);
     setenv("LIBVA_DRIVER_NAME", "nvidia", 1);
     setenv("__GLX_VENDOR_LIBRARY_NAME", "nvidia", 1);
     setenv("GBM_BACKEND", "nvidia-drm", 1);
