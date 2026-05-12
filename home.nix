@@ -19,7 +19,6 @@
       nixhelp = ''
         echo "
         nixos: Update + Rebuild + Git Push
-        nixup: Update Flake Inputs
         nixgit: Commit to GitHub
         nixbuild: Rebuild with Flakes
         nixhome: Rebuild Home Manager Config
@@ -31,8 +30,6 @@
       '';
 
       nixos = "cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
-
-      nixup = "cd ~/dotfiles && nix flake update";
 
       nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
 
