@@ -46,6 +46,8 @@
     libnotify
     iw
     linux-wifi-hotspot
+    wdisplays
+    wlr-randr
 
     # Fonts
     inter
