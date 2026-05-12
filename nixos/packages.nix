@@ -97,6 +97,7 @@
     cpio
     squashfsTools
     gnumake
+    pkgsStatic.busybox
     curl
 
     elmPackages.nodejs
