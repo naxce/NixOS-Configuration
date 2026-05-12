@@ -25,6 +25,7 @@
     linux-wifi-hotspot
     usbmuxd
     libimobiledevice
+    realvnc-vnc-viewer
 
     # Fonts
     inter
