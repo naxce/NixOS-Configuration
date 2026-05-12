@@ -94,6 +94,10 @@
 
     rustc
     cargo
+    cpio
+    squashtools
+    make
+    curl
 
     elmPackages.nodejs
 
