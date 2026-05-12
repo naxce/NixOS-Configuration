@@ -13,8 +13,26 @@ struct DesktopIcon {
     Color color;
 };
 
+// --- PROTOTYPY (Deklaracje, żeby kompilator wiedział co jest grane) ---
+void AddIcon(std::string name, std::string cmd, float x, float y, Color col);
+void SetupIcons();
+void DrawTaskbar(int w, int h);
+void DrawSettingsGUI(int w, int h);
+bool DrawCustomButton(Rectangle rect, std::string text); // Zmiana nazwy dla bezpieczeństwa
+
+// Zmienne globalne
 std::vector<DesktopIcon> icons;
 bool showSettings = false;
+
+// --- IMPLEMENTACJA FUNKCJI ---
+
+bool DrawCustomButton(Rectangle rect, std::string text) {
+    bool hover = CheckCollisionPointRec(GetMousePosition(), rect);
+    DrawRectangleRec(rect, hover ? (Color){0, 255, 255, 150} : (Color){40, 40, 45, 255});
+    DrawRectangleLinesEx(rect, 1, (Color){0, 255, 255, 255});
+    DrawText(text.c_str(), rect.x + 15, rect.y + 12, 16, WHITE);
+    return (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON));
+}
 
 void AddIcon(std::string name, std::string cmd, float x, float y, Color col) {
     icons.push_back({ {x, y, 100, 100}, name, cmd, col });
@@ -29,7 +47,7 @@ void SetupIcons() {
 }
 
 void DrawTaskbar(int w, int h) {
-    int dummy;
+    static int dummy;
     DrawRectangle(0, h - 45, w, 45, Fade((Color){10, 10, 15, 255}, 0.95f));
     DrawLine(0, h - 45, w, h - 45, (Color){0, 255, 255, 255});
 
@@ -39,14 +57,12 @@ void DrawTaskbar(int w, int h) {
     DrawText("#", showDesktopBtn.x + 15, showDesktopBtn.y + 8, 20, WHITE);
 
     if (hoverSD && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        // Skrót dla Sway: minimalizuje wszystkie okna na aktualnym workspace
         dummy = system("swaymsg [app_id=\".*\"] floating enable; swaymsg [app_id=\".*\"] move scratchpad");
     }
 
     time_t now = time(0);
-    char* dt = ctime(&now);
-    std::string timeStr = std::string(dt).substr(11, 5);
-    DrawText(timeStr.c_str(), w - 80, h - 32, 20, (Color){0, 255, 255, 255});
+    struct tm *ltm = localtime(&now);
+    DrawText(TextFormat("%02d:%02d", ltm->tm_hour, ltm->tm_min), w - 80, h - 32, 20, (Color){0, 255, 255, 255});
 
     Rectangle settingsBtn = { (float)w - 200, (float)h - 40, 110, 35 };
     bool hoverSet = CheckCollisionPointRec(GetMousePosition(), settingsBtn);
@@ -60,28 +76,21 @@ void DrawTaskbar(int w, int h) {
 void DrawSettingsGUI(int w, int h) {
     if (!showSettings) return;
 
-    Rectangle panel = { (float)w - 320, (float)h - 400, 300, 340 };
-    DrawRectangleRec(panel, (Color){20, 20, 25, 240});
+    Rectangle panel = { (float)w - 320, (float)h - 410, 300, 350 };
+    DrawRectangleRec(panel, (Color){20, 20, 25, 245});
     DrawRectangleLinesEx(panel, 2, (Color){0, 255, 255, 255});
-    DrawText("ZENITH CONTROL PANEL", panel.x + 20, panel.y + 20, 18, (Color){0, 255, 255, 255});
+    DrawText("ZENITH PANEL", panel.x + 20, panel.y + 20, 18, (Color){0, 255, 255, 255});
 
-    if (MouseButton({ panel.x + 20, panel.y + 60, 260, 40 }, "REFRESH DISPLAYS")) system("wdisplays &");
-    if (MouseButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART ZENITH")) system("pkill zenith");
-    if (MouseButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM (Drop Caches)")) system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 60, 260, 40 }, "MONITORS")) system("wdisplays &");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 110, 260, 40 }, "RESTART")) system("pkill zenith");
+    if (DrawCustomButton({ panel.x + 20, panel.y + 160, 260, 40 }, "CLEAN RAM")) system("pkexec sync; echo 3 | pkexec tee /proc/sys/vm/drop_caches");
 
-    DrawText("NixOS Unstable", panel.x + 20, panel.y + 280, 15, GRAY);
-    DrawText("NVIDIA RTX Mode: ON", panel.x + 20, panel.y + 300, 15, GREEN);
-}
-
-bool MouseButton(Rectangle rect, std::string text) {
-    bool hover = CheckCollisionPointRec(GetMousePosition(), rect);
-    DrawRectangleRec(rect, hover ? (Color){0, 255, 255, 150} : (Color){40, 40, 45, 255});
-    DrawRectangleLinesEx(rect, 1, (Color){0, 255, 255, 255});
-    DrawText(text.c_str(), rect.x + 15, rect.y + 12, 16, WHITE);
-    return (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON));
+    DrawText("System: NixOS Unstable", panel.x + 20, panel.y + 290, 14, GRAY);
+    DrawText("GPU: NVIDIA RTX Mode", panel.x + 20, panel.y + 310, 14, GREEN);
 }
 
 int main() {
+    // Środowisko pod Nvidię
     setenv("WLR_NO_HARDWARE_CURSORS", "1", 1);
     setenv("LIBVA_DRIVER_NAME", "nvidia", 1);
     setenv("__GLX_VENDOR_LIBRARY_NAME", "nvidia", 1);
@@ -94,7 +103,7 @@ int main() {
     SetTargetFPS(200);
     SetupIcons();
 
-    int dummy;
+    static int dummy;
 
     while (!WindowShouldClose()) {
         if (IsKeyDown(KEY_LEFT_SUPER) && IsKeyPressed(KEY_D)) {
@@ -108,18 +117,16 @@ int main() {
         for (auto& icon : icons) {
             bool hover = CheckCollisionPointRec(GetMousePosition(), icon.rect);
             DrawRectangleRec(icon.rect, hover ? Fade(icon.color, 0.6f) : Fade(icon.color, 0.3f));
-            DrawRectangleLinesEx(icon.rect, 2, hover ? (Color){0, 255, 255, 255} : (Color){100, 100, 100, 150});
+            DrawRectangleLinesEx(icon.rect, 2, hover ? (Color){0, 255, 255, 255} : (Color){80, 80, 85, 150});
             DrawText(icon.label.c_str(), icon.rect.x + (100 - MeasureText(icon.label.c_str(), 15)) / 2, icon.rect.y + 110, 15, WHITE);
             if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) dummy = system(icon.command.c_str());
         }
 
         DrawTaskbar(GetScreenWidth(), GetScreenHeight());
         DrawSettingsGUI(GetScreenWidth(), GetScreenHeight());
-
         EndDrawing();
     }
 
-    (void)dummy;
     CloseWindow();
     return 0;
 }
