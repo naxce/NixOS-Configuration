@@ -160,13 +160,21 @@
       ];
     }
   ];
+  security.polkit.enable = true;
 
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
-      if ((action.id == "org.freedesktop.policykit.exec" || 
-           action.id == "org.freedesktop.login1.reboot") &&
-          subject.user == "naxce") {
-        return polkit.Result.YES;
+      if (subject.user == "naxce") {
+        if (action.id == "org.freedesktop.policykit.exec" || 
+            action.id == "org.freedesktop.login1.reboot" ||
+            action.id == "org.blueman.network.setup" ||
+            action.id == "org.blueman.rfkill.setstate" ||
+            action.id == "org.blueman.pincode.confirm" ||
+            action.id == "org.blueman.device.pair" ||
+            action.id == "org.blueman.device.foregroundpair" ||
+            action.id == "org.blueman.device.connect") {
+          return polkit.Result.YES;
+        }
       }
     });
   '';
