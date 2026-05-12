@@ -13,24 +13,29 @@
   };
 
   # Gamemode
-  programs.gamemode = {
+programs.gamemode = {
     enable = true;
     settings = {
       general = {
+        softrealtime = "auto";
         renice = 10;
       };
-      gpu = {
-        apply_gpu_optimisations = "accept-responsibility";
-        gpu_device = 0;
-        nv_powermode_rw = 1;
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode Started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode Ended'";
       };
     };
   };
-
+  
   # Gamescope
   programs.gamescope = {
     enable = true;
     capSysNice = true;
+  };
+
+  environment.variables = {
+    "__NV_PRIME_RENDER_OFFLOAD" = "1";
+    "__GLX_VENDOR_LIBRARY_NAME" = "nvidia";
   };
 
   # Tryb wydajności

@@ -181,16 +181,18 @@
   };
 
   # Bluetooth
-  hardware.bluetooth = {
+hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
       General = {
-        ControllerMode = "dual";
+        Enable = "Source,Sink,Media,Socket";
         Experimental = true;
+        FastConnectable = true;
       };
     };
   };
+  services.blueman.enable = true;
 
   # Java
   programs.java.enable = true;

@@ -39,9 +39,11 @@
 
     # Terminal
     htop
+    btop
     fastfetch
     lm_sensors
     efibootmgr
+    nvtopPackages.full
 
     # KDE
     kdePackages.kate
@@ -69,6 +71,7 @@
     evtest
     libinput
     dualsensectl
+    vulkan-tools
 
     wineWow64Packages.stable
     winetricks
