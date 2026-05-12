@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   system.nixos.tags = [ "NixConsole" ];
 
-  services.displayManager.sddm.enable = false;
+services.displayManager.sddm.enable = lib.mkForce false;
 
   services.getty.autologinUser = "naxce";
 
