@@ -18,7 +18,7 @@
       src = /home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM;
       buildInputs = [ 
         raylib 
-        wlroots_0_16 
+        wlroots_0_20
         wayland 
         libxkbcommon 
         pixman 
