@@ -13,7 +13,7 @@
 
   home.packages = with pkgs; [
     (stdenv.mkDerivation {
-      pname = "zenith-os";
+      pname = "zenithwm";
       version = "1.0";
       src = ./ZenithWM;
       buildInputs = [ 
