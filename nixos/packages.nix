@@ -96,7 +96,7 @@
     cargo
     cpio
     squashfsTools
-    make
+    gnumake
     curl
 
     elmPackages.nodejs
