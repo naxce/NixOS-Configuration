@@ -34,6 +34,18 @@
         cp zenith $out/bin/
       '';
     })
+    # ZENITH
+    raylib 
+    wayland 
+    wayland-protocols
+    libxkbcommon
+    libGL
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXi
+    xorg.libXinerama
+    
     # SYSTEM
     home-manager
     os-prober
