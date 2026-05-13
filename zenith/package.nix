@@ -8,6 +8,7 @@
   libdrm,
   mesa,
   libGL,
+  libgbm,
   libinput,
   libudev-zero,
   cairo,
@@ -33,6 +34,7 @@ stdenv.mkDerivation {
     libdrm
     mesa
     libGL
+    libgbm
     libinput
     libudev-zero
     cairo
