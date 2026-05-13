@@ -22,26 +22,9 @@
     
     wlroots-overlay = (final: prev: {
       wlroots = prev.wlroots.overrideAttrs (old: {
-        patches = (old.patches or []) ++ [
-          (final.writeText "wlroots-fix.patch" ''
-            --- a/backend/libinput/switch.c
-            +++ b/backend/libinput/switch.c
-            @@ -30,6 +30,7 @@
-                     switch (libinput_event_switch_get_switch(sevent)) {
-                         case LIBINPUT_SWITCH_LID:
-                         case LIBINPUT_SWITCH_TABLET_MODE:
-            +            case LIBINPUT_SWITCH_KEYPAD_SLIDE:
-                             break;
-                     }
-            @@ -60,6 +61,7 @@
-                     switch (libinput_event_switch_get_switch(sevent)) {
-                         case LIBINPUT_SWITCH_LID:
-                         case LIBINPUT_SWITCH_TABLET_MODE:
-            +            case LIBINPUT_SWITCH_KEYPAD_SLIDE:
-                             break;
-                     }
-          '')
-        ];
+        postPatch = (old.postPatch or "") + ''
+          sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \            case LIBINPUT_SWITCH_KEYPAD_SLIDE:' backend/libinput/switch.c
+        '';
       });
     });
 
