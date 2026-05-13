@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, repoPath, ... }:
 
 let
-  zenithwm = import /home/naxce/dotfiles/ZenithWM/nix/default.nix { inherit pkgs; };
+  zenithwm = import (repoPath + "/ZenithWM/nix/default.nix") { inherit pkgs; };
 in
 {
   targets.genericLinux.enable = true;

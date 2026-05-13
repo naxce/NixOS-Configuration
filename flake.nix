@@ -3,8 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
@@ -25,25 +28,30 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations = {
-        naxce = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./nixos/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.naxce = {
-                imports = [
-                  ./home.nix
-                  ./nixos/packages.nix
-                  plasma-manager.homeModules.plasma-manager
-                ];
-              };
-            }
-          ];
+      nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {
+          repoPath = ./.;
         };
+
+        modules = [
+          ./nixos/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.naxce = {
+              imports = [
+                ./home.nix
+                ./nixos/packages.nix
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
+          }
+        ];
       };
     };
 }
