@@ -19,11 +19,20 @@
   outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
   let
     system = "x86_64-linux";
+    repoPath = ./.;
     
     wlroots-overlay = (final: prev: {
       wlroots = prev.wlroots.overrideAttrs (old: {
+        version = "${old.version}-patched";
+        
         postPatch = (old.postPatch or "") + ''
-          sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \            case LIBINPUT_SWITCH_KEYPAD_SLIDE:' backend/libinput/switch.c
+          # Wyłączamy Werror wszędzie gdzie się da
+          find . -name "meson.build" -exec sed -i 's/-Werror//g' {} +
+          
+          # Dodajemy brakujący case
+          if [ -f backend/libinput/switch.c ]; then
+            sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \                case LIBINPUT_SWITCH_KEYPAD_SLIDE: break;' backend/libinput/switch.c
+          fi
         '';
       });
     });
@@ -37,6 +46,7 @@
   {
     nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
       inherit system;
+      inherit pkgs; 
 
       specialArgs = {
         inherit (self) inputs;
@@ -53,10 +63,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-
-          home-manager.extraSpecialArgs = {
-            repoPath = ./.;
-          };
+          home-manager.extraSpecialArgs = { inherit repoPath; };
 
           home-manager.users.naxce = {
             imports = [
