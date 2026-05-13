@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "naxce nixos config";
 
@@ -59,6 +60,9 @@
 
           home-manager.extraSpecialArgs = {
             repoPath = ./.;
+            zenithwm = import ./nixos/ZenithWM/nix/default.nix {
+              pkgs = nixpkgs.legacyPackages.${system};
+            };
           };
 
           home-manager.users.naxce = {

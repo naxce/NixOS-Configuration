@@ -1,3 +1,4 @@
+# packages.nix
 { config, pkgs, ... }:
 
 {
@@ -11,10 +12,9 @@
     "/var/lib/flatpak/exports/share"
   ];
 
-  home.packages = with pkgs; [
-    # ZENITH
+  home.packages = [
     zenithwm
-
+  ] ++ (with pkgs; [
     # SYSTEM
     home-manager
     os-prober
@@ -160,5 +160,5 @@
     cava
     lavat
     toilet
-  ];
+  ]);
 }
