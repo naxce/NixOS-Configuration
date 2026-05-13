@@ -2,7 +2,6 @@
 {
   config,
   pkgs,
-  zenith,
   ...
 }:
 
@@ -18,9 +17,6 @@
   ];
 
   home.packages = with pkgs; [
-    # FATUM
-    zenith.defaultPackage.${pkgs.system}
-
     # SYSTEM
     home-manager
     os-prober

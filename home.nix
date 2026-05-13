@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  zenith,
+  ...
+}:
 
 {
   home.username = "naxce";
@@ -50,4 +55,8 @@
       color-scheme = "prefer-dark";
     };
   };
+
+  home.packages = with pkgs; [
+    zenith.packages.${pkgs.system}.zenith
+  ];
 }
