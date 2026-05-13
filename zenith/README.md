@@ -176,8 +176,8 @@ In your system flake `flake.nix`:
             terminal = "foot";
           };
 
-          services.xserver.displayManager.sddm.enable = true;
-          services.xserver.displayManager.sddm.wayland.enable = true;
+          services.displayManager.sddm.enable = true;
+          services.displayManager.sddm.wayland.enable = true;
         }
         ./hardware-configuration.nix
         ./configuration.nix
@@ -220,8 +220,8 @@ in {
 
   services.displayManager.sessionPackages = [ zenith ];
 
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   hardware.nvidia.modesetting.enable = true;
 

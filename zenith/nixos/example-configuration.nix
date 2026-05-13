@@ -2,7 +2,8 @@
 
 let
   zenith = (builtins.getFlake "path:/path/to/zenith").packages.${pkgs.system}.zenith;
-in {
+in
+{
   imports = [
     (builtins.getFlake "path:/path/to/zenith").nixosModules.default
   ];
@@ -18,7 +19,7 @@ in {
     xdg-utils
   ];
 
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };

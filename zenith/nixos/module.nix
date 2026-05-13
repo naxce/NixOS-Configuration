@@ -37,8 +37,8 @@ in
 
     services.displayManager.sessionPackages = [ cfg.package ];
 
-    services.xserver.displayManager.sddm.enable = lib.mkDefault true;
-    services.xserver.displayManager.sddm.wayland.enable = lib.mkDefault true;
+    services.displayManager.sddm.enable = lib.mkDefault true;
+    services.displayManager.sddm.wayland.enable = lib.mkDefault true;
 
     environment.sessionVariables = lib.mkIf cfg.nvidia {
       LIBVA_DRIVER_NAME = "nvidia";
