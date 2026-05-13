@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  zenithwm = import /home/naxce/NixOS/Pliki/Programowanie/OS/ZenithWM/nix/default.nix { inherit pkgs; };
+in
 {
   targets.genericLinux.enable = true;
 
@@ -13,16 +16,7 @@
 
   home.packages = with pkgs; [
     # ZENITH
-    raylib
-    wayland
-    wayland-protocols
-    libxkbcommon
-    libGL
-    libX11
-    libXcursor
-    libXrandr
-    libXi
-    libXinerama
+    zenithwm
 
     # SYSTEM
     home-manager

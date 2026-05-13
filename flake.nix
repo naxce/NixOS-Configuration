@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "naxce nixos config";
 
@@ -21,10 +20,14 @@
       home-manager,
       plasma-manager,
     }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
     {
       nixosConfigurations = {
         naxce = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             ./nixos/configuration.nix
             home-manager.nixosModules.home-manager
