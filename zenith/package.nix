@@ -30,7 +30,7 @@ stdenv.mkDerivation {
   buildInputs = [
     wayland
     libdrm
-    mesa
+    mesa.dev
     libinput
     libudev-zero
     cairo
