@@ -55,8 +55,24 @@ stdenv.mkDerivation {
   ];
 
   postInstall = ''
-    install -Dm644 $src/nixos/zenith.desktop $out/share/wayland-sessions/zenith.desktop
-    install -Dm644 $src/nixos/zenith-sddm.desktop $out/share/xsessions/zenith.desktop
+    install -Dm644 /dev/stdin $out/share/wayland-sessions/zenith.desktop << EOF
+    [Desktop Entry]
+    Name=Zenith
+    Comment=Zenith minimal Wayland compositor
+    Exec=$out/bin/zenith
+    Type=Application
+    DesktopNames=Zenith
+    EOF
+
+    install -Dm644 /dev/stdin $out/share/xsessions/zenith.desktop << EOF
+    [Desktop Entry]
+    Name=Zenith (Wayland)
+    Comment=Zenith minimal Wayland compositor
+    Exec=$out/bin/zenith
+    TryExec=$out/bin/zenith
+    Type=XSession
+    DesktopNames=Zenith
+    EOF
   '';
 
   passthru.providedSessions = [ "zenith" ];
