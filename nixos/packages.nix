@@ -1,5 +1,8 @@
 { config, pkgs, repoPath, ... }:
 
+let
+  zenithwm = import (repoPath + "/nixos/ZenithWM/nix/default.nix") { inherit pkgs; };
+in
 {
   targets.genericLinux.enable = true;
 

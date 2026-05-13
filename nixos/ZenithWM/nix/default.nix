@@ -1,29 +1,23 @@
+/*
+ * nix/default.nix — ZenithWM package
+ *
+ * Build:  nix-build nix/default.nix
+ * Shell:  nix-shell nix/default.nix
+ */
+
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  inherit (pkgs)
-    lib
-    stdenv
-    meson
-    ninja
-    pkg-config
-    wlroots_0_18
-    wayland
-    wayland-protocols
-    libxkbcommon
-    pixman
-    gtk4
-    gtk4-layer-shell
-    xwayland;
+  inherit (pkgs) lib stdenv meson ninja pkg-config
+    wlroots_0_18 wayland wayland-protocols libxkbcommon pixman
+    gtk4 gtk4-layer-shell wayland-utils xwayland;
 in
 
 stdenv.mkDerivation {
   pname = "zenithwm";
   version = "0.1.0";
 
-  src = ../.;
-
-  strictDeps = true;
+  src = ../.;   # root of the repo
 
   nativeBuildInputs = [
     meson
@@ -32,64 +26,57 @@ stdenv.mkDerivation {
   ];
 
   buildInputs = [
+    # Compositor
     wlroots_0_18
     wayland
     wayland-protocols
     libxkbcommon
     pixman
-    xwayland
+    xwayland          # optional XWayland support
 
+    # Taskbar + monitor tool
     gtk4
     gtk4-layer-shell
   ];
 
   mesonFlags = [
-    "--buildtype=release"
+    "--buildtype=release"       # -O3 + LTO via meson default_options
     "-Db_lto=true"
   ];
 
-  # ważne dla wlroots unstable API
+  passthru.providedSessions = [ "zenithwm" ];
+
+  installPhase = ''
+    mkdir -p $out/share/wayland-sessions
+    cp session/zenithwm.desktop $out/share/wayland-sessions/
+  '';
+
+  # Let wlroots use unstable internal API
   NIX_CFLAGS_COMPILE = "-DWLR_USE_UNSTABLE";
 
-  # ✔ NIE używamy dwóch phase na to samo
-  installPhase = ''
-    runHook preInstall
-
-    mkdir -p $out/bin
-    mkdir -p $out/share/wayland-sessions
-    mkdir -p $out/share/zenithwm/defaults
-
-    # binary
-    if [ -f build/zenithwm ]; then
-      install -Dm755 build/zenithwm $out/bin/zenithwm
-    fi
-
-    # session
-    install -Dm644 session/zenithwm.desktop \
+  postInstall = ''
+    # SDDM session entry
+    install -Dm644 $src/sddm/zenithwm.desktop \
       $out/share/wayland-sessions/zenithwm.desktop
 
-    # configs
-    install -Dm644 config/zenithwm.conf \
+    # Default configs
+    install -Dm644 $src/config/zenithwm.conf \
       $out/share/zenithwm/defaults/zenithwm.conf
-
-    install -Dm644 config/keys.conf \
+    install -Dm644 $src/config/keys.conf \
       $out/share/zenithwm/defaults/keys.conf
-
-    install -Dm644 config/desktop.conf \
+    install -Dm644 $src/config/desktop.conf \
       $out/share/zenithwm/defaults/desktop.conf
 
-    # launcher script
-    install -Dm755 session/zenithwm-session \
+    # Session script
+    install -Dm755 $src/session/zenithwm-session \
       $out/bin/zenithwm-session
-
-    runHook postInstall
   '';
 
   meta = with lib; {
     description = "Minimal wlroots Wayland compositor optimised for gaming";
-    homepage = "https://github.com/youruser/zenithwm";
-    license = licenses.mit;
-    platforms = platforms.linux;
+    homepage    = "https://github.com/youruser/zenithwm";
+    license     = licenses.mit;
+    platforms   = platforms.linux;
     maintainers = [];
   };
 }
