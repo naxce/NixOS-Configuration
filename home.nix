@@ -21,6 +21,7 @@
     enable = true;
     shellAliases = {
       nixhelp = ''
+        reset &&
         echo "
         nixos: Update + Rebuild + Git Push
         nixgit: Commit to GitHub
@@ -32,15 +33,16 @@
         rice: Show ricing style choice
         "
       '';
-      nixos = "clear && cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
-      nixgit = "clear && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
-      nixbuild = "clear && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
-      nixhome = "clear && home-manager switch --flake ~/dotfiles#naxce";
-      nixplasma = "clear && plasmashell --replace & disown";
-      nixclean = "clear && sudo nix-collect-garbage -d && nix-collect-garbage -d";
-      nixsh = "clear && nix-shell";
-      rice = "clear && ~/dotfiles/scripts/rice.sh";
+      nixos = "reset && cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixgit = "reset && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
+      nixbuild = "reset && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+      nixhome = "reset && home-manager switch --flake ~/dotfiles#naxce";
+      nixplasma = "reset && plasmashell --replace & disown";
+      nixclean = "reset && sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      nixsh = "reset && nix-shell";
+      rice = "reset && ~/dotfiles/scripts/rice.sh";
       khelp = ''
+        reset &&
         echo "
         ===============================
                 KITTY WORK HELP
@@ -107,7 +109,7 @@
         EOF
 
 
-        clear && fastfetch --config /tmp/kittywork/fastfetch.jsonc
+        reset && fastfetch --config /tmp/kittywork/fastfetch.jsonc
       '';
     };
   };

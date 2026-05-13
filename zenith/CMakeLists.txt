@@ -19,7 +19,7 @@ add_compile_options(
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(WAYLAND_SERVER REQUIRED wayland-server)
-pkg_check_modules(EGL REQUIRED egl)
+find_package(OpenGL REQUIRED COMPONENTS EGL)
 pkg_check_modules(GLES2 REQUIRED glesv2)
 pkg_check_modules(GBM REQUIRED gbm)
 pkg_check_modules(LIBDRM REQUIRED libdrm)
