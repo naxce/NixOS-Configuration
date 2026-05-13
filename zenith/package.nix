@@ -1,17 +1,18 @@
-{ lib
-, stdenv
-, cmake
-, pkg-config
-, wayland
-, wayland-scanner
-, libdrm
-, mesa
-, libinput
-, libudev-zero
-, cairo
-, pixman
-, fontconfig
-, libseat
+{
+  lib,
+  stdenv,
+  cmake,
+  pkg-config,
+  wayland,
+  wayland-scanner,
+  libdrm,
+  mesa,
+  libinput,
+  libudev-zero,
+  cairo,
+  pixman,
+  fontconfig,
+  seatd,
 }:
 
 stdenv.mkDerivation {
@@ -35,7 +36,7 @@ stdenv.mkDerivation {
     cairo
     pixman
     fontconfig
-    libseat
+    seatd
   ];
 
   cmakeFlags = [
