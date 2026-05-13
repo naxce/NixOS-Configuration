@@ -65,14 +65,14 @@ in {
 
     hardware = lib.mkIf cfg.nvidia {
       nvidia = {
-        modesetting.enable = true;       
-        powerManagement.enable = false;  
-        open           = false;          
-        nvidiaSettings = true;
+        modesetting.enable = lib.mkDefault true;
+        powerManagement.enable = lib.mkDefault false;
+        open = lib.mkDefault false; 
+        nvidiaSettings = lib.mkDefault true;
       };
       graphics = {
-        enable      = true;
-        enable32Bit = true;              
+        enable = lib.mkDefault true;
+        enable32Bit = lib.mkDefault true;
         extraPackages = with pkgs; [
           nvidia-vaapi-driver
           vaapiVdpau
