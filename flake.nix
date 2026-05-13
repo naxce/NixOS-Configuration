@@ -41,8 +41,7 @@
     {
       nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
         inherit system;
-        inherit pkgs;
-
+        specialArgs = { inherit zenith; };
         modules = [
           ./nixos/configuration.nix
 
@@ -50,18 +49,14 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-
-            home-manager.users.naxce =
-              { config, pkgs, ... }:
-              {
-                imports = [
-                  ./home.nix
-                  ./nixos/packages.nix
-                  plasma-manager.homeModules.plasma-manager
-                ];
-
-                config._module.args.zenith = zenith;
-              };
+            home-manager.extraSpecialArgs = { inherit zenith; };
+            home-manager.users.naxce = {
+              imports = [
+                ./home.nix
+                ./nixos/packages.nix
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
           }
         ];
       };

@@ -31,6 +31,7 @@
     wdisplays
     wlr-randr
     cage
+    wlroots_0_20
 
     # Fonts
     inter

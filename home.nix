@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  zenith,
   ...
 }:
 
@@ -56,7 +55,9 @@
     };
   };
 
-  home.packages = with pkgs; [
-    zenith.packages.${pkgs.system}.zenith
-  ];
+  /*
+    home.packages = with pkgs; [
+      zenith.packages.${pkgs.system}.zenith
+    ];
+  */
 }

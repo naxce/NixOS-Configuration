@@ -470,7 +470,7 @@ int main(int argc, char *argv[]) {
 	wl_signal_add(&server.seat->events.keyboard_modifiers, &server.keyboard_modifiers);
 
 	const char *home = getenv("HOME");
-	snprintf(server.config_path, sizeof(server.config_path), "%s/.config/zenith", home);
+	snprintf(server.config_path, sizeof(server.config_path), "%s/.config/zenithde", home);
 	mkdir(server.config_path, 0755);
 	snprintf(server.monitors_path, sizeof(server.monitors_path), "%s/monitors.conf", server.config_path);
 	config_load(&server);
@@ -549,7 +549,7 @@ static void panel_draw(struct zenith_server *server) {
 	cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
 	cairo_set_font_size(cr, 14);
 	cairo_move_to(cr, 10, 22);
-	cairo_show_text(cr, "Zenith");
+	cairo_show_text(cr, "ZenithDE");
 
 	time_t t = time(NULL);
 	struct tm *tm = localtime(&t);

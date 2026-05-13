@@ -1,15 +1,23 @@
-self: { config, lib, pkgs, ... }:
+self:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
-  cfg = config.services.zenith;
-in {
-  options.services.zenith = {
-    enable = lib.mkEnableOption "Zenith desktop environment session";
+  cfg = config.services.zenithde;
+in
+{
+  options.services.zenithde = {
+    enable = lib.mkEnableOption "ZenithDE desktop environment session";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ self.packages.${pkgs.system}.zenith ];
-    xdg.dataFile."wayland-sessions/zenith.desktop".source =
-      "${self.packages.${pkgs.system}.zenith}/share/wayland-sessions/zenith.desktop";
+    home.packages = [ self.packages.${pkgs.system}.zenithde ];
+    xdg.dataFile."wayland-sessions/zenithde.desktop".source = "${
+      self.packages.${pkgs.system}.zenithde
+    }/share/wayland-sessions/zenithde.desktop";
   };
 }

@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Zenith
-Comment=Minimal gaming desktop
-Exec=zenith
+Name=ZenithDE
+Comment=Minimal gaming desktop environment
+Exec=zenithde
 Type=Application
-DesktopNames=Zenith
+DesktopNames=ZenithDE
