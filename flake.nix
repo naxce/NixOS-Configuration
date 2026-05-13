@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "naxce nixos config";
 
@@ -20,37 +19,51 @@
   outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    
+    wlroots-overlay = (final: prev: {
+      wlroots = prev.wlroots.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [
+          (final.writeText "wlroots-fix.patch" ''
+            --- a/backend/libinput/switch.c
+            +++ b/backend/libinput/switch.c
+            @@ -30,6 +30,7 @@
+                     switch (libinput_event_switch_get_switch(sevent)) {
+                         case LIBINPUT_SWITCH_LID:
+                         case LIBINPUT_SWITCH_TABLET_MODE:
+            +            case LIBINPUT_SWITCH_KEYPAD_SLIDE:
+                             break;
+                     }
+            @@ -60,6 +61,7 @@
+                     switch (libinput_event_switch_get_switch(sevent)) {
+                         case LIBINPUT_SWITCH_LID:
+                         case LIBINPUT_SWITCH_TABLET_MODE:
+            +            case LIBINPUT_SWITCH_KEYPAD_SLIDE:
+                             break;
+                     }
+          '')
+        ];
+      });
+    });
+
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ wlroots-overlay ];
+      config.allowUnfree = true;
+    };
   in
   {
-    nixpkgs.overlays = [
-      (final: prev: {
-        wlroots = prev.wlroots.overrideAttrs (old: {
-          patches = (old.patches or []) ++ [
-            (final.writeText "wlroots-fix.patch" ''
-              diff --git a/backend/libinput/switch.c b/backend/libinput/switch.c
-              @@ -30,6 +30,7 @@
-               switch (libinput_event_switch_get_switch(sevent)) {
-                   case LIBINPUT_SWITCH_LID:
-                   case LIBINPUT_SWITCH_TABLET_MODE:
-+                  case LIBINPUT_SWITCH_KEYPAD_SLIDE:
-                       break;
-               }
-            '')
-          ];
-        });
-      })
-    ];
-
     nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
+        inherit (self) inputs;
         repoPath = ./.;
         zenithwm = import ./nixos/ZenithWM/nix/default.nix { inherit pkgs; };
       };
 
       modules = [
+        { nixpkgs.overlays = [ wlroots-overlay ]; }
+        
         ./nixos/configuration.nix
 
         home-manager.nixosModules.home-manager
