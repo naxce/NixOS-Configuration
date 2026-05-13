@@ -13,7 +13,7 @@
   ];
 
   home.packages = [
-    zenithwm
+    (import ../nixos/ZenithWM/nix/default.nix { pkgs = pkgs; })
   ] ++ (with pkgs; [
     # SYSTEM
     home-manager
