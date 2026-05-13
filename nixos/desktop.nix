@@ -9,6 +9,12 @@
     theme = "forest";
   };
 
+  programs.zenith = {
+    enable = true;
+    nvidia = true;
+    terminal = "foot";
+  };
+
   services.desktopManager.plasma6.enable = true;
   programs.dconf.enable = true;
 

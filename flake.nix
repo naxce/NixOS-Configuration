@@ -44,6 +44,7 @@
         specialArgs = { inherit zenith; };
         modules = [
           ./nixos/configuration.nix
+          zenith.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {

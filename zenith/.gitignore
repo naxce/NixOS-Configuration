@@ -1,0 +1,9 @@
+build/
+result
+result-*
+*.o
+*.a
+protocol/xdg-shell-protocol.c
+protocol/xdg-shell-server-protocol.h
+.direnv/
+.envrc

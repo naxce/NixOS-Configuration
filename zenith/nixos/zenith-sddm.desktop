@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Zenith (Wayland)
+Comment=Zenith minimal Wayland compositor
+Exec=zenith
+TryExec=zenith
+Type=XSession
+DesktopNames=Zenith

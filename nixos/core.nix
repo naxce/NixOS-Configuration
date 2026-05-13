@@ -106,6 +106,7 @@
   # Parametry kernela
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
     "split_lock_detect=off"
   ];
 
@@ -191,7 +192,7 @@
   };
 
   # Bluetooth
-hardware.bluetooth = {
+  hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
