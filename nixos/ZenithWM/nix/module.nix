@@ -1,16 +1,3 @@
-/*
- * nix/module.nix — NixOS module for ZenithWM
- *
- * Usage in configuration.nix:
- *
- *   let zenithwm = import /path/to/ZenithWM/nix/default.nix { inherit pkgs; };
- *   in {
- *     imports = [ /path/to/ZenithWM/nix/module.nix ];
- *     services.zenithwm.enable = true;
- *     services.zenithwm.nvidia = true;   # set if you use NVIDIA
- *   }
- */
-
 { config, lib, pkgs, ... }:
 
 let
@@ -36,12 +23,16 @@ in {
 
   config = lib.mkIf cfg.enable {
 
+    # ── Session Registration ──────────────────────────────────────────
+    # To rozwiązuje błąd: 'Package did not specify any session names'
+    services.displayManager.sessionPackages = [ zenithwm ];
+
     # ── Package ──────────────────────────────────────────────────────
     environment.systemPackages = [
       zenithwm
-      pkgs.foot          # default terminal
-      pkgs.fuzzel        # Super+r launcher (optional)
-      pkgs.xwayland      # legacy game support
+      pkgs.foot          
+      pkgs.fuzzel        
+      pkgs.xwayland      
     ];
 
     # ── SDDM ─────────────────────────────────────────────────────────
@@ -54,6 +45,7 @@ in {
     xdg.portal = {
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+      config.common.default = "*";
     };
 
     # ── Session environment vars ──────────────────────────────────────
@@ -81,14 +73,14 @@ in {
     # ── NVIDIA kernel & driver settings ──────────────────────────────
     hardware = lib.mkIf cfg.nvidia {
       nvidia = {
-        modesetting.enable = true;       # required for Wayland
-        powerManagement.enable = false;  # disable for desktop/gaming
-        open           = false;          # use proprietary driver
+        modesetting.enable = true;       
+        powerManagement.enable = false;  
+        open           = false;          
         nvidiaSettings = true;
       };
       graphics = {
         enable      = true;
-        enable32Bit = true;              # 32-bit Steam / Proton
+        enable32Bit = true;              
         extraPackages = with pkgs; [
           nvidia-vaapi-driver
           vaapiVdpau
@@ -118,7 +110,7 @@ in {
     # ── GameMode ─────────────────────────────────────────────────────
     programs.gamemode.enable = lib.mkDefault true;
 
-    # ── Polkit (needed for shutdown/reboot from taskbar) ─────────────
+    # ── Polkit ───────────────────────────────────────────────────────
     security.polkit.enable = true;
 
   };

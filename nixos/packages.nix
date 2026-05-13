@@ -158,7 +158,5 @@
     cava
     lavat
     toilet
-  ] ++ [
-    (import ../nixos/ZenithWM/nix/default.nix { inherit pkgs; })
   ];
 }
