@@ -51,13 +51,17 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.naxce = {
-              imports = [
-                ./home.nix
-                ./nixos/packages.nix
-                plasma-manager.homeModules.plasma-manager
-              ];
-            };
+            home-manager.users.naxce =
+              { config, pkgs, ... }:
+              {
+                imports = [
+                  ./home.nix
+                  ./nixos/packages.nix
+                  plasma-manager.homeModules.plasma-manager
+                ];
+
+                config._module.args.zenith = zenith;
+              };
           }
         ];
       };
