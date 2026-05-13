@@ -15,6 +15,14 @@
     zenithwm
   ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      wlroots = prev.wlroots.overrideAttrs (old: {
+        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=switch";
+      });
+    })
+  ];
+
   environment.systemPackages = with pkgs; [
     kdePackages.qt5compat
     kdePackages.qtsvg
