@@ -7,6 +7,7 @@
   wayland-scanner,
   libdrm,
   mesa,
+  libGL,
   libinput,
   libudev-zero,
   cairo,
@@ -30,7 +31,8 @@ stdenv.mkDerivation {
   buildInputs = [
     wayland
     libdrm
-    mesa.dev
+    mesa
+    libGL
     libinput
     libudev-zero
     cairo
