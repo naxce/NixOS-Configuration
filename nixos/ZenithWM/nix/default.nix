@@ -44,6 +44,8 @@ stdenv.mkDerivation {
     "-Db_lto=true"
   ];
 
+  passthru.providedSessions = [ "zenithwm" ];
+
   installPhase = ''
     mkdir -p $out/share/wayland-sessions
     cp session/zenithwm.desktop $out/share/wayland-sessions/
