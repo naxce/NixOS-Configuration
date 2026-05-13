@@ -49,6 +49,10 @@
                 ./nixos/packages.nix
                 plasma-manager.homeModules.plasma-manager
               ];
+
+              extraSpecialArgs = {
+                repoPath = ./.;
+              };
             };
           }
         ];
