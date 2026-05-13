@@ -14,6 +14,7 @@ add_compile_options(
     -Wno-unused-parameter
     -Wno-unused-function
     -Wno-stringop-truncation
+    -Wno-format-truncation
     -D_FORTIFY_SOURCE=2
 )
 

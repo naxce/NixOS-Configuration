@@ -14,6 +14,8 @@
 #include <cairo/cairo.h>
 #include <pixman-1/pixman.h>
 
+#include "config.h"
+
 #define ZENITH_MAX_OUTPUTS 8
 #define ZENITH_MAX_WINDOWS 256
 #define ZENITH_MAX_KEYBINDS 64
