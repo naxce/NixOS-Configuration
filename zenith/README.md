@@ -1,212 +1,316 @@
-# Zenith
-
-Minimal Wayland compositor built for gaming performance. No wlroots. No bloat.
-Direct DRM/KMS output, EGL/OpenGL ES rendering, libinput, Cairo UI.
-
----
-
-## What Zenith Is
-
-- A standalone Wayland compositor (window manager) that runs directly on DRM/KMS
-- Designed exclusively for gaming — minimal overhead, no animations, no compositing effects
-- Has a taskbar, desktop with icons, app launcher, monitor settings, and keybinds
-- Works with NVIDIA drivers on Wayland
-- Saves all settings to `~/.config/zenith/`
-- Appears in SDDM as a session choice
-
-## What Zenith Is Not
-
-- Not a daily driver desktop (no notification daemon, no system tray, no widgets)
-- Not a replacement for a full DE like KDE or GNOME
-
----
-
-## Requirements
-
-### Mandatory
-
-| Dependency        | Package name (varies by distro)           |
-| ----------------- | ----------------------------------------- |
-| wayland           | `libwayland-dev` / `wayland-devel`        |
-| wayland-scanner   | `wayland-scanner` / `wayland-devel`       |
-| wayland-protocols | `wayland-protocols`                       |
-| libdrm            | `libdrm-dev` / `libdrm-devel`             |
-| mesa (EGL+GBM)    | `libgbm-dev` / `mesa-libGL-devel`         |
-| libinput          | `libinput-dev` / `libinput-devel`         |
-| libudev           | `libudev-dev` / `systemd-devel`           |
-| cairo             | `libcairo2-dev` / `cairo-devel`           |
-| pixman            | `libpixman-1-dev` / `pixman-devel`        |
-| fontconfig        | `libfontconfig1-dev` / `fontconfig-devel` |
-| cmake             | `cmake`                                   |
-| pkg-config        | `pkg-config` / `pkgconf`                  |
-| gcc               | `gcc`                                     |
-
-### Optional but Recommended
-
-| Package | Why                       |
-| ------- | ------------------------- |
-| `foot`  | Default terminal emulator |
-| `sddm`  | Display manager for login |
-
----
-
-## Building on Non-NixOS Linux (Ubuntu / Debian / Arch / Fedora / etc.)
-
-### Step 1 — Install dependencies
-
-**Ubuntu / Debian:**
+<div align="center">
 
 ```
+███████╗███████╗███╗   ██╗██╗████████╗██╗  ██╗
+╚══███╔╝██╔════╝████╗  ██║██║╚══██╔══╝██║  ██║
+  ███╔╝ █████╗  ██╔██╗ ██║██║   ██║   ███████║
+ ███╔╝  ██╔══╝  ██║╚██╗██║██║   ██║   ██╔══██║
+███████╗███████╗██║ ╚████║██║   ██║   ██║  ██║
+╚══════╝╚══════╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+```
+
+**Minimal Wayland compositor built for one thing — gaming.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![NixOS](https://img.shields.io/badge/NixOS-supported-5277C3?style=flat-square&logo=nixos&logoColor=white)](flake.nix)
+[![Wayland](https://img.shields.io/badge/Wayland-native-orange?style=flat-square)](https://wayland.freedesktop.org/)
+[![NVIDIA](https://img.shields.io/badge/NVIDIA-ready-76b900?style=flat-square&logo=nvidia&logoColor=white)](README.md#nvidia-setup)
+[![No wlroots](https://img.shields.io/badge/wlroots-free-red?style=flat-square)](README.md)
+
+No wlroots. No bloat. No compositor effects. Direct DRM/KMS → EGL → screen.
+
+</div>
+
+---
+
+## 📸 Screenshots
+
+|                 Desktop                 |                 Launcher                  |             Monitor Settings              |
+| :-------------------------------------: | :---------------------------------------: | :---------------------------------------: |
+| ![Desktop](docs/screenshot-desktop.png) | ![Launcher](docs/screenshot-launcher.png) | ![Settings](docs/screenshot-settings.png) |
+|       _Clean desktop with icons_        |         _App search + power menu_         |          _Monitor configuration_          |
+
+---
+
+## ✦ What is Zenith
+
+Zenith is a **standalone Wayland compositor** that talks directly to the GPU via DRM/KMS and renders everything with OpenGL ES + Cairo. It has no dependency on wlroots.
+
+It is **not** a daily driver. It is built exclusively to run games with the absolute minimum overhead.
+
+| ✅ Has                          | ❌ Does not have         |
+| ------------------------------- | ------------------------ |
+| Taskbar with clock              | Notification daemon      |
+| App launcher / start menu       | System tray              |
+| Desktop with icons              | Widgets or applets       |
+| Monitor configuration UI        | Compositor animations    |
+| Window move / resize / minimize | Virtual desktops         |
+| Keybinds                        | Built-in screenshot tool |
+| NVIDIA Wayland support          | Bluetooth / network tray |
+| SDDM session entry              | XWayland (add yourself)  |
+
+---
+
+## 🚀 Quick Start
+
+### Option A — NixOS with Flakes _(recommended)_
+
+```nix
+# flake.nix
+inputs.zenith.url = "github:naxce/zenith";
+# or local: inputs.zenith.url = "path:/path/to/zenith";
+```
+
+```nix
+# configuration.nix
+imports = [ zenith.nixosModules.default ];
+
+programs.zenith = {
+  enable   = true;
+  nvidia   = true;
+  terminal = "foot";
+};
+
+services.displayManager.sessionPackages = [ zenith.packages.x86_64-linux.default ];
+services.displayManager.sddm.enable         = true;
+services.displayManager.sddm.wayland.enable = true;
+```
+
+```bash
+sudo nixos-rebuild switch --flake .#yourhost
+```
+
+### Option B — Non-NixOS (Arch / Debian / Fedora)
+
+```bash
+git clone https://github.com/naxce/zenith && cd zenith
+bash scripts/build.sh
+cd build && sudo make install
+```
+
+> **Full instructions for every method** are in the [Installation](#-installation) section below.
+
+---
+
+## ⌨️ Keybinds
+
+| Keys                | Action                  |
+| ------------------- | ----------------------- |
+| `Super + Enter`     | Open terminal           |
+| `Super + Space`     | Toggle launcher         |
+| `Super + Shift + Q` | Close focused window    |
+| `Super + H`         | Minimize focused window |
+| `Super + M`         | Maximize focused window |
+| `Super + D`         | Minimize / restore all  |
+| `Alt + Tab`         | Focus next window       |
+| `Alt + F4`          | Close window            |
+| `F11`               | Toggle fullscreen       |
+| `Super + Shift + R` | Reload config           |
+| `Ctrl + Super + Q`  | Quit Zenith             |
+
+---
+
+## 🖥️ Taskbar
+
+```
+[ Settings ] [ Start ] [ Win-D ]   [ window1 ] [ window2 ] ...   2025-05-14  23:41:07
+```
+
+| Button       | Action                                        |
+| ------------ | --------------------------------------------- |
+| **Settings** | Open monitor & general settings panel         |
+| **Start**    | Open app launcher / start menu                |
+| **Win-D**    | Minimize all windows (click again to restore) |
+
+Window buttons in the middle: **click** to focus, **click active** to minimize.
+
+---
+
+## 📦 Installation
+
+### Requirements
+
+<details>
+<summary><b>📋 Full dependency list</b></summary>
+
+| Dependency        | Ubuntu / Debian               | Arch                | Fedora                           |
+| ----------------- | ----------------------------- | ------------------- | -------------------------------- |
+| wayland           | `libwayland-dev`              | `wayland`           | `wayland-devel`                  |
+| wayland-scanner   | `wayland-scanner`             | `wayland`           | `wayland-devel`                  |
+| wayland-protocols | `wayland-protocols`           | `wayland-protocols` | `wayland-protocols-devel`        |
+| libdrm            | `libdrm-dev`                  | `libdrm`            | `libdrm-devel`                   |
+| EGL / GBM         | `libegl1-mesa-dev libgbm-dev` | `mesa`              | `mesa-libEGL-devel libgbm-devel` |
+| GLES2             | `libgles2-mesa-dev`           | `mesa`              | `mesa-libGLES-devel`             |
+| libinput          | `libinput-dev`                | `libinput`          | `libinput-devel`                 |
+| libudev           | `libudev-dev`                 | `systemd`           | `systemd-devel`                  |
+| cairo             | `libcairo2-dev`               | `cairo`             | `cairo-devel`                    |
+| pixman            | `libpixman-1-dev`             | `pixman`            | `pixman-devel`                   |
+| fontconfig        | `libfontconfig1-dev`          | `fontconfig`        | `fontconfig-devel`               |
+| cmake             | `cmake`                       | `cmake`             | `cmake`                          |
+| pkg-config        | `pkg-config`                  | `pkgconf`           | `pkgconf`                        |
+| gcc               | `gcc`                         | `gcc`               | `gcc`                            |
+
+</details>
+
+---
+
+### 🐧 Method 1 — Non-NixOS Linux
+
+#### Ubuntu / Debian
+
+```bash
 sudo apt update
 sudo apt install -y \
-    libwayland-dev wayland-protocols wayland-scanner \
-    libdrm-dev libgbm-dev libegl1-mesa-dev libgles2-mesa-dev \
-    libinput-dev libudev-dev \
-    libcairo2-dev libpixman-1-dev libfontconfig1-dev \
-    cmake pkg-config gcc make git
+  libwayland-dev wayland-protocols \
+  libdrm-dev libgbm-dev libegl1-mesa-dev libgles2-mesa-dev \
+  libinput-dev libudev-dev \
+  libcairo2-dev libpixman-1-dev libfontconfig1-dev \
+  cmake pkg-config gcc make git
 ```
 
-**Arch Linux:**
+#### Arch Linux
 
-```
+```bash
 sudo pacman -S \
-    wayland wayland-protocols \
-    libdrm mesa libinput \
-    cairo pixman fontconfig \
-    cmake pkgconf gcc make git
+  wayland wayland-protocols \
+  libdrm mesa libinput \
+  cairo pixman fontconfig \
+  cmake pkgconf gcc make git
 ```
 
-**Fedora / RHEL:**
+#### Fedora / RHEL
 
-```
+```bash
 sudo dnf install -y \
-    wayland-devel wayland-protocols-devel \
-    libdrm-devel mesa-libGL-devel mesa-libEGL-devel \
-    libgbm-devel libinput-devel systemd-devel \
-    cairo-devel pixman-devel fontconfig-devel \
-    cmake pkgconf gcc make git
+  wayland-devel wayland-protocols-devel \
+  libdrm-devel mesa-libEGL-devel libgbm-devel mesa-libGLES-devel \
+  libinput-devel systemd-devel \
+  cairo-devel pixman-devel fontconfig-devel \
+  cmake pkgconf gcc make git
 ```
 
-### Step 2 — Clone and build
+#### Build & Install
 
-```
+```bash
 git clone https://github.com/naxce/zenith
 cd zenith
-bash scripts/build.sh
-```
-
-That is it. The binary ends up at `build/zenith`.
-
-### Step 3 — Install system-wide
-
-```
+bash scripts/build.sh        # fetches protocols, runs cmake + make
 cd build
-sudo make install
+sudo make install            # installs to /usr/local/bin and drops .desktop files
 ```
 
-This installs:
+#### Add to SDDM
 
-- `/usr/local/bin/zenith`
-- `/usr/local/share/wayland-sessions/zenith.desktop` (SDDM Wayland session)
-- `/usr/local/share/xsessions/zenith.desktop` (SDDM X11 fallback session)
+```bash
+# Install SDDM if needed
+sudo apt install sddm        # Debian/Ubuntu
+sudo pacman -S sddm          # Arch
+sudo dnf install sddm        # Fedora
 
-### Step 4 — Add to SDDM
-
-If SDDM is already installed, the `.desktop` files installed above are enough.
-SDDM will show "Zenith" and "Zenith (Wayland)" in the session list at next login.
-
-If SDDM is not installed:
-
-```
-# Ubuntu / Debian
-sudo apt install sddm
-
-# Arch
-sudo pacman -S sddm
-sudo systemctl enable sddm
-
-# Fedora
-sudo dnf install sddm
-sudo systemctl enable sddm
+sudo systemctl enable --now sddm
 ```
 
-### Step 5 — Run Zenith
-
-Log out and select "Zenith" from the SDDM session menu, or run directly from a TTY:
-
-```
-zenith
-```
+The `.desktop` files installed by `make install` are picked up by SDDM automatically. Reboot and select **Zenith** from the session list.
 
 ---
 
-## Building on NixOS — Method 1: Flakes (recommended)
+### ❄️ Method 2 — NixOS with Flakes _(recommended)_
 
-### Step 1 — Enable Flakes (if not already)
+> **This is the tested, working method.** Follow every step exactly.
 
-Add to your `/etc/nixos/configuration.nix`:
+#### Step 1 — Enable Flakes
+
+In `/etc/nixos/configuration.nix` (or your flake config):
 
 ```nix
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 ```
 
-Then run `sudo nixos-rebuild switch`.
+```bash
+sudo nixos-rebuild switch
+```
 
-### Step 2 — Add Zenith as a flake input
-
-In your system flake `flake.nix`:
+#### Step 2 — Add to your flake inputs
 
 ```nix
+# flake.nix
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    zenith.url = "path:/path/to/zenith";
-    # or: zenith.url = "github:naxce/zenith";
+    nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager     = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
+    zenith.url       = "github:naxce/zenith";
+    # local development:
+    # zenith.url     = "path:/home/youruser/dotfiles/zenith";
   };
 
-  outputs = { self, nixpkgs, zenith, ... }: {
-    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, zenith, ... }: {
+    nixosConfigurations.YOURHOSTNAME = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit zenith; };
       modules = [
         zenith.nixosModules.default
-        {
-          programs.zenith = {
-            enable = true;
-            nvidia = true;
-            terminal = "foot";
-          };
-
-          services.displayManager.sddm.enable = true;
-          services.displayManager.sddm.wayland.enable = true;
-        }
-        ./hardware-configuration.nix
-        ./configuration.nix
+        ./nixos/configuration.nix
+        home-manager.nixosModules.home-manager
+        { home-manager.users.YOURUSER.imports = [ ./home.nix ]; }
       ];
     };
   };
 }
 ```
 
-### Step 3 — Rebuild
+> Replace `YOURHOSTNAME` and `YOURUSER` with your actual values.
 
+#### Step 3 — Enable in configuration.nix
+
+```nix
+# nixos/configuration.nix
+{ config, pkgs, zenith, ... }:
+
+{
+  programs.zenith = {
+    enable   = true;
+    nvidia   = true;        # set false if you don't have NVIDIA
+    terminal = "foot";
+  };
+
+  services.displayManager.sessionPackages = [
+    zenith.packages.x86_64-linux.default
+  ];
+
+  services.displayManager.sddm.enable         = true;
+  services.displayManager.sddm.wayland.enable = true;
+}
 ```
-sudo nixos-rebuild switch --flake .#myhost
+
+> ⚠️ **The `sessionPackages` line is mandatory.** Without it, SDDM will not show Zenith in the session list even if the package is installed.
+
+#### Step 4 — Rebuild
+
+```bash
+sudo nixos-rebuild switch --flake .#YOURHOSTNAME
 ```
+
+#### Step 5 — Verify
+
+```bash
+# Should show zenith.desktop
+ls $(grep "SessionDir.*wayland" /etc/sddm.conf.d/*.conf | cut -d= -f2)/
+
+# Should print the zenith binary path
+which zenith
+```
+
+Reboot and select **Zenith** from the SDDM session list.
 
 ---
 
-## Building on NixOS — Method 2: No Flakes (classic)
+### ❄️ Method 3 — NixOS without Flakes
 
-### Step 1 — Build the package
-
-```
+```bash
 cd /path/to/zenith
 nix-build package.nix -I nixpkgs=channel:nixos-unstable
+# binary at ./result/bin/zenith
 ```
-
-Result symlink: `./result/bin/zenith`
-
-### Step 2 — Add to configuration
 
 In `/etc/nixos/configuration.nix`:
 
@@ -218,56 +322,33 @@ let
 in {
   environment.systemPackages = [ zenith ];
 
-  services.displayManager.sessionPackages = [ zenith ];
-
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sessionPackages     = [ zenith ];
+  services.displayManager.sddm.enable         = true;
   services.displayManager.sddm.wayland.enable = true;
-
-  hardware.nvidia.modesetting.enable = true;
-
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-  ];
-
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME         = "nvidia";
-    GBM_BACKEND               = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    WLR_DRM_NO_ATOMIC         = "1";
-    MOZ_ENABLE_WAYLAND        = "1";
-    QT_QPA_PLATFORM           = "wayland";
-    SDL_VIDEODRIVER           = "wayland";
-  };
 }
 ```
 
-Then:
-
-```
+```bash
 sudo nixos-rebuild switch
 ```
 
 ---
 
-## Building on NixOS — Method 3: Home Manager
-
-In your Home Manager config (`home.nix` or equivalent):
+### ❄️ Method 4 — NixOS with Home Manager
 
 ```nix
-{ config, pkgs, ... }:
+# home.nix
+{ zenith, ... }:
 
 {
-  imports = [
-    (builtins.getFlake "path:/path/to/zenith").homeManagerModules.default
-  ];
+  imports = [ zenith.homeManagerModules.default ];
 
   wayland.windowManager.zenith = {
     enable = true;
     settings = {
-      terminal = "foot";
-      nvidia = true;
-      gaps = 0;
+      terminal    = "foot";
+      nvidia      = true;
+      gaps        = 0;
     };
     autostart = [
       "foot --server"
@@ -276,56 +357,55 @@ In your Home Manager config (`home.nix` or equivalent):
 }
 ```
 
-Run:
-
-```
-home-manager switch
-```
+> Note: Home Manager manages `~/.config/zenith/` but the NixOS module still handles SDDM registration. You need both.
 
 ---
 
-## NVIDIA Setup (all distros)
+## 🟢 NVIDIA Setup
 
-These are required for NVIDIA + Wayland. Zenith sets them automatically, but also set them in your system/session environment:
+Zenith sets all required env vars automatically on startup. For system-level setup:
+
+#### NixOS
+
+The `programs.zenith.nvidia = true` option handles everything. Additionally ensure:
+
+```nix
+hardware.nvidia.modesetting.enable = true;
+boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+```
+
+#### Other distros
+
+Add to `/etc/environment`:
 
 ```
-nvidia-drm.modeset=1       # kernel parameter (boot)
-nvidia-drm.fbdev=1         # kernel parameter (boot)
-
 GBM_BACKEND=nvidia-drm
 __GLX_VENDOR_LIBRARY_NAME=nvidia
 LIBVA_DRIVER_NAME=nvidia
 WLR_DRM_NO_ATOMIC=1
 ```
 
-On NixOS the module handles this. On other distros add them to `/etc/environment` or your `.profile`:
-
-```
-echo 'GBM_BACKEND=nvidia-drm' | sudo tee -a /etc/environment
-echo '__GLX_VENDOR_LIBRARY_NAME=nvidia' | sudo tee -a /etc/environment
-echo 'LIBVA_DRIVER_NAME=nvidia' | sudo tee -a /etc/environment
-echo 'WLR_DRM_NO_ATOMIC=1' | sudo tee -a /etc/environment
-```
-
-For the kernel parameters edit `/etc/default/grub`:
+Add to kernel parameters (edit `/etc/default/grub`):
 
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1 nvidia-drm.fbdev=1"
 ```
 
-Then run `sudo update-grub` and reboot.
+```bash
+sudo update-grub && reboot
+```
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
-All config lives in `~/.config/zenith/`.
+All files live in `~/.config/zenith/`.
 
-### `~/.config/zenith/zenith.conf`
+### `zenith.conf`
 
-```
+```ini
 terminal=foot
-wallpaper=/home/user/wallpaper.png
+wallpaper=/home/user/pictures/wallpaper.png
 border_width=1
 border_color_focused=FF4488FF
 border_color_normal=FF222222
@@ -335,20 +415,19 @@ gaps=0
 nvidia_mode=1
 ```
 
-Colors are in `AARRGGBB` hex without `#`.
+> Colors are `AARRGGBB` hex without `#`. Reload with `Super + Shift + R`.
 
-### `~/.config/zenith/autostart`
+### `autostart`
 
-One command per line. Runs on startup. Lines starting with `#` are comments.
+One command per line, executed on Zenith startup:
 
-```
+```bash
 foot --server
 ```
 
 ### Desktop Icons
 
-Put `.desktop` files or symlinks in `~/Desktop/`. They appear on the desktop.
-Standard `.desktop` format:
+Drop `.desktop` files or symlinks in `~/Desktop/`:
 
 ```ini
 [Desktop Entry]
@@ -360,163 +439,196 @@ Type=Application
 
 ---
 
-## Keybinds
+## 🖥️ Monitor Settings Panel
 
-| Keys              | Action                  |
-| ----------------- | ----------------------- |
-| Super + Enter     | Open terminal           |
-| Super + Space     | Open/close launcher     |
-| Super + Shift + Q | Close focused window    |
-| Super + H         | Minimize focused window |
-| Super + M         | Maximize focused window |
-| Super + D         | Minimize / restore all  |
-| Alt + Tab         | Focus next window       |
-| Alt + F4          | Close window            |
-| F11               | Toggle fullscreen       |
-| Super + Shift + R | Reload config           |
-| Ctrl + Super + Q  | Quit Zenith             |
+Open with the **Settings** button on the taskbar.
+
+| Tab          | What you can do                                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Monitors** | See all connected outputs. Arrow keys = move position. `+`/`-` = scale. `E` = enable/disable. `Enter` = save & apply. |
+| **General**  | View current config values (edit the file directly to change).                                                        |
+| **Keybinds** | Reference list of all keybinds.                                                                                       |
+
+Settings are written back to `~/.config/zenith/zenith.conf`.
 
 ---
 
-## Taskbar Buttons
+## 🔧 Troubleshooting
 
-| Button   | Action                                        |
-| -------- | --------------------------------------------- |
-| Settings | Opens monitor & config panel                  |
-| Start    | Opens app launcher / search                   |
-| Win-D    | Minimize all windows (click again to restore) |
+<details>
+<summary><b>❌ Zenith not showing in SDDM</b></summary>
 
-**Clock** is shown on the right. Clicking window names in the taskbar focuses or minimizes them.
+**On NixOS:** Make sure you have this line in `configuration.nix`:
 
----
+```nix
+services.displayManager.sessionPackages = [
+  zenith.packages.x86_64-linux.default
+];
+```
 
-## Launcher (Start Menu)
+This is the most common mistake. The module alone is not enough — SDDM needs the package explicitly registered.
 
-- Open with `Super + Space` or the **Start** button
-- Type to search installed apps (reads `.desktop` files)
-- `Up`/`Down` to navigate, `Enter` to launch
-- `Escape` to close
-- **Shutdown / Reboot / Logout** buttons at the bottom
+Verify after rebuild:
 
----
+```bash
+ls $(grep "SessionDir.*wayland" /etc/sddm.conf.d/*.conf | cut -d= -f2)/
+```
 
-## Monitor Settings
+`zenith.desktop` must appear in that output.
 
-Open with the **Settings** button or from the launcher.
+**On other distros:** Verify the `.desktop` file exists:
 
-- **Monitors tab**: lists all connected outputs, resolution, refresh rate, position, scale
-  - Arrow keys: move monitor position
-  - `+` / `-`: scale up/down
-  - `E`: toggle enable/disable
-  - `Enter` or "Save & Apply": save and apply
-- **General tab**: shows current config values (edit the file directly for changes)
-- **Keybinds tab**: reference list of all keybinds
+```bash
+ls /usr/local/share/wayland-sessions/zenith.desktop
+ls /usr/share/wayland-sessions/zenith.desktop
+```
 
-Settings are saved to `~/.config/zenith/zenith.conf` and `monitor_N=` entries.
+If missing, run `sudo make install` from the build directory.
 
----
+</details>
 
-## Troubleshooting
+<details>
+<summary><b>❌ Black screen / Zenith doesn't start</b></summary>
 
-### Zenith doesn't start / black screen
-
-1. Check you have kernel modesetting: `cat /proc/cmdline | grep nvidia-drm`
-2. Make sure no other compositor is running: `echo $WAYLAND_DISPLAY` should be empty
-3. Check DRM access: `ls -la /dev/dri/` — your user needs to be in the `video` or `render` group
+1. Check kernel modesetting is active:
+   ```bash
+   cat /proc/cmdline | grep nvidia-drm
    ```
-   sudo usermod -aG video,render $USER
+2. Make sure you're not inside another compositor — run from a TTY (`Ctrl+Alt+F2`)
+3. Check DRM group membership:
+   ```bash
+   groups $USER   # should include 'video' and/or 'render'
+   sudo usermod -aG video,render $USER  # then log out and back in
    ```
-   Log out and back in.
-4. Run from TTY (not inside another compositor): switch to TTY2 with `Ctrl+Alt+F2`, log in, run `zenith`
+4. Run directly and check output:
+   ```bash
+   zenith 2>&1 | head -20
+   ```
 
-### "No DRM device found"
+</details>
 
-You are probably trying to run Zenith inside an existing Wayland/X11 session.
-Zenith must be started from a TTY or from a display manager (SDDM) on bare hardware.
+<details>
+<summary><b>❌ "No DRM device found"</b></summary>
 
-### SDDM doesn't show Zenith
+You are running Zenith inside an existing Wayland or X11 session. Zenith must run on bare hardware — from a TTY or from SDDM, not nested.
 
-Make sure the `.desktop` file was installed:
+</details>
 
+<details>
+<summary><b>❌ Build fails: egl / gbm not found (non-NixOS)</b></summary>
+
+Install the Mesa dev packages for your distro:
+
+```bash
+# Ubuntu / Debian
+sudo apt install libegl1-mesa-dev libgbm-dev
+
+# Arch
+sudo pacman -S mesa
+
+# Fedora
+sudo dnf install mesa-libEGL-devel libgbm-devel
 ```
-ls /usr/local/share/wayland-sessions/
-ls /usr/share/wayland-sessions/
-```
 
-If not, run `sudo make install` from the build directory.
+</details>
 
-### Build fails: "wayland-scanner not found"
+<details>
+<summary><b>❌ Build fails: xdg-shell.xml not found</b></summary>
 
-Install `wayland-scanner`:
+Run the fetch script:
 
-- Ubuntu: `sudo apt install wayland-scanner`
-- Arch: included in `wayland` package
-- Fedora: `sudo dnf install wayland-devel`
-
-### Build fails: "xdg-shell.xml not found"
-
-Run the protocol fetch script:
-
-```
+```bash
 bash scripts/fetch-protocols.sh
 ```
 
-Or manually copy from your system:
+Or copy manually:
 
-```
+```bash
 find /usr -name xdg-shell.xml 2>/dev/null
-cp /path/found/xdg-shell.xml protocol/
+# then:
+cp /path/to/xdg-shell.xml protocol/
 ```
 
-### Apps don't use Wayland
+</details>
 
-Set these in your session or `~/.profile`:
+<details>
+<summary><b>❌ Invisible cursor (NVIDIA)</b></summary>
+
+Add to kernel parameters:
 
 ```
+nvidia-drm.fbdev=1
+```
+
+On NixOS: `boot.kernelParams = [ "nvidia-drm.fbdev=1" ];`
+
+</details>
+
+<details>
+<summary><b>❌ Apps not using Wayland</b></summary>
+
+Zenith sets these automatically, but some apps read them before launch. Add to `~/.profile` or `/etc/environment`:
+
+```bash
 export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
 export SDL_VIDEODRIVER=wayland
 export CLUTTER_BACKEND=wayland
 ```
 
-Zenith sets these automatically when it starts, but some apps read them before Zenith sets them.
-
-### Cursor is invisible
-
-This is a known NVIDIA Wayland issue. Add to your kernel parameters:
-
-```
-nvidia-drm.fbdev=1
-```
-
-### Games run slowly
-
-Zenith has no compositor effects. If games still run slowly:
-
-1. Use `gamemode` if available: prefix your game with `gamemoderun`
-2. Set CPU governor: `sudo cpupower frequency-set -g performance`
-3. Make sure the game uses Vulkan or native Wayland — not XWayland
+</details>
 
 ---
 
-## File Layout
+## 📁 Project Structure
 
 ```
 zenith/
-├── src/                  C source files
-├── include/              Header files
-├── protocol/             Wayland protocol XML + generated files
-├── config/               Default config files
-├── nixos/                NixOS module, Home Manager module, .desktop files
-├── scripts/              Build and protocol helper scripts
-├── CMakeLists.txt        Build system
-├── flake.nix             Nix flake
-├── package.nix           Nix package derivation
-└── README.md             This file
+├── src/                    C source files
+│   ├── zenith.c            Entry point, main loop
+│   ├── output.c            DRM/KMS + EGL output management
+│   ├── input.c             libinput keyboard/mouse handling
+│   ├── window.c            Window management
+│   ├── taskbar.c           Taskbar rendering (Cairo)
+│   ├── desktop.c           Desktop + icon rendering
+│   ├── launcher.c          App launcher / start menu
+│   ├── settings_panel.c    Monitor & config settings UI
+│   ├── keybinds.c          Keyboard shortcut handling
+│   ├── config.c            Config file read/write
+│   └── monitor_settings.c  Monitor apply/save/load
+├── include/                Header files
+├── protocol/               Wayland protocol XML + generated files
+├── config/                 Default config files
+├── nixos/
+│   ├── module.nix          NixOS module  (programs.zenith.*)
+│   ├── home-manager.nix    Home Manager module
+│   ├── zenith.desktop      Wayland session entry for SDDM
+│   └── zenith-sddm.desktop X11 session entry for SDDM
+├── scripts/
+│   ├── build.sh            One-command build for non-NixOS
+│   └── fetch-protocols.sh  Downloads xdg-shell.xml
+├── CMakeLists.txt
+├── flake.nix
+├── package.nix
+└── README.md
 ```
 
 ---
 
-## License
+## 🎮 Gaming Tips
 
-MIT
+- Use `gamemoderun %command%` in Steam launch options for CPU governor boost
+- Set `nvidia_mode=1` in `zenith.conf` (default)
+- Prefer Vulkan / native Wayland games over OpenGL / XWayland for best performance
+- `gaps=0` and `border_width=1` give the smallest possible compositor overhead
+- Zenith renders the taskbar at 60fps and nothing else unless windows are present
+
+---
+
+<div align="center">
+
+**MIT License** · Built for NixOS · No wlroots · NVIDIA ready
+
+_If Zenith helped you get more frames, leave a ⭐_
+
+</div>
