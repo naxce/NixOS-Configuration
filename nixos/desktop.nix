@@ -17,7 +17,7 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "forest";
+    theme = "breeze";
   };
 
   services.desktopManager.plasma6.enable = true;
