@@ -63,7 +63,7 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "Zenith minimal Wayland compositor optimized for gaming";
-    homepage = "https://github.com/your-repo/zenith";
+    homepage = "https://github.com/naxce/zenith";
     license = licenses.mit;
     platforms = platforms.linux;
     mainProgram = "zenith";

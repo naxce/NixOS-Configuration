@@ -6,7 +6,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 add_compile_options(
     -O3
-    -march=native
     -pipe
     -fno-plt
     -fstack-protector-strong
@@ -21,7 +20,6 @@ add_compile_options(
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(WAYLAND_SERVER REQUIRED wayland-server)
-find_package(OpenGL REQUIRED COMPONENTS EGL)
 pkg_check_modules(GLES2 REQUIRED glesv2)
 pkg_check_modules(GBM REQUIRED gbm)
 pkg_check_modules(LIBDRM REQUIRED libdrm)
@@ -30,6 +28,9 @@ pkg_check_modules(LIBUDEV REQUIRED libudev)
 pkg_check_modules(CAIRO REQUIRED cairo)
 pkg_check_modules(PIXMAN REQUIRED pixman-1)
 pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+
+find_library(EGL_LIB EGL REQUIRED)
+find_path(EGL_INCLUDE_DIR EGL/egl.h REQUIRED)
 
 find_package(Threads REQUIRED)
 
@@ -77,8 +78,8 @@ add_dependencies(zenith protocols)
 target_include_directories(zenith PRIVATE
     include
     protocol
+    ${EGL_INCLUDE_DIR}
     ${WAYLAND_SERVER_INCLUDE_DIRS}
-    ${EGL_INCLUDE_DIRS}
     ${GLES2_INCLUDE_DIRS}
     ${GBM_INCLUDE_DIRS}
     ${LIBDRM_INCLUDE_DIRS}
@@ -90,8 +91,8 @@ target_include_directories(zenith PRIVATE
 )
 
 target_link_libraries(zenith PRIVATE
+    ${EGL_LIB}
     ${WAYLAND_SERVER_LIBRARIES}
-    ${EGL_LIBRARIES}
     ${GLES2_LIBRARIES}
     ${GBM_LIBRARIES}
     ${LIBDRM_LIBRARIES}
@@ -104,24 +105,8 @@ target_link_libraries(zenith PRIVATE
     m
 )
 
-target_compile_options(zenith PRIVATE
-    ${WAYLAND_SERVER_CFLAGS_OTHER}
-    ${EGL_CFLAGS_OTHER}
-    ${GLES2_CFLAGS_OTHER}
-    ${GBM_CFLAGS_OTHER}
-    ${LIBDRM_CFLAGS_OTHER}
-    ${LIBINPUT_CFLAGS_OTHER}
-    ${LIBUDEV_CFLAGS_OTHER}
-    ${CAIRO_CFLAGS_OTHER}
-    ${PIXMAN_CFLAGS_OTHER}
-    ${FONTCONFIG_CFLAGS_OTHER}
-)
-
 install(TARGETS zenith RUNTIME DESTINATION bin)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/nixos/zenith.desktop
     DESTINATION share/wayland-sessions)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/nixos/zenith-sddm.desktop
     DESTINATION share/xsessions)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/config/
-    DESTINATION share/zenith
-    FILES_MATCHING PATTERN "*.conf" PATTERN "*.sh")

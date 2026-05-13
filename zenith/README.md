@@ -25,28 +25,28 @@ Direct DRM/KMS output, EGL/OpenGL ES rendering, libinput, Cairo UI.
 
 ### Mandatory
 
-| Dependency        | Package name (varies by distro)              |
-|-------------------|----------------------------------------------|
-| wayland           | `libwayland-dev` / `wayland-devel`           |
-| wayland-scanner   | `wayland-scanner` / `wayland-devel`          |
-| wayland-protocols | `wayland-protocols`                          |
-| libdrm            | `libdrm-dev` / `libdrm-devel`               |
-| mesa (EGL+GBM)    | `libgbm-dev` / `mesa-libGL-devel`           |
-| libinput          | `libinput-dev` / `libinput-devel`           |
-| libudev           | `libudev-dev` / `systemd-devel`             |
-| cairo             | `libcairo2-dev` / `cairo-devel`             |
-| pixman            | `libpixman-1-dev` / `pixman-devel`          |
-| fontconfig        | `libfontconfig1-dev` / `fontconfig-devel`   |
-| cmake             | `cmake`                                      |
-| pkg-config        | `pkg-config` / `pkgconf`                    |
-| gcc               | `gcc`                                        |
+| Dependency        | Package name (varies by distro)           |
+| ----------------- | ----------------------------------------- |
+| wayland           | `libwayland-dev` / `wayland-devel`        |
+| wayland-scanner   | `wayland-scanner` / `wayland-devel`       |
+| wayland-protocols | `wayland-protocols`                       |
+| libdrm            | `libdrm-dev` / `libdrm-devel`             |
+| mesa (EGL+GBM)    | `libgbm-dev` / `mesa-libGL-devel`         |
+| libinput          | `libinput-dev` / `libinput-devel`         |
+| libudev           | `libudev-dev` / `systemd-devel`           |
+| cairo             | `libcairo2-dev` / `cairo-devel`           |
+| pixman            | `libpixman-1-dev` / `pixman-devel`        |
+| fontconfig        | `libfontconfig1-dev` / `fontconfig-devel` |
+| cmake             | `cmake`                                   |
+| pkg-config        | `pkg-config` / `pkgconf`                  |
+| gcc               | `gcc`                                     |
 
 ### Optional but Recommended
 
-| Package   | Why                            |
-|-----------|--------------------------------|
-| `foot`    | Default terminal emulator      |
-| `sddm`    | Display manager for login      |
+| Package | Why                       |
+| ------- | ------------------------- |
+| `foot`  | Default terminal emulator |
+| `sddm`  | Display manager for login |
 
 ---
 
@@ -55,6 +55,7 @@ Direct DRM/KMS output, EGL/OpenGL ES rendering, libinput, Cairo UI.
 ### Step 1 — Install dependencies
 
 **Ubuntu / Debian:**
+
 ```
 sudo apt update
 sudo apt install -y \
@@ -66,6 +67,7 @@ sudo apt install -y \
 ```
 
 **Arch Linux:**
+
 ```
 sudo pacman -S \
     wayland wayland-protocols \
@@ -75,6 +77,7 @@ sudo pacman -S \
 ```
 
 **Fedora / RHEL:**
+
 ```
 sudo dnf install -y \
     wayland-devel wayland-protocols-devel \
@@ -87,7 +90,7 @@ sudo dnf install -y \
 ### Step 2 — Clone and build
 
 ```
-git clone https://github.com/your-repo/zenith
+git clone https://github.com/naxce/zenith
 cd zenith
 bash scripts/build.sh
 ```
@@ -102,9 +105,10 @@ sudo make install
 ```
 
 This installs:
+
 - `/usr/local/bin/zenith`
-- `/usr/local/share/wayland-sessions/zenith.desktop`  (SDDM Wayland session)
-- `/usr/local/share/xsessions/zenith.desktop`          (SDDM X11 fallback session)
+- `/usr/local/share/wayland-sessions/zenith.desktop` (SDDM Wayland session)
+- `/usr/local/share/xsessions/zenith.desktop` (SDDM X11 fallback session)
 
 ### Step 4 — Add to SDDM
 
@@ -112,6 +116,7 @@ If SDDM is already installed, the `.desktop` files installed above are enough.
 SDDM will show "Zenith" and "Zenith (Wayland)" in the session list at next login.
 
 If SDDM is not installed:
+
 ```
 # Ubuntu / Debian
 sudo apt install sddm
@@ -140,20 +145,23 @@ zenith
 ### Step 1 — Enable Flakes (if not already)
 
 Add to your `/etc/nixos/configuration.nix`:
+
 ```nix
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 ```
+
 Then run `sudo nixos-rebuild switch`.
 
 ### Step 2 — Add Zenith as a flake input
 
 In your system flake `flake.nix`:
+
 ```nix
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     zenith.url = "path:/path/to/zenith";
-    # or: zenith.url = "github:your-repo/zenith";
+    # or: zenith.url = "github:naxce/zenith";
   };
 
   outputs = { self, nixpkgs, zenith, ... }: {
@@ -201,6 +209,7 @@ Result symlink: `./result/bin/zenith`
 ### Step 2 — Add to configuration
 
 In `/etc/nixos/configuration.nix`:
+
 ```nix
 { config, pkgs, ... }:
 
@@ -234,6 +243,7 @@ in {
 ```
 
 Then:
+
 ```
 sudo nixos-rebuild switch
 ```
@@ -267,6 +277,7 @@ In your Home Manager config (`home.nix` or equivalent):
 ```
 
 Run:
+
 ```
 home-manager switch
 ```
@@ -297,9 +308,11 @@ echo 'WLR_DRM_NO_ATOMIC=1' | sudo tee -a /etc/environment
 ```
 
 For the kernel parameters edit `/etc/default/grub`:
+
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet nvidia-drm.modeset=1 nvidia-drm.fbdev=1"
 ```
+
 Then run `sudo update-grub` and reboot.
 
 ---
@@ -336,6 +349,7 @@ foot --server
 
 Put `.desktop` files or symlinks in `~/Desktop/`. They appear on the desktop.
 Standard `.desktop` format:
+
 ```ini
 [Desktop Entry]
 Name=My Game
@@ -348,29 +362,29 @@ Type=Application
 
 ## Keybinds
 
-| Keys                   | Action                        |
-|------------------------|-------------------------------|
-| Super + Enter          | Open terminal                 |
-| Super + Space          | Open/close launcher           |
-| Super + Shift + Q      | Close focused window          |
-| Super + H              | Minimize focused window       |
-| Super + M              | Maximize focused window       |
-| Super + D              | Minimize / restore all        |
-| Alt + Tab              | Focus next window             |
-| Alt + F4               | Close window                  |
-| F11                    | Toggle fullscreen             |
-| Super + Shift + R      | Reload config                 |
-| Ctrl + Super + Q       | Quit Zenith                   |
+| Keys              | Action                  |
+| ----------------- | ----------------------- |
+| Super + Enter     | Open terminal           |
+| Super + Space     | Open/close launcher     |
+| Super + Shift + Q | Close focused window    |
+| Super + H         | Minimize focused window |
+| Super + M         | Maximize focused window |
+| Super + D         | Minimize / restore all  |
+| Alt + Tab         | Focus next window       |
+| Alt + F4          | Close window            |
+| F11               | Toggle fullscreen       |
+| Super + Shift + R | Reload config           |
+| Ctrl + Super + Q  | Quit Zenith             |
 
 ---
 
 ## Taskbar Buttons
 
-| Button   | Action                                              |
-|----------|-----------------------------------------------------|
-| Settings | Opens monitor & config panel                        |
-| Start    | Opens app launcher / search                         |
-| Win-D    | Minimize all windows (click again to restore)       |
+| Button   | Action                                        |
+| -------- | --------------------------------------------- |
+| Settings | Opens monitor & config panel                  |
+| Start    | Opens app launcher / search                   |
+| Win-D    | Minimize all windows (click again to restore) |
 
 **Clock** is shown on the right. Clicking window names in the taskbar focuses or minimizes them.
 
@@ -423,15 +437,18 @@ Zenith must be started from a TTY or from a display manager (SDDM) on bare hardw
 ### SDDM doesn't show Zenith
 
 Make sure the `.desktop` file was installed:
+
 ```
 ls /usr/local/share/wayland-sessions/
 ls /usr/share/wayland-sessions/
 ```
+
 If not, run `sudo make install` from the build directory.
 
 ### Build fails: "wayland-scanner not found"
 
 Install `wayland-scanner`:
+
 - Ubuntu: `sudo apt install wayland-scanner`
 - Arch: included in `wayland` package
 - Fedora: `sudo dnf install wayland-devel`
@@ -439,10 +456,13 @@ Install `wayland-scanner`:
 ### Build fails: "xdg-shell.xml not found"
 
 Run the protocol fetch script:
+
 ```
 bash scripts/fetch-protocols.sh
 ```
+
 Or manually copy from your system:
+
 ```
 find /usr -name xdg-shell.xml 2>/dev/null
 cp /path/found/xdg-shell.xml protocol/
@@ -451,17 +471,20 @@ cp /path/found/xdg-shell.xml protocol/
 ### Apps don't use Wayland
 
 Set these in your session or `~/.profile`:
+
 ```
 export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
 export SDL_VIDEODRIVER=wayland
 export CLUTTER_BACKEND=wayland
 ```
+
 Zenith sets these automatically when it starts, but some apps read them before Zenith sets them.
 
 ### Cursor is invisible
 
 This is a known NVIDIA Wayland issue. Add to your kernel parameters:
+
 ```
 nvidia-drm.fbdev=1
 ```
@@ -469,6 +492,7 @@ nvidia-drm.fbdev=1
 ### Games run slowly
 
 Zenith has no compositor effects. If games still run slowly:
+
 1. Use `gamemode` if available: prefix your game with `gamemoderun`
 2. Set CPU governor: `sudo cpupower frequency-set -g performance`
 3. Make sure the game uses Vulkan or native Wayland — not XWayland
