@@ -2,7 +2,9 @@
 
 let
   cfg = config.services.zenithwm;
+  zenithwmPkg = import ./default.nix { inherit pkgs; };
 in {
+
   options.services.zenithwm = {
     enable = lib.mkEnableOption "ZenithWM Wayland compositor";
 
@@ -19,31 +21,27 @@ in {
     };
   };
 
-config = lib.mkIf cfg.enable {
-    services.displayManager.sessionPackages = [ zenithwm ];
+  config = lib.mkIf cfg.enable {
+    services.displayManager.sessionPackages = [ zenithwmPkg ];
 
-    # ── Package ──────────────────────────────────────────────────────
     environment.systemPackages = [
-      zenithwm
+      zenithwmPkg
       pkgs.foot          
       pkgs.fuzzel        
       pkgs.xwayland      
     ];
 
-    # ── SDDM ─────────────────────────────────────────────────────────
     services.displayManager.sddm = {
       enable      = lib.mkDefault true;
       wayland.enable = true;
     };
 
-    # ── Wayland / XDG ────────────────────────────────────────────────
     xdg.portal = {
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
       config.common.default = "*";
     };
 
-    # ── Session environment vars ──────────────────────────────────────
     environment.sessionVariables = lib.mkMerge [
       {
         XDG_SESSION_TYPE        = "wayland";
@@ -65,7 +63,6 @@ config = lib.mkIf cfg.enable {
       cfg.extraSessionVars
     ];
 
-    # ── NVIDIA kernel & driver settings ──────────────────────────────
     hardware = lib.mkIf cfg.nvidia {
       nvidia = {
         modesetting.enable = true;       
@@ -84,13 +81,11 @@ config = lib.mkIf cfg.enable {
       };
     };
 
-    # ── Boot params for NVIDIA DRM ────────────────────────────────────
     boot = lib.mkIf cfg.nvidia {
       kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
       kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     };
 
-    # ── Audio (Pipewire) ─────────────────────────────────────────────
     services.pipewire = {
       enable            = lib.mkDefault true;
       alsa.enable       = true;
@@ -99,14 +94,8 @@ config = lib.mkIf cfg.enable {
     };
     security.rtkit.enable = lib.mkDefault true;
 
-    # ── D-Bus ────────────────────────────────────────────────────────
     services.dbus.enable = true;
-
-    # ── GameMode ─────────────────────────────────────────────────────
     programs.gamemode.enable = lib.mkDefault true;
-
-    # ── Polkit ───────────────────────────────────────────────────────
     security.polkit.enable = true;
-
   };
 }
