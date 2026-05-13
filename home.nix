@@ -69,21 +69,21 @@
         "
       '';
       ff = ''
-          mkdir -p /tmp/kittywork
+        mkdir -p /tmp/kittywork
 
-          cat << 'EOF' > /tmp/kittywork/fastfetch.jsonc
+        cat << 'EOF' > /tmp/kittywork/fastfetch.jsonc
         {
             "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
             "logo": {
-                "source": "~/dotfiles/Pictures/LogoPurple.png",
+                "source": "~/dotfiles/Pictures/LogoBlue.png",
                 "type": "kitty",
-                "width": 24,
+                "width": 22,
                 "height": 10,
                 "padding": { "top": 2, "left": 2 }
             },
             "display": {
                 "separator": " ➜ ",
-                "color": { "keys": "magenta" }
+                "color": { "keys": "blue" }
             },
             "modules": [
                 "title",
@@ -106,7 +106,8 @@
         }
         EOF
 
-          fastfetch --config /tmp/kittywork/fastfetch.jsonc
+
+        clear && fastfetch --config /tmp/kittywork/fastfetch.jsonc
       '';
     };
   };
