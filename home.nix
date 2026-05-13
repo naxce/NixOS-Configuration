@@ -40,6 +40,29 @@
       nixclean = "clear && sudo nix-collect-garbage -d && nix-collect-garbage -d";
       nixsh = "clear && nix-shell";
       rice = "clear && ~/dotfiles/scripts/rice.sh";
+      khelp = ''
+        echo "
+        OKNA
+        Ctrl+Shift+T      → nowy tab
+        Ctrl+Shift+Enter  → nowe okno
+        Ctrl+Shift+W      → zamknij tab
+        Ctrl+Shift+Q      → zamknij okno
+
+        SPLITY
+        Ctrl+Alt+V        → split pionowy
+        Ctrl+Alt+H        → split poziomy
+
+        NAWIGACJA
+        Ctrl+Alt+←→↑↓     → zmiana panelu
+
+        RESIZE SPLITÓW
+        Ctrl+Shift+←→↑↓   → zmiana rozmiaru
+
+        SELEKCJA
+        mouse select      → auto copy
+        Ctrl+Shift+C      → kopiuj (jeśli potrzebne)
+        "
+      '';
     };
   };
 
