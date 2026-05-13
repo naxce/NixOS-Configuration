@@ -1,14 +1,27 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  inherit (pkgs)
+  patched_wlroots = pkgs.wlroots_0_18.overrideAttrs (old: {
+    pname = "wlroots-zenith-fixed";
+    version = "${old.version}-patched";
+    __intentionallyOverridingVersion = true; 
+    
+    postPatch = (old.postPatch or "") + ''
+      find . -name "meson.build" -exec sed -i 's/-Werror//g' {} +
+      if [ -f backend/libinput/switch.c ]; then
+        sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \                case LIBINPUT_SWITCH_KEYPAD_SLIDE: break;' backend/libinput/switch.c
+      fi
+    '';
+  });
+
+inherit (pkgs)
     lib
     stdenv
     meson
     ninja
     pkg-config
-    wlroots_0_18
     wayland
+    wayland-scanner
     wayland-protocols
     libxkbcommon
     pixman
@@ -25,20 +38,20 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-  nativeBuildInputs = [
+nativeBuildInputs = [
     meson
     ninja
     pkg-config
+    wayland-scanner
   ];
 
   buildInputs = [
-    wlroots_0_18
+    patched_wlroots
     wayland
     wayland-protocols
     libxkbcommon
     pixman
     xwayland
-
     gtk4
     gtk4-layer-shell
   ];
@@ -48,8 +61,11 @@ stdenv.mkDerivation {
     "-Db_lto=true"
   ];
 
-  # ważne dla wlroots unstable API
-  NIX_CFLAGS_COMPILE = "-DWLR_USE_UNSTABLE";
+  NIX_CFLAGS_COMPILE = [
+    "-DWLR_USE_UNSTABLE"
+    "-I${wayland-protocols}/share/wayland-protocols/stable/xdg-shell"
+    "-I${wayland}/include"
+  ];
 
   # ✔ NIE używamy dwóch phase na to samo
   installPhase = ''

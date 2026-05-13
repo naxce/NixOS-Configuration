@@ -23,15 +23,8 @@
     
     wlroots-overlay = (final: prev: {
       wlroots = prev.wlroots.overrideAttrs (old: {
-        version = "${old.version}-patched";
-        
-        postPatch = (old.postPatch or "") + ''
-          find . -name "meson.build" -exec sed -i 's/-Werror//g' {} +
-          
-          if [ -f backend/libinput/switch.c ]; then
-            sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \                case LIBINPUT_SWITCH_KEYPAD_SLIDE: break;' backend/libinput/switch.c
-          fi
-        '';
+        version = "${old.version}-patched-final";
+        patches = (old.patches or []) ++ [ ./fix-wlroots-switch.patch ];
       });
     });
 
