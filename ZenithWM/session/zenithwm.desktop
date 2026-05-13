@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=ZenithWM
+Comment=Minimal Wayland compositor for gaming
+Exec=zenithwm-session
+Type=Application
+DesktopNames=ZenithWM
