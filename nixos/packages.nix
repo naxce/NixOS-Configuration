@@ -1,5 +1,10 @@
 # packages.nix
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  zenith,
+  ...
+}:
 
 {
   targets.genericLinux.enable = true;
@@ -14,7 +19,7 @@
 
   home.packages = with pkgs; [
     # FATUM
-    zenith.packages.${pkgs.system}.zenith
+    zenith.defaultPackage.${pkgs.system}
 
     # SYSTEM
     home-manager
