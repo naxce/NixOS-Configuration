@@ -8,10 +8,6 @@
 
   programs.home-manager.enable = true;
 
-  xdg.dataFile."wayland-sessions/zenith.desktop".source = "${
-    zenith.packages.${pkgs.system}.zenith
-  }/share/wayland-sessions/zenith.desktop";
-
   home.file.".config/cava".source = ./.config/cava;
   home.file.".config/fastfetch".source = ./.config/fastfetch;
   home.file.".config/kitty".source = ./.config/kitty;
