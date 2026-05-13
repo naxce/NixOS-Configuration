@@ -5,6 +5,7 @@
   pkg-config,
   wayland,
   wayland-scanner,
+  wayland-protocols,
   libdrm,
   mesa,
   libGL,
@@ -27,6 +28,7 @@ stdenv.mkDerivation {
     cmake
     pkg-config
     wayland-scanner
+    wayland-protocols
   ];
 
   buildInputs = [
@@ -42,6 +44,11 @@ stdenv.mkDerivation {
     fontconfig
     seatd
   ];
+
+  preConfigure = ''
+    mkdir -p protocol
+    cp ${wayland-protocols}/share/wayland-protocols/stable/xdg-shell/xdg-shell.xml protocol/xdg-shell.xml
+  '';
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
