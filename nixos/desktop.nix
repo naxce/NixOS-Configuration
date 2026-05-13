@@ -15,13 +15,27 @@
     zenithwm
   ];
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      wlroots = prev.wlroots.overrideAttrs (old: {
-        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=switch";
-      });
-    })
-  ];
+nixpkgs.overlays = [
+  (final: prev: {
+    wlroots = prev.wlroots.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        (final.writeText "wlroots-switch-fix.patch" ''
+          diff --git a/backend/libinput/switch.c b/backend/libinput/switch.c
+          index 1234567..abcdef0 100644
+          --- a/backend/libinput/switch.c
+          +++ b/backend/libinput/switch.c
+          @@ -30,6 +30,7 @@ handle_switch_toggle(struct libinput_event_switch *sevent)
+               switch (libinput_event_switch_get_switch(sevent)) {
+                   case LIBINPUT_SWITCH_LID:
+                   case LIBINPUT_SWITCH_TABLET_MODE:
++                  case LIBINPUT_SWITCH_KEYPAD_SLIDE:
+                       break;
+               }
+        '')
+      ];
+    });
+  })
+];
 
   environment.systemPackages = with pkgs; [
     kdePackages.qt5compat
