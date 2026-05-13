@@ -1,4 +1,4 @@
-{ config, pkgs, repoPath, ... }:
+{ config, pkgs, ... }:
 
 {
   targets.genericLinux.enable = true;
