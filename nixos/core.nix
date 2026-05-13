@@ -18,13 +18,9 @@
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 10;
-    editor = false;
-  };
-
+  boot.loader.refind.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.grub.enable = false;
 
   # Wirtualka
