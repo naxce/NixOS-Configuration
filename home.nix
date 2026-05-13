@@ -77,7 +77,7 @@
             "logo": {
                 "source": "~/dotfiles/Pictures/LogoBlue.png",
                 "type": "kitty",
-                "width": 22,
+                "width": 25,
                 "height": 10,
                 "padding": { "top": 2, "left": 2 }
             },
