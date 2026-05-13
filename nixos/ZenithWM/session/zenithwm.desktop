@@ -1,5 +1,4 @@
 [Desktop Entry]
-Name=ZenithWM
+Name=zenithwm
 Exec=zenithwm-session
 Type=Application
-DesktopNames=zenithwm
