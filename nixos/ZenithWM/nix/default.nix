@@ -51,8 +51,6 @@ stdenv.mkDerivation {
   # ważne dla wlroots unstable API
   NIX_CFLAGS_COMPILE = "-DWLR_USE_UNSTABLE";
 
-  passthru.providedSessions = [ "zenithwm" ];
-
   # ✔ NIE używamy dwóch phase na to samo
   installPhase = ''
     runHook preInstall
@@ -86,6 +84,10 @@ stdenv.mkDerivation {
 
     runHook postInstall
   '';
+
+  passthru = {
+    providedSessions = [ "zenithwm" ];
+  };
 
   meta = with lib; {
     description = "Minimal wlroots Wayland compositor optimised for gaming";

@@ -2,9 +2,7 @@
 
 let
   cfg = config.services.zenithwm;
-  zenithwm = import ./default.nix { inherit pkgs; };
 in {
-
   options.services.zenithwm = {
     enable = lib.mkEnableOption "ZenithWM Wayland compositor";
 
@@ -21,10 +19,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-
-    # ── Session Registration ──────────────────────────────────────────
-    # To rozwiązuje błąd: 'Package did not specify any session names'
+config = lib.mkIf cfg.enable {
     services.displayManager.sessionPackages = [ zenithwm ];
 
     # ── Package ──────────────────────────────────────────────────────

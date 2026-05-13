@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./ZenithWM/nix/module.nix
+  ];
+
+  services.zenithwm.enable = true;
+  services.zenithwm.nvidia = true;
+
   services.xserver.enable = true;
 
   services.displayManager.sddm = {
@@ -19,16 +26,6 @@
           (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=switch";
       });
     })
-  ];
-
-  services.displayManager.sessionPackages = [
-    (pkgs.writeTextDir "share/wayland-sessions/zenithwm.desktop" ''
-      [Desktop Entry]
-      Name=ZenithWM
-      Comment=Zenith Wayland Compositor
-      Exec=zenithwm
-      Type=Application
-    '')
   ];
 
   environment.systemPackages = with pkgs; [
@@ -53,10 +50,6 @@
     })
   ];
 
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox;
-  };
-
+  programs.firefox.enable = true;
   services.printing.enable = true;
 }
