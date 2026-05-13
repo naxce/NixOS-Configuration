@@ -12,6 +12,7 @@
 
 #include "zenith.h"
 #include "input.h"
+#include "output.h"
 #include "window.h"
 #include "keybinds.h"
 #include "taskbar.h"

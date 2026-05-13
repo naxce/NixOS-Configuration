@@ -85,8 +85,7 @@ void zenith_window_focus(struct zenith_server *server, struct zenith_window *win
 
 void zenith_window_close(struct zenith_window *win) {
     if (!win || !win->xdg_toplevel) return;
-    wl_resource_post_event(win->xdg_toplevel,
-        XDG_TOPLEVEL_CLOSE_EVENT_SINCE_VERSION >= 1 ? 2 : 0);
+    wl_resource_post_event(win->xdg_toplevel, 2);
 }
 
 void zenith_window_minimize(struct zenith_window *win) {
