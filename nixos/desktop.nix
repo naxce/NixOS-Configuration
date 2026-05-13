@@ -1,6 +1,6 @@
 # desktop.nix
 
-{ config, pkgs, ... }:
+{ config, pkgs, zenithwm, ... }:
 
 {
   services.xserver.enable = true;
@@ -11,10 +11,15 @@
     theme = "forest";
   };
 
+  services.displayManager.sessionPackages = [
+    zenithwm
+  ];
+
   environment.systemPackages = with pkgs; [
     kdePackages.qt5compat
     kdePackages.qtsvg
     kdePackages.qtmultimedia
+    zenithwm
 
     (stdenv.mkDerivation {
       name = "sddm-theme-forest";
