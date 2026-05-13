@@ -1,13 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./ZenithWM/nix/module.nix
-  ];
-
-  services.zenithwm.enable = true;
-  services.zenithwm.nvidia = true;
-
   services.xserver.enable = true;
 
   services.displayManager.sddm = {
@@ -18,15 +11,6 @@
 
   services.desktopManager.plasma6.enable = true;
   programs.dconf.enable = true;
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      wlroots = prev.wlroots.overrideAttrs (old: {
-        NIX_CFLAGS_COMPILE =
-          (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=switch";
-      });
-    })
-  ];
 
   environment.systemPackages = with pkgs; [
     kdePackages.qt5compat
