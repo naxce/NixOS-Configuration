@@ -122,8 +122,8 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1778710059,
-        "narHash": "sha256-nA7JYrat98rxpfKn8pZMOrS5iKsmOT2L/jMPxlmTS9s=",
+        "lastModified": 1778710104,
+        "narHash": "sha256-9xpH28N6Gu9XkjPpZfAKUBI1XP3pWi5gXNwJV4xZAsM=",
         "path": "/home/naxce/dotfiles/zenith",
         "type": "path"
       },

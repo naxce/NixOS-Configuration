@@ -15,7 +15,6 @@
 #include <wayland-server-core.h>
 #include <wayland-server-protocol.h>
 #include <xdg-shell-server-protocol.h>
-#include <xdg-output-unstable-v1-server-protocol.h>
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
