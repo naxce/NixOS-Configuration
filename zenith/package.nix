@@ -48,6 +48,8 @@ stdenv.mkDerivation {
     install -Dm644 $src/nixos/zenith-sddm.desktop $out/share/xsessions/zenith.desktop
   '';
 
+  passthru.providedSessions = [ "zenith" ];
+
   meta = with lib; {
     description = "Zenith minimal Wayland compositor optimized for gaming";
     homepage = "https://github.com/your-repo/zenith";
