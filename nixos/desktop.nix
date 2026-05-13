@@ -1,18 +1,23 @@
-{ config, pkgs, ... }:
+{ config, pkgs, zenith, ... }:
 
 {
   services.xserver.enable = true;
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "forest";
-  };
+  services.displayManager.sessionPackages = [
+    zenith.packages.x86_64-linux.default
+  ];
 
   programs.zenith = {
     enable = true;
     nvidia = true;
     terminal = "foot";
+  };
+  
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "forest";
   };
 
   services.desktopManager.plasma6.enable = true;
