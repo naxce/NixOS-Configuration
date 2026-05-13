@@ -6,6 +6,7 @@
 #include <wayland-server-protocol.h>
 
 #include "zenith.h"
+#include "output.h"
 #include "window.h"
 #include "taskbar.h"
 

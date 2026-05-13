@@ -11,8 +11,9 @@ add_compile_options(
     -fno-plt
     -fstack-protector-strong
     -Wall
-    -Wextra
     -Wno-unused-parameter
+    -Wno-unused-function
+    -Wno-stringop-truncation
     -D_FORTIFY_SOURCE=2
 )
 
