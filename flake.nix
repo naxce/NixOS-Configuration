@@ -26,10 +26,8 @@
         version = "${old.version}-patched";
         
         postPatch = (old.postPatch or "") + ''
-          # Wyłączamy Werror wszędzie gdzie się da
           find . -name "meson.build" -exec sed -i 's/-Werror//g' {} +
           
-          # Dodajemy brakujący case
           if [ -f backend/libinput/switch.c ]; then
             sed -i '/case LIBINPUT_SWITCH_TABLET_MODE:/a \                case LIBINPUT_SWITCH_KEYPAD_SLIDE: break;' backend/libinput/switch.c
           fi
