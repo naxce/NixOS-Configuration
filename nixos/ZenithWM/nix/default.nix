@@ -14,7 +14,7 @@ let
     '';
   });
 
-inherit (pkgs)
+  inherit (pkgs)
     lib
     stdenv
     meson
@@ -38,7 +38,7 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-nativeBuildInputs = [
+  nativeBuildInputs = [
     meson
     ninja
     pkg-config
@@ -56,18 +56,26 @@ nativeBuildInputs = [
     gtk4-layer-shell
   ];
 
+  preBuild = ''
+    mkdir -p protocols
+    wayland-scanner client-header \
+      ${wayland-protocols}/share/wayland-protocols/stable/xdg-shell/xdg-shell.xml \
+      protocols/xdg-shell-protocol.h
+    wayland-scanner private-code \
+      ${wayland-protocols}/share/wayland-protocols/stable/xdg-shell/xdg-shell.xml \
+      protocols/xdg-shell-protocol.c
+  '';
+
+  NIX_CFLAGS_COMPILE = [
+    "-DWLR_USE_UNSTABLE"
+    "-I./protocols"
+  ];
+
   mesonFlags = [
     "--buildtype=release"
     "-Db_lto=true"
   ];
 
-  NIX_CFLAGS_COMPILE = [
-    "-DWLR_USE_UNSTABLE"
-    "-I${wayland-protocols}/share/wayland-protocols/stable/xdg-shell"
-    "-I${wayland}/include"
-  ];
-
-  # ✔ NIE używamy dwóch phase na to samo
   installPhase = ''
     runHook preInstall
 
@@ -75,28 +83,25 @@ nativeBuildInputs = [
     mkdir -p $out/share/wayland-sessions
     mkdir -p $out/share/zenithwm/defaults
 
-    # binary
+    # Szukamy binarki w build/ lub bezpośrednio w build/compositor/
     if [ -f build/zenithwm ]; then
       install -Dm755 build/zenithwm $out/bin/zenithwm
+    elif [ -f build/compositor/zenithwm ]; then
+      install -Dm755 build/compositor/zenithwm $out/bin/zenithwm
     fi
 
     # session
-    install -Dm644 session/zenithwm.desktop \
-      $out/share/wayland-sessions/zenithwm.desktop
+    if [ -f session/zenithwm.desktop ]; then
+      install -Dm644 session/zenithwm.desktop $out/share/wayland-sessions/zenithwm.desktop
+    fi
 
     # configs
-    install -Dm644 config/zenithwm.conf \
-      $out/share/zenithwm/defaults/zenithwm.conf
-
-    install -Dm644 config/keys.conf \
-      $out/share/zenithwm/defaults/keys.conf
-
-    install -Dm644 config/desktop.conf \
-      $out/share/zenithwm/defaults/desktop.conf
+    [ -d config ] && cp -r config/* $out/share/zenithwm/defaults/
 
     # launcher script
-    install -Dm755 session/zenithwm-session \
-      $out/bin/zenithwm-session
+    if [ -f session/zenithwm-session ]; then
+      install -Dm755 session/zenithwm-session $out/bin/zenithwm-session
+    fi
 
     runHook postInstall
   '';
@@ -107,7 +112,7 @@ nativeBuildInputs = [
 
   meta = with lib; {
     description = "Minimal wlroots Wayland compositor optimised for gaming";
-    homepage = "https://github.com/youruser/zenithwm";
+    homepage = "https://github.com/naxce/ZenithWM";
     license = licenses.mit;
     platforms = platforms.linux;
     maintainers = [];
