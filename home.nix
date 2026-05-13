@@ -42,25 +42,30 @@
       rice = "clear && ~/dotfiles/scripts/rice.sh";
       khelp = ''
         echo "
-        OKNA
-        Ctrl+Shift+T      → nowy tab
-        Ctrl+Shift+Enter  → nowe okno
-        Ctrl+Shift+W      → zamknij tab
-        Ctrl+Shift+Q      → zamknij okno
+        ===============================
+                KITTY WORK HELP
+        ===============================
 
-        SPLITY
-        Ctrl+Alt+V        → split pionowy
-        Ctrl+Alt+H        → split poziomy
+        TABS
+        Ctrl+Shift+T   → new tab
+        Ctrl+Shift+W   → close tab
+        Ctrl+Shift+Q   → close window
 
-        NAWIGACJA
-        Ctrl+Alt+←→↑↓     → zmiana panelu
+        SPLITS
+        Ctrl+Shift+Enter → split window
+        Ctrl+Alt+V       → split
+        Ctrl+Alt+H       → split
 
-        RESIZE SPLITÓW
-        Ctrl+Shift+←→↑↓   → zmiana rozmiaru
+        NAVIGATION
+        Ctrl+Alt+arrows → move between panes
 
-        SELEKCJA
-        mouse select      → auto copy
-        Ctrl+Shift+C      → kopiuj (jeśli potrzebne)
+        RESIZE
+        Ctrl+Shift+arrows → resize split
+
+        ===============================
+        TIP
+        splits auto-arrange (no manual direction)
+        ===============================
         "
       '';
     };
