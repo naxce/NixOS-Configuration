@@ -33,8 +33,6 @@
     kdePackages.qtsvg
     kdePackages.qtmultimedia
 
-    zenithwm
-
     (pkgs.stdenv.mkDerivation {
       name = "sddm-theme-forest";
       src = pkgs.fetchFromGitHub {
