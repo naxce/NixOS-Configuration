@@ -12,9 +12,7 @@
     "/var/lib/flatpak/exports/share"
   ];
 
-  home.packages = [
-    (import ../nixos/ZenithWM/nix/default.nix { pkgs = pkgs; })
-  ] ++ (with pkgs; [
+  home.packages = with pkgs; [
     # SYSTEM
     home-manager
     os-prober
@@ -160,5 +158,7 @@
     cava
     lavat
     toilet
-  ]);
+  ] ++ [
+    (import ../nixos/ZenithWM/nix/default.nix { inherit pkgs; })
+  ];
 }
