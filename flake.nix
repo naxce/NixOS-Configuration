@@ -28,6 +28,8 @@
 
         specialArgs = {
           repoPath = ./.;
+
+          zenithwm = import (./nixos/ZenithWM/nix/default.nix) { inherit pkgs; };
         };
 
         modules = [
