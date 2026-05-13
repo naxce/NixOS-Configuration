@@ -29,21 +29,21 @@
         "
       '';
 
-      nixos = "cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixos = "clear && cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
 
-      nixgit = "cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
+      nixgit = "clear && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
 
-      nixbuild = "cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+      nixbuild = "clear && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
 
-      nixhome = "home-manager switch --flake ~/dotfiles#naxce";
+      nixhome = "clear && home-manager switch --flake ~/dotfiles#naxce";
 
-      nixplasma = "plasmashell --replace & disown";
+      nixplasma = "clear && plasmashell --replace & disown";
 
-      nixclean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      nixclean = "clear && sudo nix-collect-garbage -d && nix-collect-garbage -d";
 
-      nixsh = "nix-shell";
+      nixsh = "clear && nix-shell";
 
-      rice = "~/dotfiles/scripts/rice.sh";
+      rice = "clear && ~/dotfiles/scripts/rice.sh";
     };
   };
 

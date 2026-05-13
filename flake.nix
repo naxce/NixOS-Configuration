@@ -17,12 +17,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      plasma-manager,
-    }:
+    { self, nixpkgs, home-manager, plasma-manager }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -39,19 +34,22 @@
           ./nixos/configuration.nix
 
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
 
-            home-manager.users.naxce = {
-              imports = [
-                ./home.nix
-                ./nixos/packages.nix
-                plasma-manager.homeModules.plasma-manager
-              ];
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
               extraSpecialArgs = {
                 repoPath = ./.;
+              };
+
+              users.naxce = {
+                imports = [
+                  ./home.nix
+                  ./nixos/packages.nix
+                  plasma-manager.homeModules.plasma-manager
+                ];
               };
             };
           }
