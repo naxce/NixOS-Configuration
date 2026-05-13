@@ -47,6 +47,7 @@
     unrar
 
     # Terminal
+    alacritty
     htop
     btop
     fastfetch
