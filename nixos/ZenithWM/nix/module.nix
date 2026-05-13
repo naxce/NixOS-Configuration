@@ -67,7 +67,7 @@ in {
       nvidia = {
         modesetting.enable = lib.mkDefault true;
         powerManagement.enable = lib.mkDefault false;
-        open = lib.mkDefault false; 
+        open = lib.mkDefault true;
         nvidiaSettings = lib.mkDefault true;
       };
       graphics = {
@@ -75,7 +75,7 @@ in {
         enable32Bit = lib.mkDefault true;
         extraPackages = with pkgs; [
           nvidia-vaapi-driver
-          vaapiVdpau
+          libva-vdpau-driver
           libvdpau-va-gl
         ];
       };
