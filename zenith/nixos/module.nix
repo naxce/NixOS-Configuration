@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.programs.zenith;
-  zenithPkg = pkgs.callPackage ../package.nix {};
-in {
+  zenithPkg = pkgs.callPackage ../package.nix { };
+in
+{
   options.programs.zenith = {
     enable = lib.mkEnableOption "Zenith Wayland compositor";
 
@@ -35,16 +41,16 @@ in {
     services.xserver.displayManager.sddm.wayland.enable = lib.mkDefault true;
 
     environment.sessionVariables = lib.mkIf cfg.nvidia {
-      LIBVA_DRIVER_NAME      = "nvidia";
-      GBM_BACKEND            = "nvidia-drm";
+      LIBVA_DRIVER_NAME = "nvidia";
+      GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      WLR_DRM_NO_ATOMIC      = "1";
-      __GL_YIELD             = "USLEEP";
-      __GL_MaxFramesAllowed  = "1";
-      MOZ_ENABLE_WAYLAND     = "1";
-      QT_QPA_PLATFORM        = "wayland";
-      SDL_VIDEODRIVER        = "wayland";
-      CLUTTER_BACKEND        = "wayland";
+      WLR_DRM_NO_ATOMIC = "1";
+      __GL_YIELD = "USLEEP";
+      __GL_MaxFramesAllowed = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      QT_QPA_PLATFORM = "wayland";
+      SDL_VIDEODRIVER = "wayland";
+      CLUTTER_BACKEND = "wayland";
     };
 
     hardware.nvidia = lib.mkIf cfg.nvidia {
@@ -62,11 +68,5 @@ in {
     security.polkit.enable = true;
     services.dbus.enable = true;
     xdg.portal.enable = true;
-
-    users.users = lib.mkIf (config.users.users != {}) {};
-
-    systemd.tmpfiles.rules = [
-      "d /etc/zenith 0755 root root -"
-    ];
   };
 }
