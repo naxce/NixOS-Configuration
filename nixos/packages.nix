@@ -13,6 +13,9 @@
   ];
 
   home.packages = with pkgs; [
+    # FATUM
+    zenith.packages.${pkgs.system}.zenith
+
     # SYSTEM
     home-manager
     os-prober

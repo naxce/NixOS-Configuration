@@ -14,39 +14,52 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-  };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
-  let
-    system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  in
-  {
-    nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs; 
-
-      modules = [
-        ./nixos/configuration.nix
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.users.naxce = {
-            imports = [
-              ./home.nix
-              ./nixos/packages.nix
-              plasma-manager.homeModules.plasma-manager
-            ];
-          };
-        }
-      ];
+    zenith = {
+      url = "path:/home/naxce/dotfiles/zenith";
+      #url = "github:naxce/zenith";
     };
   };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      plasma-manager,
+      zenith,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      nixosConfigurations.naxce = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit pkgs;
+
+        modules = [
+          ./nixos/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.naxce = {
+              imports = [
+                ./home.nix
+                ./nixos/packages.nix
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
+          }
+        ];
+      };
+    };
 }
