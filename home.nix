@@ -14,7 +14,7 @@
 
   home.packages = [
     (pkgs.writeShellScriptBin "kwork" ''
-      exec /run/current-system/sw/bin/kitty --class kitty-work --name kitty-work --config '/home/naxce/dotfiles/.config/kitty/work.conf' "$@"
+      exec kitty --class kitty-work --name kitty-work --config '/home/naxce/dotfiles/.config/kitty/work.conf' "$@"
     '')
   ];
 
