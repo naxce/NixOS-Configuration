@@ -25,11 +25,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778706808,
-        "narHash": "sha256-ihH1UnI6nYSOkjAg4QsOadg6sp2LxXnWO9urPbo3/hw=",
+        "lastModified": 1778772542,
+        "narHash": "sha256-mVZ6gS7GLy9FMVl/rx2rOICKsQ0Sb/mtlMeDdCUtPyY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9760b31dab3016fc6e422ca241cfeac605fb89c9",
+        "rev": "3d4f5477f03e0de9f80ad0da7784d43cd386697c",
         "type": "github"
       },
       "original": {
@@ -122,8 +122,8 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1778711404,
-        "narHash": "sha256-3Tk5AbWsAW3N3cm004jWMOLJR/4blPdYZMAJx5/AB5U=",
+        "lastModified": 1778777297,
+        "narHash": "sha256-7zxLPHBj+dKeFxBzFKB03TodIEu9NpIhCdL/03u+TUM=",
         "path": "/home/naxce/dotfiles/zenith",
         "type": "path"
       },

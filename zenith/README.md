@@ -68,7 +68,7 @@ imports = [ zenith.nixosModules.default ];
 programs.zenith = {
   enable   = true;
   nvidia   = true;
-  terminal = "foot";
+  terminal = "kitty";
 };
 
 services.displayManager.sessionPackages = [ zenith.packages.x86_64-linux.default ];
@@ -270,7 +270,7 @@ sudo nixos-rebuild switch
   programs.zenith = {
     enable   = true;
     nvidia   = true;        # set false if you don't have NVIDIA
-    terminal = "foot";
+    terminal = "kitty";
   };
 
   services.displayManager.sessionPackages = [
@@ -346,12 +346,12 @@ sudo nixos-rebuild switch
   wayland.windowManager.zenith = {
     enable = true;
     settings = {
-      terminal    = "foot";
+      terminal    = "kitty";
       nvidia      = true;
       gaps        = 0;
     };
     autostart = [
-      "foot --server"
+      "kitty --server"
     ];
   };
 }
@@ -404,7 +404,7 @@ All files live in `~/.config/zenith/`.
 ### `zenith.conf`
 
 ```ini
-terminal=foot
+terminal=kitty
 wallpaper=/home/user/pictures/wallpaper.png
 border_width=1
 border_color_focused=FF4488FF
@@ -422,7 +422,7 @@ nvidia_mode=1
 One command per line, executed on Zenith startup:
 
 ```bash
-foot --server
+kitty --server
 ```
 
 ### Desktop Icons
@@ -632,3 +632,5 @@ zenith/
 _If Zenith helped you get more frames, leave a ⭐_
 
 </div>
+# Zenith
+# Zenith

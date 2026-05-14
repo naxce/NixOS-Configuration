@@ -33,7 +33,7 @@ void zenith_config_init(struct zenith_config *cfg) {
     }
     snprintf(cfg->config_file, sizeof(cfg->config_file), "%s/zenith/zenith.conf", cfg->config_dir);
 
-    strncpy(cfg->terminal, "foot", sizeof(cfg->terminal)-1);
+    strncpy(cfg->terminal, "kitty", sizeof(cfg->terminal)-1);
     strncpy(cfg->wallpaper, "", sizeof(cfg->wallpaper)-1);
     cfg->border_width = 1;
     cfg->border_color_focused = 0xFF4488FF;

@@ -10,7 +10,7 @@
   programs.zenith = {
     enable = true;
     nvidia = true;
-    terminal = "foot";
+    terminal = "kitty";
   };
   
 

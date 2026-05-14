@@ -11,11 +11,11 @@ in
   programs.zenith = {
     enable = true;
     nvidia = true;
-    terminal = "foot";
+    terminal = "kitty";
   };
 
   environment.systemPackages = with pkgs; [
-    foot
+    kitty
     xdg-utils
   ];
 

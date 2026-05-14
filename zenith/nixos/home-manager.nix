@@ -28,7 +28,7 @@ in {
     settings = {
       terminal = lib.mkOption {
         type = lib.types.str;
-        default = "foot";
+        default = "kitty";
         description = "Default terminal emulator.";
       };
 

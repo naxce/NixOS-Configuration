@@ -8,13 +8,13 @@
   wayland.windowManager.zenith = {
     enable = true;
     settings = {
-      terminal = "foot";
+      terminal = "kitty";
       gaps = 0;
       borderWidth = 1;
       nvidia = true;
     };
     autostart = [
-      "foot --server"
+      "kitty --server"
     ];
   };
 }

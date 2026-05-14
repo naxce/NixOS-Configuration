@@ -18,12 +18,12 @@ static void kb_close_focused(struct zenith_server *server) {
 
 static void kb_open_terminal(struct zenith_server *server) {
     const char *term = server->config.terminal;
-    if (!term || term[0] == '\0') term = "foot";
+    if (!term || term[0] == '\0') term = "kitty";
     pid_t pid = fork();
     if (pid == 0) {
         setsid();
         execlp(term, term, NULL);
-        execlp("foot", "foot", NULL);
+        execlp("kitty", "kitty", NULL);
         execlp("alacritty", "alacritty", NULL);
         execlp("xterm", "xterm", NULL);
         _exit(1);
