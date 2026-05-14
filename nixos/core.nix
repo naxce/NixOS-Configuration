@@ -153,13 +153,13 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/run/current-system/sw/bin/tee /boot/EFI/refind/manual_boot.conf";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl reboot";
-          options = [ "NOPASSWD" ];
-        }
+command = "/run/current-system/sw/bin/tee /boot/EFI/refind/manual_boot.conf";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/current-system/sw/bin/systemctl reboot";
+        options = [ "NOPASSWD" ];
+      }
       ];
     }
   ];
