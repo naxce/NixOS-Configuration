@@ -122,6 +122,7 @@
 
         reset && fastfetch --config /tmp/kittywork/fastfetch.jsonc
       '';
+      reset = "reset && ff";
     };
   };
 
