@@ -108,6 +108,8 @@
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
     "split_lock_detect=off"
+    "btusb.enable_autosuspend=0"
+    "btusb.reset=1"
   ];
 
   # POLSKA 🇵🇱
