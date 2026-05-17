@@ -9,7 +9,7 @@
 
 {
   # Najnowszy kernel
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Ustawienia konsoli
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v24n.psf.gz";
@@ -20,6 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.refind.enable = false;
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.extraEntries = { };
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.grub.enable = false;
 
@@ -102,12 +103,7 @@
   };
 
   # Parametry kernela
-  boot.blacklistedKernelModules = [
-    "btusb"
-    "mt7921e"
-    "mt7921s"
-    "mt7921u"
-  ];
+  boot.blacklistedKernelModules = [ ];
 
   boot.initrd.includeDefaultModules = true;
 
@@ -116,6 +112,7 @@
     "nvidia-drm.fbdev=1"
     "split_lock_detect=off"
     "btusb.enable_autosuspend=0"
+    "pcie_aspm=off"
   ];
 
   # POLSKA 🇵🇱
