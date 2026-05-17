@@ -102,12 +102,14 @@
   };
 
   # Parametry kernela
-  boot.initrd.extraModprobeConfig = ''
-    blacklist btusb
-    blacklist mt7921e
-    blacklist mt7921s
-    blacklist mt7921u
-  '';
+  boot.blacklistedKernelModules = [
+    "btusb"
+    "mt7921e"
+    "mt7921s"
+    "mt7921u"
+  ];
+
+  boot.initrd.includeDefaultModules = true;
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
@@ -115,8 +117,6 @@
     "split_lock_detect=off"
     "btusb.enable_autosuspend=0"
   ];
-
-  boot.blacklistedKernelModules = [ ];
 
   # POLSKA 🇵🇱
   time.timeZone = "Europe/Warsaw";
