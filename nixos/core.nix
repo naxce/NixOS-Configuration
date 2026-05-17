@@ -9,7 +9,7 @@
 
 {
   # Najnowszy kernel CachyOS
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Ustawienia konsoli
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v24n.psf.gz";
