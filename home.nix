@@ -90,7 +90,7 @@
             "logo": {
                 "source": "~/dotfiles/Pictures/LogoBlue.png",
                 "type": "kitty",
-                "width": 25,
+                "width": 26,
                 "height": 10,
                 "padding": { "top": 2, "left": 2 }
             },
