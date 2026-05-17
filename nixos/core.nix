@@ -160,6 +160,26 @@
           command = "/run/current-system/sw/bin/systemctl reboot";
           options = [ "NOPASSWD" ];
         }
+        {
+          command = "/home/naxce/dotfiles/scripts/hotspot.sh";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/create_ap";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/pkill";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/ip";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/iw";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
