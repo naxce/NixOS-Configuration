@@ -77,7 +77,7 @@
       nixhelp = "wipe && echo -e \"\nnixos: Update + Rebuild + Git Push\nnixgit: Commit to GitHub\nnixbuild: Rebuild with Flakes\nnixhome: Rebuild Home Manager Config\nnixkde: Restart KDE Plasma\nnixclean: Collect and delete garbage\nnixsh: nix-shell\nrice: Show ricing style choice\n\"";
 
       nixos = "wipe && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
-      nixup = "cd ~/dotfiles && nix flake update && git add . && git commit -m \"Update $(date)\" || true && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixup = "wipe && cd ~/dotfiles && nix flake update && git add . && git commit -m \"Update $(date)\" || true && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
       nixgit = "wipe && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
       nixbuild = "wipe && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
       nixhome = "wipe && home-manager switch --flake ~/dotfiles#naxce";
