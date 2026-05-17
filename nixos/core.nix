@@ -88,7 +88,7 @@
     enable = true;
     enable32Bit = true;
   };
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
   hardware.firmware = [ pkgs.linux-firmware ];
 
   systemd.services.gpu-performance = {
