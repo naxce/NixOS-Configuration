@@ -222,14 +222,17 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+
     settings = {
       General = {
-        Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "dual";
         Experimental = true;
         FastConnectable = true;
+        AutoEnable = true;
       };
     };
   };
+
   services.blueman.enable = true;
 
   # Java
