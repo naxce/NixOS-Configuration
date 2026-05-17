@@ -9,7 +9,7 @@
 
 {
   # Najnowszy kernel Zen
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Ustawienia konsoli
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v24n.psf.gz";
@@ -89,8 +89,7 @@
     enable32Bit = true;
   };
   hardware.enableRedistributableFirmware = true;
-
-  programs.sway.enable = true;
+  hardware.firmware = [ pkgs.linux-firmware ];
 
   systemd.services.gpu-performance = {
     wantedBy = [ "multi-user.target" ];
