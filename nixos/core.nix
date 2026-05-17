@@ -8,8 +8,8 @@
 }:
 
 {
-  # Najnowszy kernel Zen
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Najnowszy kernel
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Ustawienia konsoli
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v24n.psf.gz";
@@ -89,7 +89,6 @@
     enable32Bit = true;
   };
   hardware.enableAllFirmware = true;
-  hardware.firmware = [ pkgs.linux-firmware ];
 
   systemd.services.gpu-performance = {
     wantedBy = [ "multi-user.target" ];
