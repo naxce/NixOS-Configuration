@@ -46,6 +46,7 @@
       nixplasma = "reset && plasmashell --replace & disown";
       nixclean = "reset && sudo nix-collect-garbage -d && nix-collect-garbage -d";
       nixsh = "reset && nix-shell";
+      hts = "~/dotfiles/scripts/hotspot.sh";
       zenithgit = "reset && cd ~/dotfiles/zenith && git add . && (git commit -m \"Update\" || true) && git push origin main";
       rice = "reset && ~/dotfiles/scripts/rice.sh";
       khelp = ''
