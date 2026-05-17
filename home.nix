@@ -72,20 +72,20 @@
       ff = "fastfetch --config /tmp/kittywork/fastfetch.jsonc";
       wipe = "wipe";
 
-      nixhelp = "wipe && echo -e \"\nnixos: Update + Rebuild + Git Push\nnixgit: Commit to GitHub\nnixbuild: Rebuild with Flakes\nnixhome: Rebuild Home Manager Config\nnixkde: Restart KDE Plasma\nnixclean: Collect and delete garbage\nnixsh: nix-shell\nrice: Show ricing style choice\n\"";
+      nixhelp = "reset && echo -e \"\nnixos: Update + Rebuild + Git Push\nnixgit: Commit to GitHub\nnixbuild: Rebuild with Flakes\nnixhome: Rebuild Home Manager Config\nnixkde: Restart KDE Plasma\nnixclean: Collect and delete garbage\nnixsh: nix-shell\nrice: Show ricing style choice\n\"";
 
-      nixos = "wipe && cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
-      nixgit = "wipe && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
-      nixbuild = "wipe && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
-      nixhome = "wipe && home-manager switch --flake ~/dotfiles#naxce";
-      nixkde = "wipe && { plasmashell --replace & disown; }";
-      nixclean = "wipe && sudo nix-collect-garbage -d && nix-collect-garbage -d";
-      nixsh = "wipe && nix-shell";
+      nixos = "reset && cd ~/dotfiles && nix flake update && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main && sudo nixos-rebuild switch --flake .#naxce";
+      nixgit = "reset && cd ~/dotfiles && git add . && (git commit -m \"Update $(date)\" || true) && git push origin main";
+      nixbuild = "reset && cd ~/dotfiles && sudo nixos-rebuild switch --flake .#naxce";
+      nixhome = "reset && home-manager switch --flake ~/dotfiles#naxce";
+      nixkde = "reset && { plasmashell --replace & disown; }";
+      nixclean = "reset && sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      nixsh = "reset && nix-shell";
       hts = "sudo ~/dotfiles/scripts/hotspot.sh";
-      zenithgit = "wipe && cd ~/dotfiles/zenith && git add . && (git commit -m \"Update\" || true) && git push origin main";
-      rice = "wipe && ~/dotfiles/scripts/rice.sh";
+      zenithgit = "reset && cd ~/dotfiles/zenith && git add . && (git commit -m \"Update\" || true) && git push origin main";
+      rice = "reset && ~/dotfiles/scripts/rice.sh";
 
-      khelp = "wipe && echo -e \"\n===============================\n        KITTY WORK HELP\n===============================\n\nTABS\nCtrl+Shift+T   → new tab\nCtrl+Shift+W   → close tab\nCtrl+Shift+Q   → close window\n\nSPLITS\nCtrl+Shift+Enter → split window\nCtrl+Alt+V       → split\nCtrl+Alt+H       → split\n\nNAVIGATION\nCtrl+Alt+arrows → move between panes\n\nRESIZE\nCtrl+Shift+arrows → resize split\n\n===============================\nTIP\nsplits auto-arrange (no manual direction)\n===============================\n\"";
+      khelp = "reset && echo -e \"\n===============================\n        KITTY WORK HELP\n===============================\n\nTABS\nCtrl+Shift+T   → new tab\nCtrl+Shift+W   → close tab\nCtrl+Shift+Q   → close window\n\nSPLITS\nCtrl+Shift+Enter → split window\nCtrl+Alt+V       → split\nCtrl+Alt+H       → split\n\nNAVIGATION\nCtrl+Alt+arrows → move between panes\n\nRESIZE\nCtrl+Shift+arrows → resize split\n\n===============================\nTIP\nsplits auto-arrange (no manual direction)\n===============================\n\"";
     };
   };
 
