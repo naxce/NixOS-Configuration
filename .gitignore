@@ -1,1 +1,8 @@
 nixos/hardware-configuration.nix
+*.token
+*.key
+*.secret
+*.age
+.env
+**/*credentials*
+**/*secret*

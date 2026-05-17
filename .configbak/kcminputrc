@@ -1,9 +1,0 @@
-[Libinput][4152][6200][SteelSeries SteelSeries Aerox 3 Wireless]
-PointerAcceleration=0.000
-PointerAccelerationProfile=1
-
-[Libinput][4152][6202][SteelSeries SteelSeries Aerox 3 Wireless]
-PointerAccelerationProfile=1
-
-[Mouse]
-cursorSize=12
