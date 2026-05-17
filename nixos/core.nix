@@ -107,8 +107,9 @@
     "nvidia-drm.fbdev=1"
     "split_lock_detect=off"
     "btusb.enable_autosuspend=0"
-    "btusb.reset=1"
   ];
+
+  boot.blacklistedKernelModules = [ ];
 
   # POLSKA 🇵🇱
   time.timeZone = "Europe/Warsaw";
@@ -260,20 +261,22 @@
   services.xserver.xkb.layout = "pl";
 
   # OpenRGB
-  services.hardware.openrgb = {
-    enable = true;
-    motherboard = "amd";
-  };
-  systemd.user.services.openrgb-autostart = {
-    description = "openrgb-autostart";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.openrgb}/bin/openrgb --profile '1'";
-      Type = "oneshot";
-      RemainAfterExit = "yes";
+  /*
+    services.hardware.openrgb = {
+      enable = true;
+      motherboard = "amd";
     };
-  };
+    systemd.user.services.openrgb-autostart = {
+      description = "openrgb-autostart";
+      after = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.openrgb}/bin/openrgb --profile '1'";
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+      };
+    };
+  */
 
   # Flatpak
   services.flatpak.enable = true;
