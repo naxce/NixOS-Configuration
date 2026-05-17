@@ -195,7 +195,8 @@
             action.id == "org.blueman.pincode.confirm" ||
             action.id == "org.blueman.device.pair" ||
             action.id == "org.blueman.device.foregroundpair" ||
-            action.id == "org.blueman.device.connect") {
+            action.id == "org.blueman.device.connect" ||
+            action.id == "org.freedesktop.systemd1.manage-units") {
           return polkit.Result.YES;
         }
       }
