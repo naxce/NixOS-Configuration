@@ -66,8 +66,6 @@
           command reset
           fastfetch --config /tmp/kittywork/fastfetch.jsonc
       }
-
-      fastfetch --config /tmp/kittywork/fastfetch.jsonc
     '';
 
     shellAliases = {
