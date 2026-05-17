@@ -25,6 +25,9 @@
 
   programs.bash = {
     enable = true;
+    initExtra = ''
+      ff
+    '';
     shellAliases = {
       nixhelp = ''
         reset &&
