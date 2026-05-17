@@ -212,6 +212,12 @@
     };
   };
 
+  # Ollama
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;

@@ -21,7 +21,7 @@ ip link set "$IFACE_AP" down 2>/dev/null || true
 iw dev "$IFACE_AP" set type managed 2>/dev/null || true
 ip link set "$IFACE_AP" up
 
-nohup create_ap "$IFACE_AP" "$IFACE_INTERNET" "$SSID" "$PASS" --freq-band 5 --no-virt > /tmp/hotspot.log 2>&1 &
+nohup create_ap "$IFACE_AP" "$IFACE_INTERNET" "$SSID" "$PASS" --freq-band 5 --no-virt > "/tmp/hotspot-$USER.log" 2>&1 &
 
 disown
 sleep 2
