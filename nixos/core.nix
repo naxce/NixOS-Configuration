@@ -102,6 +102,13 @@
   };
 
   # Parametry kernela
+  boot.initrd.blacklistedKernelModules = [
+    "btusb"
+    "mt7921e"
+    "mt7921s"
+    "mt7921u"
+  ];
+
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
